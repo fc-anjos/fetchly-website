@@ -2,11 +2,12 @@
 
 import Image from 'next/image';
 import { Container } from '@/components/ui/Container';
+import { Section } from '@/components/ui/Section';
 import { Text } from '@/components/ui/Text';
 
 export function Bento() {
   return (
-    <section className="py-16 md:py-20">
+    <Section>
       <Container>
         {/* Intro Text */}
         <div className="text-center mb-12 max-w-4xl mx-auto">
@@ -123,7 +124,7 @@ export function Bento() {
           </div>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }
 

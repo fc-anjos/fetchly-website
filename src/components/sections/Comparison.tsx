@@ -19,7 +19,6 @@ export function Comparison({ theme = 'dark' }: ComparisonProps) {
     <Section
       id="comparison"
       className={cn(
-        'py-24 md:py-32',
         isDark ? 'bg-gray-950' : 'bg-light-bg'
       )}
     >

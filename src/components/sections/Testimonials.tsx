@@ -58,7 +58,6 @@ export function Testimonials({ theme = 'dark' }: TestimonialsProps) {
     <Section
       id="testimonials"
       className={cn(
-        'py-24 md:py-32',
         isDark ? 'bg-gray-950' : 'bg-light-bg-alt'
       )}
     >

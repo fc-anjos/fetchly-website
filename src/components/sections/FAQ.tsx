@@ -17,7 +17,7 @@ export function FAQ() {
   };
 
   return (
-    <Section id="faq" background="muted" className="py-24 md:py-32">
+    <Section id="faq" background="muted">
       <Container size="md">
         <div className="text-center mb-16">
           <Badge className="mb-4">FAQ</Badge>

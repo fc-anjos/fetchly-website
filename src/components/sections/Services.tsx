@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { Container } from '@/components/ui/Container';
+import { Section } from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
 import { Heading } from '@/components/ui/Heading';
 import { Text } from '@/components/ui/Text';
@@ -30,7 +31,7 @@ const RIGHT_FEATURES = [
 
 export function Services() {
   return (
-    <section id="why-fetchly" className="py-20 md:py-28 lg:py-32">
+    <Section id="why-fetchly">
       <Container>
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
@@ -94,7 +95,7 @@ export function Services() {
           </Button>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }
 
