@@ -51,11 +51,8 @@ export function FeatureGrid({
   className,
   id,
 }: FeatureGridProps) {
-  const gridColsClass = {
-    2: 'md:grid-cols-2',
-    3: 'md:grid-cols-2 lg:grid-cols-3',
-    4: 'md:grid-cols-2 lg:grid-cols-4',
-  }[columns];
+  // Use editorial list layout for 2-3 columns, grid for 4
+  const useEditorialLayout = columns <= 3;
 
   return (
     <Section
@@ -71,43 +68,135 @@ export function FeatureGrid({
             description={description}
           />
         )}
-        <ScrollReveal stagger={0.08} direction="up" distance={40}>
-          <div className={cn('grid grid-cols-1 gap-6', gridColsClass)}>
-            {items.map((item) => (
-              <div
-                key={item.title}
-                data-reveal
-                className={cn(
-                  'p-8 rounded-2xl transition-all duration-300',
-                  'bg-surface-card border border-border hover:border-primary/50',
-                  centerText && 'text-center'
-                )}
-              >
-                {item.icon && (
-                  <div
-                    className={cn(
-                      'mb-6',
-                      centerText && 'flex justify-center',
-                      iconWithBackground &&
-                        'w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors',
-                      !iconWithBackground && 'text-primary'
-                    )}
-                  >
-                    {item.icon}
-                  </div>
-                )}
-                <Heading level="h4" className="mb-3 text-foreground">
+
+        {useEditorialLayout ? (
+          <EditorialLayout
+            items={items}
+            columns={columns}
+            centerText={centerText}
+            iconWithBackground={iconWithBackground}
+          />
+        ) : (
+          <CompactGrid
+            items={items}
+            centerText={centerText}
+            iconWithBackground={iconWithBackground}
+          />
+        )}
+      </Container>
+    </Section>
+  );
+}
+
+/** Editorial layout: items as rows separated by rules, two-column asymmetric on desktop */
+function EditorialLayout({
+  items,
+  columns,
+  centerText,
+  iconWithBackground,
+}: {
+  items: FeatureItem[];
+  columns: 2 | 3 | 4;
+  centerText: boolean;
+  iconWithBackground: boolean;
+}) {
+  return (
+    <ScrollReveal stagger={0.12} direction="up" distance={30}>
+      <div
+        className={cn(
+          'grid gap-y-0',
+          columns === 2 ? 'grid-cols-1 md:grid-cols-2 md:gap-x-16' : 'grid-cols-1',
+        )}
+      >
+        {items.map((item, index) => (
+          <div
+            key={item.title}
+            data-reveal
+            className={cn(
+              'py-8 md:py-10',
+              // Top border on all except first (and for 2-col, not the first in each column)
+              columns === 2
+                ? index >= 2 && 'border-t border-border'
+                : index > 0 && 'border-t border-border',
+              // For 2-col layout, first two items get top border only on mobile
+              columns === 2 && index === 1 && 'border-t border-border md:border-t-0',
+              centerText && 'text-center',
+            )}
+          >
+            <div className={cn(
+              'flex gap-5',
+              centerText && 'flex-col items-center',
+              !item.icon && 'flex-col',
+            )}>
+              {item.icon && (
+                <div
+                  className={cn(
+                    'shrink-0 text-primary mt-1',
+                    iconWithBackground &&
+                      'w-12 h-12 rounded-lg bg-primary/8 flex items-center justify-center',
+                  )}
+                >
+                  {item.icon}
+                </div>
+              )}
+              <div>
+                <Heading level="h4" className="text-foreground mb-3">
                   {item.title}
                 </Heading>
-                <Text className="text-foreground-muted">
+                <Text className="text-foreground-muted max-w-lg">
                   {item.description}
                 </Text>
               </div>
-            ))}
+            </div>
           </div>
-        </ScrollReveal>
-      </Container>
-    </Section>
+        ))}
+      </div>
+    </ScrollReveal>
+  );
+}
+
+/** Compact grid: for 4-column layouts, minimal open style without card borders */
+function CompactGrid({
+  items,
+  centerText,
+  iconWithBackground,
+}: {
+  items: FeatureItem[];
+  centerText: boolean;
+  iconWithBackground: boolean;
+}) {
+  return (
+    <ScrollReveal stagger={0.08} direction="up" distance={30}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8">
+        {items.map((item) => (
+          <div
+            key={item.title}
+            data-reveal
+            className={cn(centerText && 'text-center')}
+          >
+            {item.icon && (
+              <div
+                className={cn(
+                  'mb-5 text-primary',
+                  centerText && 'flex justify-center',
+                  iconWithBackground &&
+                    'w-12 h-12 rounded-lg bg-primary/8 flex items-center justify-center',
+                  centerText && iconWithBackground && 'mx-auto',
+                )}
+              >
+                {item.icon}
+              </div>
+            )}
+            <Heading level="h4" className="text-foreground mb-3">
+              {item.title}
+            </Heading>
+            <Text className="text-foreground-muted">
+              {item.description}
+            </Text>
+          </div>
+        ))}
+      </div>
+    </ScrollReveal>
   );
 }
 

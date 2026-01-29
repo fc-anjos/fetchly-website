@@ -54,10 +54,10 @@ export function IconGrid({
     8: 'grid-cols-2 md:grid-cols-4 lg:grid-cols-8',
   }[columns];
 
-  const paddingClass = {
-    compact: 'p-4',
-    default: 'p-6',
-    large: 'p-8',
+  const gapClass = {
+    compact: 'gap-6',
+    default: 'gap-8 md:gap-10',
+    large: 'gap-10 md:gap-12',
   }[size];
 
   return (
@@ -71,22 +71,19 @@ export function IconGrid({
           <SectionHeader title={title || ''} description={description} />
         )}
         <ScrollReveal stagger={0.05} direction="up" distance={25}>
-          <div className={cn('grid gap-4', gridColsClass)}>
+          <div className={cn('grid', gridColsClass, gapClass)}>
             {items.map((item) => (
               <div
                 key={item.title}
                 data-reveal
-                className={cn(
-                  'rounded-2xl text-center transition-colors',
-                  paddingClass,
-                  'bg-surface-card border border-border hover:border-primary/50'
-                )}
+                className="text-center group"
               >
                 <div
                   className={cn(
-                    'flex justify-center mb-3 text-primary',
+                    'flex justify-center mb-4 text-primary transition-colors',
+                    'group-hover:text-accent',
                     iconWithBackground &&
-                      'w-16 h-16 mx-auto rounded-xl bg-primary/10 items-center'
+                      'w-14 h-14 mx-auto rounded-xl bg-primary/8 items-center group-hover:bg-primary/12'
                   )}
                 >
                   {item.icon}
@@ -98,7 +95,7 @@ export function IconGrid({
                   {item.title}
                 </Text>
                 {item.description && (
-                  <Text size="sm" className="mt-2 text-foreground-muted">
+                  <Text size="sm" className="mt-1.5 text-foreground-muted/70">
                     {item.description}
                   </Text>
                 )}

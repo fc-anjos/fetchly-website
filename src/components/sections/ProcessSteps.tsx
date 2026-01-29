@@ -54,23 +54,35 @@ export function ProcessSteps({
     >
       <Container>
         <SectionHeader title={title} />
-        <ScrollReveal stagger={0.15} direction="up">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <ScrollReveal stagger={0.2} direction="up" distance={30}>
+          <div className="max-w-4xl mx-auto">
             {steps.map((step, index) => (
               <div
                 key={step.title}
                 data-reveal
-                className="p-8 rounded-2xl transition-colors bg-surface-card border border-border"
+                className={cn(
+                  'grid grid-cols-1 md:grid-cols-[5rem_1fr] gap-4 md:gap-12',
+                  'py-10 md:py-12',
+                  index < steps.length - 1 && 'border-b border-border',
+                )}
               >
-                <Text size="sm" className="font-semibold mb-4 text-primary">
+                {/* Step number — large typographic anchor */}
+                <div
+                  className="text-foreground/10 font-bold leading-none"
+                  style={{ fontSize: 'clamp(3rem, 4vw, 4rem)' }}
+                >
                   0{index + 1}
-                </Text>
-                <Heading level="h4" className="mb-4 capitalize text-foreground">
-                  {step.title}
-                </Heading>
-                <Text className="text-foreground-muted">
-                  {step.description}
-                </Text>
+                </div>
+
+                {/* Content */}
+                <div>
+                  <Heading level="h3" className="text-foreground mb-4 capitalize">
+                    {step.title}
+                  </Heading>
+                  <Text className="text-foreground-muted max-w-xl">
+                    {step.description}
+                  </Text>
+                </div>
               </div>
             ))}
           </div>

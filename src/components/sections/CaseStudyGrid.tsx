@@ -49,6 +49,81 @@ export const DEFAULT_CASE_STUDIES: CaseStudy[] = [
   },
 ];
 
+function CaseStudyItem({
+  study,
+  featured = false,
+}: {
+  study: CaseStudy;
+  featured?: boolean;
+}) {
+  const content = (
+    <div className={cn(
+      'group block',
+      featured ? 'md:grid md:grid-cols-[1.2fr_1fr] md:gap-12 md:items-center' : '',
+    )}>
+      {/* Image */}
+      <div
+        className={cn(
+          'relative overflow-hidden rounded-xl bg-surface-muted',
+          featured ? 'aspect-[4/3]' : 'aspect-video',
+        )}
+      >
+        {study.image ? (
+          <Image
+            src={study.image}
+            alt={study.title}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span
+              className="text-foreground/5 font-bold select-none"
+              style={{ fontSize: 'clamp(3rem, 8vw, 6rem)' }}
+            >
+              {study.title}
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* Text content */}
+      <div className={cn(featured ? 'mt-6 md:mt-0' : 'mt-6')}>
+        <Heading
+          level={featured ? 'h2' : 'h3'}
+          className="text-foreground group-hover:text-primary transition-colors mb-3"
+        >
+          {study.title}
+        </Heading>
+        <Text className="text-foreground-muted max-w-md">
+          {study.description}
+        </Text>
+        <span className="inline-flex items-center gap-2 mt-5 text-primary text-sm font-medium group-hover:gap-3 transition-all">
+          View case study
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M17 8l4 4m0 0l-4 4m4-4H3"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
+  );
+
+  if (study.href) {
+    return (
+      <Link href={study.href} className="block">
+        {content}
+      </Link>
+    );
+  }
+
+  return content;
+}
+
 export function CaseStudyGrid({
   title = "What we've built.",
   subtitle = 'Real products with real results.',
@@ -58,14 +133,18 @@ export function CaseStudyGrid({
   background = 'default',
   className,
 }: CaseStudyGridProps) {
+  const featured = items[0];
+  const rest = items.slice(1);
+
   return (
     <Section
       background={background}
       className={cn('py-24 md:py-32', className)}
     >
       <Container>
+        {/* Section header */}
         <ScrollReveal direction="up" distance={30}>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16">
             <div>
               <Heading
                 level="display-2"
@@ -82,10 +161,10 @@ export function CaseStudyGrid({
             {viewAllHref && (
               <Link
                 href={viewAllHref}
-                className="mt-6 md:mt-0 text-primary hover:text-primary-dark transition-colors inline-flex items-center gap-2"
+                className="mt-6 md:mt-0 text-primary hover:text-primary-dark transition-colors inline-flex items-center gap-2 text-sm font-medium"
               >
                 {viewAllText}
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -97,44 +176,29 @@ export function CaseStudyGrid({
             )}
           </div>
         </ScrollReveal>
-        <ScrollReveal stagger={0.2} direction="up">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {items.map((study) => (
-              <Link
-                key={study.title}
-                href={study.href || '/case-studies'}
-                data-reveal
-                className="group rounded-2xl overflow-hidden transition-all duration-300 bg-surface-card border border-border hover:border-primary/50"
-              >
-                <div className="aspect-video relative bg-surface-muted">
-                  {study.image ? (
-                    <Image
-                      src={study.image}
-                      alt={study.title}
-                      fill
-                      className="object-cover"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center text-foreground-muted">
-                      <Text as="span" size="lg">{study.title}</Text>
-                    </div>
-                  )}
+
+        {/* Featured case study */}
+        {featured && (
+          <ScrollReveal direction="up" distance={30}>
+            <CaseStudyItem study={featured} featured />
+          </ScrollReveal>
+        )}
+
+        {/* Remaining case studies */}
+        {rest.length > 0 && (
+          <ScrollReveal stagger={0.15} direction="up" distance={30}>
+            <div className={cn(
+              'mt-16 pt-16 border-t border-border',
+              'grid grid-cols-1 md:grid-cols-2 gap-12',
+            )}>
+              {rest.map((study) => (
+                <div key={study.title} data-reveal>
+                  <CaseStudyItem study={study} />
                 </div>
-                <div className="p-6">
-                  <Heading
-                    level="h4"
-                    className="mb-2 group-hover:text-primary transition-colors text-foreground"
-                  >
-                    {study.title}
-                  </Heading>
-                  <Text className="text-foreground-muted">
-                    {study.description}
-                  </Text>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </ScrollReveal>
+              ))}
+            </div>
+          </ScrollReveal>
+        )}
       </Container>
     </Section>
   );

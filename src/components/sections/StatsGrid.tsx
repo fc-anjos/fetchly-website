@@ -3,7 +3,6 @@
 import { useEffect, useRef } from 'react';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
-import { Heading } from '@/components/ui/Heading';
 import { Text } from '@/components/ui/Text';
 import { SectionHeader } from './SectionHeader';
 import { ScrollReveal } from '@/components/effects/ScrollReveal';
@@ -36,15 +35,15 @@ export const DEFAULT_STATS: StatItem[] = [
   { value: '103', label: 'Successfully launched web, mobile and eComm platforms' },
 ];
 
-function StatCard({ stat }: { stat: StatItem }) {
-  const numberRef = useRef<HTMLDivElement>(null);
+function AnimatedNumber({ value }: { value: string | number }) {
+  const numberRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     if (!numberRef.current) return;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
-    const numericValue = parseInt(String(stat.value), 10);
+    const numericValue = parseInt(String(value), 10);
     if (isNaN(numericValue)) return;
 
     let ctx: any;
@@ -78,25 +77,9 @@ function StatCard({ stat }: { stat: StatItem }) {
 
     init();
     return () => { ctx?.revert(); };
-  }, [stat.value]);
+  }, [value]);
 
-  return (
-    <div
-      data-reveal
-      className="text-center p-8 rounded-2xl bg-surface-card border border-border"
-    >
-      <Heading
-        level="display-1"
-        as="div"
-        className="mb-2 text-primary"
-      >
-        <div ref={numberRef}>{stat.value}</div>
-      </Heading>
-      <Text className="text-foreground-muted">
-        {stat.label}
-      </Text>
-    </div>
-  );
+  return <span ref={numberRef}>{value}</span>;
 }
 
 export function StatsGrid({
@@ -113,10 +96,35 @@ export function StatsGrid({
     >
       <Container>
         <SectionHeader title={title} description={description} />
-        <ScrollReveal stagger={0.2} direction="up">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {stats.map((stat) => (
-              <StatCard key={stat.label} stat={stat} />
+        <ScrollReveal stagger={0.15} direction="up" distance={30}>
+          <div className="flex flex-col md:flex-row md:items-start">
+            {stats.map((stat, index) => (
+              <div
+                key={stat.label}
+                data-reveal
+                className={cn(
+                  'flex-1',
+                  // Vertical divider between items on desktop
+                  index > 0 && 'md:border-l md:border-border',
+                  // Horizontal divider between items on mobile
+                  index > 0 && 'border-t border-border md:border-t-0',
+                  // Spacing: padding instead of gap for divider alignment
+                  index > 0 && 'pt-10 md:pt-0 mt-10 md:mt-0',
+                  index > 0 && 'md:pl-12',
+                  index < stats.length - 1 && 'pb-10 md:pb-0 md:pr-12',
+                )}
+              >
+                <div
+                  className="text-foreground font-bold tracking-tighter"
+                  style={{ fontSize: 'clamp(3.5rem, 6vw, 5.5rem)', lineHeight: 1 }}
+                >
+                  <AnimatedNumber value={stat.value} />
+                  <span className="text-primary">+</span>
+                </div>
+                <Text className="text-foreground-muted mt-4 max-w-[16rem]">
+                  {stat.label}
+                </Text>
+              </div>
             ))}
           </div>
         </ScrollReveal>
