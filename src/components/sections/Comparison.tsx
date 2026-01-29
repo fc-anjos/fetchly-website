@@ -6,112 +6,79 @@ import { Button } from '@/components/ui/Button';
 import { Heading } from '@/components/ui/Heading';
 import { Text } from '@/components/ui/Text';
 import { COMPARISON_DATA } from '@/lib/constants';
+import { ScrollReveal } from '@/components/effects/ScrollReveal';
 import { cn } from '@/lib/utils';
 
-interface ComparisonProps {
-  theme?: 'dark' | 'light';
-}
-
-export function Comparison({ theme = 'dark' }: ComparisonProps) {
-  const isDark = theme === 'dark';
-
+export function Comparison() {
   return (
-    <Section
-      id="comparison"
-      className={cn(
-        isDark ? 'bg-gray-950' : 'bg-light-bg'
-      )}
-    >
+    <Section id="comparison" className="bg-surface">
       <Container>
-        <div className="text-center mb-16">
-          <Heading level="display-2" className={isDark ? 'text-white' : 'text-black'}>
-            A totally different model
-          </Heading>
-        </div>
+        <ScrollReveal direction="up" distance={30}>
+          <div className="text-center mb-16">
+            <Heading level="display-2" className="text-foreground">
+              A totally different model
+            </Heading>
+          </div>
+        </ScrollReveal>
 
         {/* Comparison Table */}
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[600px]">
-            <thead>
-              <tr>
-                <th
-                  className={cn(
-                    'text-left py-4 px-6 font-medium text-sm uppercase tracking-wider',
-                    isDark ? 'text-gray-400' : 'text-black/60'
-                  )}
-                >
-                  Product Comparison
-                </th>
-                <th
-                  className={cn(
-                    'py-4 px-6 text-center font-medium',
-                    isDark ? 'text-gray-400' : 'text-black/60'
-                  )}
-                >
-                  Staff Aug
-                </th>
-                <th className="py-4 px-6 text-center">
-                  <div className="inline-flex flex-col items-center bg-dark rounded-t-xl py-3 px-6 -mb-4">
-                    <Text as="span" size="lg" className="text-white font-semibold">Fetchly</Text>
-                  </div>
-                </th>
-                <th
-                  className={cn(
-                    'py-4 px-6 text-center font-medium',
-                    isDark ? 'text-gray-400' : 'text-black/60'
-                  )}
-                >
-                  Agency
-                </th>
-              </tr>
-            </thead>
-            <tbody
-              className={cn(
-                'divide-y',
-                isDark ? 'divide-white/5' : 'divide-black/5'
-              )}
-            >
-              {COMPARISON_DATA.rows.map((row) => (
-                <tr
-                  key={row.feature}
-                  className={cn(
-                    'transition-colors',
-                    isDark ? 'hover:bg-white/5' : 'hover:bg-black/5'
-                  )}
-                >
-                  <td
-                    className={cn(
-                      'py-5 px-6 font-medium uppercase text-sm tracking-wide',
-                      isDark ? 'text-white' : 'text-black'
-                    )}
-                  >
-                    {row.feature}
-                  </td>
-                  <td className="py-5 px-6 text-center">
-                    <ComparisonCell value={row.staffAug} isDark={isDark} />
-                  </td>
-                  <td className="py-5 px-6 text-center bg-dark/30">
-                    <ComparisonCell value={row.fetchly} highlight isDark={isDark} />
-                  </td>
-                  <td className="py-5 px-6 text-center">
-                    <ComparisonCell value={row.agency} isDark={isDark} />
-                  </td>
+        <ScrollReveal stagger={0.06} direction="up" distance={30}>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[600px]">
+              <thead>
+                <tr>
+                  <th className="text-left py-4 px-6 font-medium text-sm uppercase tracking-wider text-foreground-muted">
+                    Product Comparison
+                  </th>
+                  <th className="py-4 px-6 text-center font-medium text-foreground-muted">
+                    Staff Aug
+                  </th>
+                  <th className="py-4 px-6 text-center">
+                    <div className="inline-flex flex-col items-center bg-dark rounded-t-xl py-3 px-6 -mb-4">
+                      <Text as="span" size="lg" className="text-white font-semibold">Fetchly</Text>
+                    </div>
+                  </th>
+                  <th className="py-4 px-6 text-center font-medium text-foreground-muted">
+                    Agency
+                  </th>
                 </tr>
-              ))}
-              {/* CTA Row */}
-              <tr>
-                <td className="py-5 px-6"></td>
-                <td className="py-5 px-6"></td>
-                <td className="py-5 px-6 text-center bg-dark/30 rounded-b-xl">
-                  <Button href="/intake/step-1" className="w-full">
-                    Get in touch
-                  </Button>
-                </td>
-                <td className="py-5 px-6"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody className="divide-y divide-border">
+                {COMPARISON_DATA.rows.map((row) => (
+                  <tr
+                    key={row.feature}
+                    data-reveal
+                    className="transition-colors hover:bg-overlay"
+                  >
+                    <td className="py-5 px-6 font-medium uppercase text-sm tracking-wide text-foreground">
+                      {row.feature}
+                    </td>
+                    <td className="py-5 px-6 text-center">
+                      <ComparisonCell value={row.staffAug} />
+                    </td>
+                    <td className="py-5 px-6 text-center bg-dark/30">
+                      <ComparisonCell value={row.fetchly} highlight />
+                    </td>
+                    <td className="py-5 px-6 text-center">
+                      <ComparisonCell value={row.agency} />
+                    </td>
+                  </tr>
+                ))}
+                {/* CTA Row */}
+                <tr>
+                  <td className="py-5 px-6"></td>
+                  <td className="py-5 px-6"></td>
+                  <td className="py-5 px-6 text-center bg-dark/30 rounded-b-xl">
+                    <Button href="/intake/step-1" className="w-full">
+                      Get in touch
+                    </Button>
+                  </td>
+                  <td className="py-5 px-6"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </ScrollReveal>
       </Container>
     </Section>
   );
@@ -120,11 +87,9 @@ export function Comparison({ theme = 'dark' }: ComparisonProps) {
 function ComparisonCell({
   value,
   highlight = false,
-  isDark = true,
 }: {
   value: boolean | 'partial';
   highlight?: boolean;
-  isDark?: boolean;
 }) {
   if (value === true) {
     return (
@@ -163,14 +128,9 @@ function ComparisonCell({
   }
 
   return (
-    <span
-      className={cn(
-        'inline-flex items-center justify-center w-8 h-8 rounded-full',
-        isDark ? 'bg-gray-700/50' : 'bg-gray-300/50'
-      )}
-    >
+    <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-foreground-muted/20">
       <svg
-        className={cn('w-5 h-5', isDark ? 'text-gray-500' : 'text-gray-400')}
+        className="w-5 h-5 text-foreground-muted"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"

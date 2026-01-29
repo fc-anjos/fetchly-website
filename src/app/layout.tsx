@@ -1,7 +1,11 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import { SmoothScroll } from '@/components/effects/SmoothScroll';
+import { CursorProvider, CustomCursor } from '@/components/effects/CustomCursor';
+import { Preloader } from '@/components/effects/Preloader';
 import '@/styles/globals.css';
 
 const inter = Inter({
@@ -41,16 +45,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="min-h-screen flex flex-col bg-gray-950 text-white antialiased">
-        <a href="#main-content" className="skip-link">
-          Skip to main content
-        </a>
-        <Navbar />
-        <main id="main-content" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
+      <body className="min-h-screen flex flex-col bg-surface text-foreground antialiased">
+        <ThemeProvider>
+          <Preloader />
+          <SmoothScroll>
+            <CursorProvider>
+              <CustomCursor />
+              <a href="#main-content" className="skip-link">
+                Skip to main content
+              </a>
+              <Navbar />
+              <main id="main-content" className="flex-1">
+                {children}
+              </main>
+              <Footer />
+            </CursorProvider>
+          </SmoothScroll>
+        </ThemeProvider>
       </body>
     </html>
   );

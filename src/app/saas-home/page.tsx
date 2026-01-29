@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { CTA } from '@/components/sections/CTA';
 import { ProcessSteps } from '@/components/sections/ProcessSteps';
@@ -73,7 +74,7 @@ const FAQ_ITEMS = [
 
 export default function SaaSHomePage() {
   return (
-    <div className="theme-light">
+    <>
       {/* Hero Section */}
       <PageHero
         title={<>Custom software<br />development as a service</>}
@@ -83,13 +84,37 @@ export default function SaaSHomePage() {
         ctaHref="/intake/request"
         secondaryText="Learn more"
         secondaryHref="/our-model"
-        image="/images/projects.png"
-        imageAlt="Projects dashboard"
-        theme="light"
+        image="/images/saas-hero.jpg"
+        imageAlt="SaaS order management dashboard"
+        badgeImage="/images/badge-saas.svg"
+        imageOverlay={
+          <>
+            {/* CA logo overlay */}
+            <div className="absolute top-4 left-4 z-10 w-20">
+              <Image
+                src="/images/ca-logo.svg"
+                alt="Container Alliance"
+                width={80}
+                height={32}
+                className="w-full h-auto"
+              />
+            </div>
+            {/* Leads portlet floating card */}
+            <div className="absolute -bottom-4 -left-8 z-10 w-36 md:w-44">
+              <Image
+                src="/images/leads-portlet.avif"
+                alt="Leads portlet UI card"
+                width={220}
+                height={160}
+                className="w-full h-auto rounded-xl shadow-2xl"
+              />
+            </div>
+          </>
+        }
       />
 
       {/* Process Section */}
-      <ProcessSteps theme="light" />
+      <ProcessSteps />
 
       {/* Value Props Section */}
       <FeatureGrid
@@ -98,7 +123,6 @@ export default function SaaSHomePage() {
         description="See what 7+ years in business, 120+ employees, and 100+ engineers can do for your next big idea."
         items={VALUE_PROPS}
         columns={3}
-        theme="light"
         background="muted"
       />
 
@@ -107,23 +131,21 @@ export default function SaaSHomePage() {
         title="We build apps so you don't have to"
         items={CAPABILITIES}
         columns={3}
-        theme="light"
       />
 
       {/* Testimonials */}
-      <Testimonials theme="light" />
+      <Testimonials />
 
       {/* FAQ Section */}
       <FAQAccordion
         title="The what, the how, the why."
         description="Get your questions answered. Our SaaS application development company is here to assist you. Don't see your question? Ask away."
         items={FAQ_ITEMS}
-        theme="light"
         background="muted"
       />
 
       {/* CTA Section */}
       <CTA />
-    </div>
+    </>
   );
 }

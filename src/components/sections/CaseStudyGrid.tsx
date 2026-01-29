@@ -4,6 +4,7 @@ import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Heading } from '@/components/ui/Heading';
 import { Text } from '@/components/ui/Text';
+import { ScrollReveal } from '@/components/effects/ScrollReveal';
 import { cn } from '@/lib/utils';
 
 export interface CaseStudy {
@@ -28,8 +29,6 @@ export interface CaseStudyGridProps {
   viewAllHref?: string;
   /** View all link text */
   viewAllText?: string;
-  /** Theme variant */
-  theme?: 'dark' | 'light';
   /** Background variant */
   background?: 'default' | 'muted';
   /** Additional className */
@@ -56,106 +55,86 @@ export function CaseStudyGrid({
   items = DEFAULT_CASE_STUDIES,
   viewAllHref = '/case-studies',
   viewAllText = 'View all',
-  theme = 'dark',
   background = 'default',
   className,
 }: CaseStudyGridProps) {
-  const isDark = theme === 'dark';
-
   return (
     <Section
-      background={isDark ? background : undefined}
-      className={cn(
-        'py-24 md:py-32',
-        !isDark && (background === 'muted' ? 'bg-light-bg-alt' : 'bg-light-bg'),
-        className
-      )}
+      background={background}
+      className={cn('py-24 md:py-32', className)}
     >
       <Container>
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
-          <div>
-            <Heading
-              level="display-2"
-              className={cn('mb-4', isDark ? 'text-white' : 'text-black')}
-            >
-              {title}
-            </Heading>
-            {subtitle && (
-              <Text size="xl" className={isDark ? 'text-gray-300' : 'text-light-text-muted'}>
-                {subtitle}
-              </Text>
+        <ScrollReveal direction="up" distance={30}>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
+            <div>
+              <Heading
+                level="display-2"
+                className="mb-4 text-foreground"
+              >
+                {title}
+              </Heading>
+              {subtitle && (
+                <Text size="xl" className="text-foreground-muted">
+                  {subtitle}
+                </Text>
+              )}
+            </div>
+            {viewAllHref && (
+              <Link
+                href={viewAllHref}
+                className="mt-6 md:mt-0 text-primary hover:text-primary-dark transition-colors inline-flex items-center gap-2"
+              >
+                {viewAllText}
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </Link>
             )}
           </div>
-          {viewAllHref && (
-            <Link
-              href={viewAllHref}
-              className="mt-6 md:mt-0 text-primary hover:text-primary-dark transition-colors inline-flex items-center gap-2"
-            >
-              {viewAllText}
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </Link>
-          )}
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {items.map((study) => (
-            <Link
-              key={study.title}
-              href={study.href || '/case-studies'}
-              className={cn(
-                'group rounded-2xl overflow-hidden transition-all duration-300',
-                isDark
-                  ? 'bg-gray-900/50 border border-white/10 hover:border-primary/50'
-                  : 'bg-light-card border border-black/10 hover:border-primary/50'
-              )}
-            >
-              <div
-                className={cn(
-                  'aspect-video relative',
-                  isDark ? 'bg-gray-800' : 'bg-gray-200'
-                )}
+        </ScrollReveal>
+        <ScrollReveal stagger={0.2} direction="up">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {items.map((study) => (
+              <Link
+                key={study.title}
+                href={study.href || '/case-studies'}
+                data-reveal
+                className="group rounded-2xl overflow-hidden transition-all duration-300 bg-surface-card border border-border hover:border-primary/50"
               >
-                {study.image ? (
-                  <Image
-                    src={study.image}
-                    alt={study.title}
-                    fill
-                    className="object-cover"
-                  />
-                ) : (
-                  <div
-                    className={cn(
-                      'absolute inset-0 flex items-center justify-center',
-                      isDark ? 'text-gray-600' : 'text-gray-400'
-                    )}
-                  >
-                    <Text as="span" size="lg">{study.title}</Text>
-                  </div>
-                )}
-              </div>
-              <div className="p-6">
-                <Heading
-                  level="h4"
-                  className={cn(
-                    'mb-2 group-hover:text-primary transition-colors',
-                    isDark ? 'text-white' : 'text-black'
+                <div className="aspect-video relative bg-surface-muted">
+                  {study.image ? (
+                    <Image
+                      src={study.image}
+                      alt={study.title}
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center text-foreground-muted">
+                      <Text as="span" size="lg">{study.title}</Text>
+                    </div>
                   )}
-                >
-                  {study.title}
-                </Heading>
-                <Text className={isDark ? 'text-gray-400' : 'text-light-text-muted'}>
-                  {study.description}
-                </Text>
-              </div>
-            </Link>
-          ))}
-        </div>
+                </div>
+                <div className="p-6">
+                  <Heading
+                    level="h4"
+                    className="mb-2 group-hover:text-primary transition-colors text-foreground"
+                  >
+                    {study.title}
+                  </Heading>
+                  <Text className="text-foreground-muted">
+                    {study.description}
+                  </Text>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </ScrollReveal>
       </Container>
     </Section>
   );

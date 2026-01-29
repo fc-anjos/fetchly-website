@@ -100,29 +100,26 @@ const FAQ_ITEMS = [
 
 export default function ServicesPage() {
   return (
-    <div className="theme-light">
+    <>
       {/* Hero Section */}
       <PageHero
         title={<>Explore our comprehensive<br />service offerings</>}
-        subtitle="Full-stack development services"
         description="Our diverse range of services is designed to meet your unique needs, ensuring quality and satisfaction at every step. From personalized consultations to innovative solutions, we are here to help you achieve your goals."
-        ctaText="Get Started"
-        ctaHref="/intake/step-1"
+        ctaText="Talk to us"
+        ctaHref="/intake/request"
         secondaryText="Learn more"
-        secondaryHref="#services"
-        theme="light"
+        secondaryHref="/case-studies"
         showBadge={false}
       />
 
       {/* About Us Section */}
-      <StatsGrid theme="light" />
+      <StatsGrid />
 
       {/* Services Section */}
       <FeatureGrid
         title="What we offer"
         items={SERVICES}
         columns={3}
-        theme="light"
         background="muted"
         iconWithBackground
         className="scroll-mt-24"
@@ -130,22 +127,21 @@ export default function ServicesPage() {
       />
 
       {/* Comparison Section */}
-      <Comparison theme="light" />
+      <Comparison />
 
       {/* Case Studies Section */}
-      <CaseStudyGrid theme="light" background="muted" />
+      <CaseStudyGrid background="muted" />
 
       {/* Testimonials Section */}
-      <Testimonials theme="light" />
+      <Testimonials />
 
       {/* FAQ Section */}
       <FAQAccordion
         title="FAQ"
         description="Have questions? We've got answers. If you don't see yours, reach out below."
         items={FAQ_ITEMS}
-        theme="light"
         showCTA
       />
-    </div>
+    </>
   );
 }

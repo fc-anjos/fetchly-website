@@ -112,19 +112,18 @@ const FAQ_ITEMS = [
 
 export default function OurModelPage() {
   return (
-    <div className="theme-light">
+    <>
       {/* Hero Section */}
       <PageHero
         title={<>Your dedicated<br />development team awaits</>}
         subtitle="Web, mobile & data software"
         description="At Fetchly, we provide you with top-tier developers and essential support services, ensuring your project thrives. Experience a seamless collaboration that brings your app vision to life."
-        ctaText="Get Started"
-        ctaHref="/intake/step-1"
+        ctaText="Talk to us"
+        ctaHref="/intake/request"
         secondaryText="Learn more"
         secondaryHref="#team-model"
-        image="/images/projects.png"
-        imageAlt="Development team dashboard"
-        theme="light"
+        image="/images/our-model-diagram.png"
+        imageAlt="Pentagon-shaped diagram with Development in the center surrounded by DevOps, Design, QA, Architecture, and PM segments."
         showBadge={false}
       />
 
@@ -135,32 +134,30 @@ export default function OurModelPage() {
         items={TEAM_ROLES}
         columns={8}
         size="default"
-        theme="light"
         id="team-model"
       />
 
       {/* Process Section */}
-      <ProcessSteps theme="light" background="muted" />
+      <ProcessSteps background="muted" />
 
       {/* About Us Section */}
-      <StatsGrid theme="light" />
+      <StatsGrid />
 
       {/* Comparison Section */}
-      <Comparison theme="light" />
+      <Comparison />
 
       {/* Case Studies Section */}
-      <CaseStudyGrid theme="light" subtitle="Build it right." background="muted" />
+      <CaseStudyGrid subtitle="Build it right." background="muted" />
 
       {/* Testimonials Section */}
-      <Testimonials theme="light" />
+      <Testimonials />
 
       {/* FAQ Section */}
       <FAQAccordion
         title="The what, the how, the why."
         items={FAQ_ITEMS}
-        theme="light"
         showCTA
       />
-    </div>
+    </>
   );
 }

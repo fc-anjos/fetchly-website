@@ -3,6 +3,7 @@ import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Text } from '@/components/ui/Text';
 import { SectionHeader } from './SectionHeader';
+import { ScrollReveal } from '@/components/effects/ScrollReveal';
 import { cn } from '@/lib/utils';
 
 export interface IconGridItem {
@@ -25,8 +26,6 @@ export interface IconGridProps {
   columns?: 3 | 4 | 6 | 8;
   /** Card size variant */
   size?: 'compact' | 'default' | 'large';
-  /** Theme variant */
-  theme?: 'dark' | 'light';
   /** Background variant */
   background?: 'default' | 'muted';
   /** Whether to show icon in a background box */
@@ -43,14 +42,11 @@ export function IconGrid({
   items,
   columns = 4,
   size = 'default',
-  theme = 'dark',
   background = 'default',
   iconWithBackground = false,
   className,
   id,
 }: IconGridProps) {
-  const isDark = theme === 'dark';
-
   const gridColsClass = {
     3: 'md:grid-cols-3',
     4: 'grid-cols-2 md:grid-cols-4',
@@ -67,55 +63,49 @@ export function IconGrid({
   return (
     <Section
       id={id}
-      background={isDark ? background : undefined}
-      className={cn(
-        'py-24 md:py-32',
-        !isDark && (background === 'muted' ? 'bg-light-bg-alt' : 'bg-light-bg'),
-        className
-      )}
+      background={background}
+      className={cn('py-24 md:py-32', className)}
     >
       <Container>
         {(title || description) && (
-          <SectionHeader title={title || ''} description={description} theme={theme} />
+          <SectionHeader title={title || ''} description={description} />
         )}
-        <div className={cn('grid gap-4', gridColsClass)}>
-          {items.map((item) => (
-            <div
-              key={item.title}
-              className={cn(
-                'rounded-2xl text-center transition-colors',
-                paddingClass,
-                isDark
-                  ? 'bg-gray-900/50 border border-white/10 hover:border-primary/50'
-                  : 'bg-light-card border border-black/10 hover:border-primary/50'
-              )}
-            >
+        <ScrollReveal stagger={0.05} direction="up" distance={25}>
+          <div className={cn('grid gap-4', gridColsClass)}>
+            {items.map((item) => (
               <div
+                key={item.title}
+                data-reveal
                 className={cn(
-                  'flex justify-center mb-3 text-primary',
-                  iconWithBackground &&
-                    'w-16 h-16 mx-auto rounded-xl bg-primary/10 items-center'
+                  'rounded-2xl text-center transition-colors',
+                  paddingClass,
+                  'bg-surface-card border border-border hover:border-primary/50'
                 )}
               >
-                {item.icon}
-              </div>
-              <Text
-                size={size === 'compact' ? 'sm' : 'base'}
-                className={isDark ? 'text-gray-300' : 'text-light-text-muted'}
-              >
-                {item.title}
-              </Text>
-              {item.description && (
-                <Text
-                  size="sm"
-                  className={cn('mt-2', isDark ? 'text-gray-400' : 'text-light-text-muted')}
+                <div
+                  className={cn(
+                    'flex justify-center mb-3 text-primary',
+                    iconWithBackground &&
+                      'w-16 h-16 mx-auto rounded-xl bg-primary/10 items-center'
+                  )}
                 >
-                  {item.description}
+                  {item.icon}
+                </div>
+                <Text
+                  size={size === 'compact' ? 'sm' : 'base'}
+                  className="text-foreground-muted"
+                >
+                  {item.title}
                 </Text>
-              )}
-            </div>
-          ))}
-        </div>
+                {item.description && (
+                  <Text size="sm" className="mt-2 text-foreground-muted">
+                    {item.description}
+                  </Text>
+                )}
+              </div>
+            ))}
+          </div>
+        </ScrollReveal>
       </Container>
     </Section>
   );

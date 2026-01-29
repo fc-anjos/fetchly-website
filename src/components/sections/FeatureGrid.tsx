@@ -4,6 +4,7 @@ import { Section } from '@/components/ui/Section';
 import { Heading } from '@/components/ui/Heading';
 import { Text } from '@/components/ui/Text';
 import { SectionHeader } from './SectionHeader';
+import { ScrollReveal } from '@/components/effects/ScrollReveal';
 import { cn } from '@/lib/utils';
 
 export interface FeatureItem {
@@ -26,8 +27,6 @@ export interface FeatureGridProps {
   items: FeatureItem[];
   /** Number of columns */
   columns?: 2 | 3 | 4;
-  /** Theme variant */
-  theme?: 'dark' | 'light';
   /** Background variant */
   background?: 'default' | 'muted';
   /** Whether to center text in cards */
@@ -46,15 +45,12 @@ export function FeatureGrid({
   description,
   items,
   columns = 3,
-  theme = 'dark',
   background = 'default',
   centerText = false,
   iconWithBackground = false,
   className,
   id,
 }: FeatureGridProps) {
-  const isDark = theme === 'dark';
-
   const gridColsClass = {
     2: 'md:grid-cols-2',
     3: 'md:grid-cols-2 lg:grid-cols-3',
@@ -64,12 +60,8 @@ export function FeatureGrid({
   return (
     <Section
       id={id}
-      background={isDark ? background : undefined}
-      className={cn(
-        'py-24 md:py-32',
-        !isDark && (background === 'muted' ? 'bg-light-bg-alt' : 'bg-light-bg'),
-        className
-      )}
+      background={background}
+      className={cn('py-24 md:py-32', className)}
     >
       <Container>
         {(title || label) && (
@@ -77,46 +69,43 @@ export function FeatureGrid({
             label={label}
             title={title || ''}
             description={description}
-            theme={theme}
           />
         )}
-        <div className={cn('grid grid-cols-1 gap-6', gridColsClass)}>
-          {items.map((item) => (
-            <div
-              key={item.title}
-              className={cn(
-                'p-8 rounded-2xl transition-all duration-300',
-                isDark
-                  ? 'bg-gray-900/50 border border-white/10 hover:border-primary/50'
-                  : 'bg-light-card border border-black/10 hover:bg-light-card-hover rounded-[1rem]',
-                centerText && 'text-center'
-              )}
-            >
-              {item.icon && (
-                <div
-                  className={cn(
-                    'mb-6',
-                    centerText && 'flex justify-center',
-                    iconWithBackground &&
-                      'w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors',
-                    !iconWithBackground && 'text-primary'
-                  )}
-                >
-                  {item.icon}
-                </div>
-              )}
-              <Heading
-                level="h4"
-                className={cn('mb-3', isDark ? 'text-white' : 'text-black')}
+        <ScrollReveal stagger={0.08} direction="up" distance={40}>
+          <div className={cn('grid grid-cols-1 gap-6', gridColsClass)}>
+            {items.map((item) => (
+              <div
+                key={item.title}
+                data-reveal
+                className={cn(
+                  'p-8 rounded-2xl transition-all duration-300',
+                  'bg-surface-card border border-border hover:border-primary/50',
+                  centerText && 'text-center'
+                )}
               >
-                {item.title}
-              </Heading>
-              <Text className={isDark ? 'text-gray-400' : 'text-light-text-muted'}>
-                {item.description}
-              </Text>
-            </div>
-          ))}
-        </div>
+                {item.icon && (
+                  <div
+                    className={cn(
+                      'mb-6',
+                      centerText && 'flex justify-center',
+                      iconWithBackground &&
+                        'w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors',
+                      !iconWithBackground && 'text-primary'
+                    )}
+                  >
+                    {item.icon}
+                  </div>
+                )}
+                <Heading level="h4" className="mb-3 text-foreground">
+                  {item.title}
+                </Heading>
+                <Text className="text-foreground-muted">
+                  {item.description}
+                </Text>
+              </div>
+            ))}
+          </div>
+        </ScrollReveal>
       </Container>
     </Section>
   );

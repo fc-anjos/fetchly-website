@@ -4,7 +4,11 @@
       "WebFetch(domain:fetch.ly)",
       "Bash(tr:*)",
       "Bash(ls:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "WebSearch",
+      "WebFetch(domain:jackwhiting.co.uk)",
+      "WebFetch(domain:jianliao.github.io)",
+      "WebFetch(domain:dev.to)"
     ]
   }
 }

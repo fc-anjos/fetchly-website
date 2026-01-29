@@ -1,10 +1,14 @@
+'use client';
+
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
-import { Heading } from '@/components/ui/Heading';
+import { SplitText } from '@/components/effects/SplitText';
 import { Text } from '@/components/ui/Text';
+import { Parallax } from '@/components/effects/Parallax';
 import { cn } from '@/lib/utils';
 
 export interface PageHeroProps {
@@ -28,8 +32,10 @@ export interface PageHeroProps {
   imageAlt?: string;
   /** Whether to show the floating badge */
   showBadge?: boolean;
-  /** Theme variant */
-  theme?: 'dark' | 'light';
+  /** Custom badge image path (defaults to /images/badge.svg) */
+  badgeImage?: string;
+  /** Additional overlay elements rendered on top of the hero image */
+  imageOverlay?: ReactNode;
   /** Additional className */
   className?: string;
 }
@@ -45,16 +51,70 @@ export function PageHero({
   image = '/images/projects.png',
   imageAlt = 'Project showcase',
   showBadge = true,
-  theme = 'dark',
+  badgeImage = '/images/badge.svg',
+  imageOverlay,
   className,
 }: PageHeroProps) {
-  const isDark = theme === 'dark';
+  const subtitleRef = useRef<HTMLDivElement>(null);
+  const descRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      [subtitleRef, descRef, ctaRef, imageRef].forEach(ref => {
+        if (ref.current) ref.current.style.opacity = '1';
+      });
+      return;
+    }
+
+    let ctx: any;
+    const animate = async () => {
+      const { gsap } = await import('gsap');
+      ctx = gsap.context(() => {
+        const tl = gsap.timeline({ delay: 0.3 });
+        if (subtitleRef.current) {
+          tl.fromTo(subtitleRef.current,
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' },
+            0.4
+          );
+        }
+        if (descRef.current) {
+          tl.fromTo(descRef.current,
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' },
+            0.55
+          );
+        }
+        if (ctaRef.current) {
+          tl.fromTo(ctaRef.current,
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' },
+            0.7
+          );
+        }
+        if (imageRef.current) {
+          tl.fromTo(imageRef.current,
+            { opacity: 0, x: 60, scale: 0.95 },
+            { opacity: 1, x: 0, scale: 1, duration: 1, ease: 'power3.out' },
+            0.5
+          );
+        }
+      });
+    };
+    animate();
+    return () => { ctx?.revert(); };
+  }, []);
+
+  // SplitText requires a string child — handle ReactNode title gracefully
+  const titleIsString = typeof title === 'string';
 
   return (
     <section
       className={cn(
-        'relative min-h-[90vh] flex items-center overflow-hidden',
-        isDark ? 'bg-gray-950' : 'bg-light-bg',
+        'relative min-h-screen flex items-center pt-(--header-height) overflow-hidden bg-surface',
         className
       )}
     >
@@ -62,37 +122,39 @@ export function PageHero({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-center py-16">
           {/* Left Content */}
           <div className="z-10">
-            <Heading
-              level="display-1"
-              className={cn('mb-4', isDark ? 'text-white' : 'text-black')}
-            >
-              {title}
-            </Heading>
+            {titleIsString ? (
+              <SplitText
+                as="h1"
+                splitBy="words"
+                trigger="mount"
+                className="text-display-1 font-bold leading-[1.05] tracking-tight mb-4 text-foreground"
+                animation={{ duration: 0.7, stagger: 0.05, ease: 'power4.out', y: 45 }}
+              >
+                {title as string}
+              </SplitText>
+            ) : (
+              <h1 className="text-display-1 font-bold leading-[1.05] tracking-tight mb-4 text-foreground">
+                {title}
+              </h1>
+            )}
             {subtitle && (
-              <div className="mb-4">
+              <div ref={subtitleRef} className="mb-4" style={{ opacity: 0 }}>
                 <Text
                   size="base"
-                  className={cn(
-                    'uppercase tracking-wider font-semibold',
-                    isDark ? 'text-white/80' : 'text-black/80'
-                  )}
+                  className="uppercase tracking-wider font-semibold text-foreground/80"
                 >
                   {subtitle}
                 </Text>
               </div>
             )}
             {description && (
-              <Text
-                size="lg"
-                className={cn(
-                  'mb-8',
-                  isDark ? 'text-gray-400' : 'text-light-text-muted'
-                )}
-              >
-                {description}
-              </Text>
+              <div ref={descRef} style={{ opacity: 0 }}>
+                <Text size="lg" className="mb-8 text-foreground-muted">
+                  {description}
+                </Text>
+              </div>
             )}
-            <div className="flex flex-wrap gap-4">
+            <div ref={ctaRef} className="flex flex-wrap gap-4" style={{ opacity: 0 }}>
               {ctaText && ctaHref && (
                 <Button href={ctaHref} size="lg" variant="primary">
                   {ctaText}
@@ -101,12 +163,7 @@ export function PageHero({
               {secondaryText && secondaryHref && (
                 <Link
                   href={secondaryHref}
-                  className={cn(
-                    'inline-flex items-center gap-2 transition-colors',
-                    isDark
-                      ? 'text-white hover:text-primary'
-                      : 'text-black hover:text-primary'
-                  )}
+                  className="inline-flex items-center gap-2 transition-colors text-foreground hover:text-primary"
                 >
                   <Text as="span" size="lg" className="font-medium">
                     {secondaryText}
@@ -125,27 +182,33 @@ export function PageHero({
           </div>
 
           {/* Right Image */}
-          <div className="relative z-10">
-            <div className="relative aspect-[4/3] rounded-[1.25rem] overflow-hidden">
-              <Image
-                src={image}
-                alt={imageAlt}
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-            {/* Floating badge */}
-            {showBadge && (
-              <div className="absolute -top-4 -right-4 w-32 h-32">
+          <div ref={imageRef} className="relative z-10" style={{ opacity: 0 }}>
+            <Parallax speed={0.15}>
+              <div className="relative aspect-[4/3] rounded-[1.25rem] overflow-hidden">
                 <Image
-                  src="/images/badge.svg"
-                  alt=""
-                  width={127}
-                  height={127}
-                  className="w-full h-full animate-spin-slow"
+                  src={image}
+                  alt={imageAlt}
+                  fill
+                  className="object-contain"
+                  priority
                 />
               </div>
+            </Parallax>
+            {/* Image overlay elements */}
+            {imageOverlay}
+            {/* Floating badge */}
+            {showBadge && (
+              <Parallax speed={-0.1}>
+                <div className="absolute -top-4 -right-4 w-32 h-32">
+                  <Image
+                    src={badgeImage}
+                    alt=""
+                    width={127}
+                    height={127}
+                    className="w-full h-full animate-spin-slow"
+                  />
+                </div>
+              </Parallax>
             )}
           </div>
         </div>
@@ -156,10 +219,7 @@ export function PageHero({
         src="/images/dotted-texture.webp"
         alt=""
         fill
-        className={cn(
-          'object-cover pointer-events-none',
-          isDark ? 'opacity-10' : 'opacity-30'
-        )}
+        className="object-cover pointer-events-none opacity-20"
       />
     </section>
   );

@@ -7,6 +7,7 @@ import { Section } from '@/components/ui/Section';
 import { Badge } from '@/components/ui/Badge';
 import { Heading } from '@/components/ui/Heading';
 import { Text } from '@/components/ui/Text';
+import { ScrollReveal } from '@/components/effects/ScrollReveal';
 import { cn } from '@/lib/utils';
 
 const testimonials = [
@@ -36,13 +37,8 @@ const testimonials = [
   },
 ];
 
-interface TestimonialsProps {
-  theme?: 'dark' | 'light';
-}
-
-export function Testimonials({ theme = 'dark' }: TestimonialsProps) {
+export function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const isDark = theme === 'dark';
 
   const goToPrevious = () => {
     setCurrentIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
@@ -55,146 +51,111 @@ export function Testimonials({ theme = 'dark' }: TestimonialsProps) {
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <Section
-      id="testimonials"
-      className={cn(
-        isDark ? 'bg-gray-950' : 'bg-light-bg-alt'
-      )}
-    >
+    <Section id="testimonials" className="bg-surface-alt">
       <Container>
-        <div className="text-center mb-12">
-          <Badge className="mb-4" variant={isDark ? 'default' : 'light'}>
-            Testimonials
-          </Badge>
-          <Heading level="display-2" className={isDark ? 'text-white' : 'text-black'}>
-            What our clients say
-          </Heading>
-        </div>
+        <ScrollReveal direction="up" distance={30}>
+          <div className="text-center mb-12">
+            <Badge className="mb-4">Testimonials</Badge>
+            <Heading level="display-2" className="text-foreground">
+              What our clients say
+            </Heading>
+          </div>
+        </ScrollReveal>
 
-        <div className="max-w-4xl mx-auto">
-          {/* Testimonial Card */}
-          <div className="relative">
-            <div
-              className={cn(
-                'rounded-2xl p-8 md:p-12',
-                isDark
-                  ? 'bg-gray-900/50 border border-white/10'
-                  : 'bg-light-card border border-black/10'
-              )}
-            >
-              {/* Stars */}
-              <div className="flex gap-1 mb-6">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <StarIcon
-                    key={star}
-                    className={cn('w-6 h-6', isDark ? 'text-dark' : 'text-primary')}
-                  />
-                ))}
-              </div>
+        <ScrollReveal direction="up" duration={1}>
+          <div className="max-w-4xl mx-auto">
+            {/* Testimonial Card */}
+            <div className="relative">
+              <div className="rounded-2xl p-8 md:p-12 bg-surface-card border border-border">
+                {/* Stars */}
+                <div className="flex gap-1 mb-6">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <StarIcon key={star} className="w-6 h-6 text-primary" />
+                  ))}
+                </div>
 
-              {/* Quote */}
-              <Text
-                as="blockquote"
-                size="xl"
-                className={cn(
-                  'font-normal mb-8',
-                  isDark ? 'text-white' : 'text-black'
-                )}
-              >
-                &ldquo;{currentTestimonial.quote}&rdquo;
-              </Text>
+                {/* Quote */}
+                <Text
+                  as="blockquote"
+                  size="xl"
+                  className="font-normal mb-8 text-foreground"
+                >
+                  &ldquo;{currentTestimonial.quote}&rdquo;
+                </Text>
 
-              {/* Author */}
-              <div className="flex items-center gap-4">
-                {currentTestimonial.logo ? (
-                  <div
-                    className={cn(
-                      'w-12 h-12 rounded-full flex items-center justify-center p-2',
-                      isDark ? 'bg-white/5' : 'bg-black/5'
-                    )}
-                  >
+                {/* Author */}
+                <div className="flex items-center gap-4">
+                  {currentTestimonial.logo ? (
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center p-2 bg-overlay">
+                      <Image
+                        src={currentTestimonial.logo}
+                        alt={currentTestimonial.author}
+                        width={40}
+                        height={40}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  ) : currentTestimonial.image ? (
                     <Image
-                      src={currentTestimonial.logo}
+                      src={currentTestimonial.image}
                       alt={currentTestimonial.author}
-                      width={40}
-                      height={40}
-                      className="w-full h-full object-contain"
+                      width={48}
+                      height={48}
+                      className="w-12 h-12 rounded-full object-cover"
                     />
+                  ) : null}
+                  <div>
+                    <p className="font-semibold text-foreground">
+                      {currentTestimonial.author}
+                    </p>
+                    <p className="text-sm text-foreground-muted">
+                      {currentTestimonial.role}
+                    </p>
                   </div>
-                ) : currentTestimonial.image ? (
-                  <Image
-                    src={currentTestimonial.image}
-                    alt={currentTestimonial.author}
-                    width={48}
-                    height={48}
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
-                ) : null}
-                <div>
-                  <p className={cn('font-semibold', isDark ? 'text-white' : 'text-black')}>
-                    {currentTestimonial.author}
-                  </p>
-                  <p className={cn('text-sm', isDark ? 'text-gray-400' : 'text-light-text-muted')}>
-                    {currentTestimonial.role}
-                  </p>
                 </div>
               </div>
+
+              {/* Navigation Arrows */}
+              <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 -left-16 -right-16 justify-between pointer-events-none">
+                <button
+                  onClick={goToPrevious}
+                  className="w-12 h-12 rounded-full border flex items-center justify-center transition-colors pointer-events-auto bg-overlay border-border text-foreground hover:bg-overlay-hover"
+                  aria-label="Previous testimonial"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button
+                  onClick={goToNext}
+                  className="w-12 h-12 rounded-full border flex items-center justify-center transition-colors pointer-events-auto bg-overlay border-border text-foreground hover:bg-overlay-hover"
+                  aria-label="Next testimonial"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
             </div>
 
-            {/* Navigation Arrows */}
-            <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 -left-16 -right-16 justify-between pointer-events-none">
-              <button
-                onClick={goToPrevious}
-                className={cn(
-                  'w-12 h-12 rounded-full border flex items-center justify-center transition-colors pointer-events-auto',
-                  isDark
-                    ? 'bg-white/5 border-white/10 text-white hover:bg-white/10'
-                    : 'bg-black/5 border-black/10 text-black hover:bg-black/10'
-                )}
-                aria-label="Previous testimonial"
-              >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-              <button
-                onClick={goToNext}
-                className={cn(
-                  'w-12 h-12 rounded-full border flex items-center justify-center transition-colors pointer-events-auto',
-                  isDark
-                    ? 'bg-white/5 border-white/10 text-white hover:bg-white/10'
-                    : 'bg-black/5 border-black/10 text-black hover:bg-black/10'
-                )}
-                aria-label="Next testimonial"
-              >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
+            {/* Dots Navigation */}
+            <div className="flex justify-center gap-2 mt-8">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={cn(
+                    'w-2.5 h-2.5 rounded-full transition-colors',
+                    index === currentIndex
+                      ? 'bg-foreground'
+                      : 'bg-foreground/20 hover:bg-foreground/40'
+                  )}
+                  aria-label={`Go to testimonial ${index + 1}`}
+                />
+              ))}
             </div>
           </div>
-
-          {/* Dots Navigation */}
-          <div className="flex justify-center gap-2 mt-8">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={cn(
-                  'w-2.5 h-2.5 rounded-full transition-colors',
-                  index === currentIndex
-                    ? isDark
-                      ? 'bg-white'
-                      : 'bg-black'
-                    : isDark
-                      ? 'bg-white/20 hover:bg-white/40'
-                      : 'bg-black/20 hover:bg-black/40'
-                )}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
+        </ScrollReveal>
       </Container>
     </Section>
   );

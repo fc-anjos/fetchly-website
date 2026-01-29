@@ -82,7 +82,7 @@ const FAQ_ITEMS = [
 
 export default function EcommercePage() {
   return (
-    <div className="theme-light">
+    <>
       {/* Hero Section */}
       <PageHero
         title={<>We help build<br />eCommerce brands</>}
@@ -92,48 +92,72 @@ export default function EcommercePage() {
         ctaHref="/intake/request"
         secondaryText="Learn more"
         secondaryHref="/our-model"
-        image="/images/casper.png"
+        image="/images/casper.jpg"
         imageAlt="Casper website homepage highlighting 20% off Dream mattresses, 30% off bundles, pillows, and a bed with call-to-action buttons."
-        theme="light"
+        badgeImage="/images/badge-ecommerce.svg"
+        imageOverlay={
+          <>
+            {/* Casper logo overlay */}
+            <div className="absolute top-4 left-4 z-10 w-24">
+              <Image
+                src="/images/casper-logo.svg"
+                alt="Casper"
+                width={96}
+                height={32}
+                className="w-full h-auto"
+              />
+            </div>
+            {/* iPhone mockup */}
+            <div className="absolute -bottom-4 -left-8 z-10 w-28 md:w-36">
+              <Image
+                src="/images/casper-iphone.avif"
+                alt="Casper mobile website"
+                width={180}
+                height={360}
+                className="w-full h-auto rounded-xl shadow-2xl"
+              />
+            </div>
+          </>
+        }
       />
 
-      {/* Trust Section - Light alt background */}
-      <section className="py-28 bg-light-bg-alt">
+      {/* Trust Section */}
+      <section className="py-28 bg-surface-alt">
         <Container>
           <div className="max-w-4xl mx-auto text-center">
-            <Text size="sm" className="uppercase tracking-[1px] font-semibold text-black/60 mb-6">
+            <Text size="sm" className="uppercase tracking-[1px] font-semibold text-foreground-muted mb-6">
               The best web development company
             </Text>
-            <Heading level="display-2" className="text-black mb-6">
+            <Heading level="display-2" className="text-foreground mb-6">
               Trusted by brands that don&apos;t want to build another team.
             </Heading>
-            <Text size="lg" className="text-light-text-muted">
+            <Text size="lg" className="text-foreground-muted">
               For years, many clients have relied on Fetchly as their only outside dev team. Why? Fetchly gives you more than just code. You get a full-stack team, a tightly managed process, and a smarter way to build and scale your store.
               <br />
-              <strong className="text-black">70+ applications launched. 7+ years strong.</strong>
+              <strong className="text-foreground">70+ applications launched. 7+ years strong.</strong>
             </Text>
           </div>
         </Container>
       </section>
 
-      {/* Process Section - Light background */}
-      <ProcessSteps theme="light" />
+      {/* Process Section */}
+      <ProcessSteps />
 
-      {/* Testimonials Section - Light alt background */}
-      <section className="py-28 bg-light-bg-alt">
+      {/* Testimonials Section */}
+      <section className="py-28 bg-surface-alt">
         <Container>
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <Text size="sm" className="uppercase tracking-[1px] font-semibold text-black/60 mb-4">
+              <Text size="sm" className="uppercase tracking-[1px] font-semibold text-foreground-muted mb-4">
                 What our clients say
               </Text>
-              <Heading level="display-2" className="text-black">
+              <Heading level="display-2" className="text-foreground">
                 Trusted by industry leaders
               </Heading>
             </div>
             {/* Featured testimonial */}
-            <div className="p-8 md:p-12 rounded-[1.25rem] bg-light-card border border-black/10">
-              <Text as="blockquote" size="xl" className="text-black leading-relaxed mb-6">
+            <div className="p-8 md:p-12 rounded-[1.25rem] bg-surface-card border border-border">
+              <Text as="blockquote" size="xl" className="text-foreground leading-relaxed mb-6">
                 &ldquo;I was, without exaggerating, blown away by the quality, appearance, and functionality of the app.&rdquo;
               </Text>
               <div className="flex items-center gap-4">
@@ -142,11 +166,11 @@ export default function EcommercePage() {
                   alt="University of Denver"
                   width={48}
                   height={48}
-                  className="h-12 w-auto"
+                  className="h-12 w-auto dark:invert"
                 />
                 <div>
-                  <Text className="font-semibold text-black">Douglas H. Clements, Ph.D</Text>
-                  <Text size="sm" className="text-light-text-muted">Distinguished Professor and Kennedy Endowed Chair University of Denver</Text>
+                  <Text className="font-semibold text-foreground">Douglas H. Clements, Ph.D</Text>
+                  <Text size="sm" className="text-foreground-muted">Distinguished Professor and Kennedy Endowed Chair University of Denver</Text>
                 </div>
               </div>
             </div>
@@ -154,13 +178,13 @@ export default function EcommercePage() {
         </Container>
       </section>
 
-      {/* CTA Card Section - Dark card on light background */}
-      <section className="py-28 bg-light-bg">
+      {/* CTA Card Section - Always dark card */}
+      <section className="py-28 bg-surface">
         <Container>
-          <div className="rounded-[3rem] bg-dark-card text-white overflow-hidden">
+          <div className="rounded-[3rem] bg-gray-900 text-white overflow-hidden dark:bg-white/5 dark:border dark:border-border">
             <div className="grid grid-cols-1 lg:grid-cols-2">
               <div className="p-12 lg:p-16 flex flex-col justify-center">
-                <Heading level="display-2" className="mb-6">
+                <Heading level="display-2" className="text-white mb-6">
                   Ready to build
                   <br />
                   something amazing?
@@ -187,38 +211,35 @@ export default function EcommercePage() {
         </Container>
       </section>
 
-      {/* Features Section - Light alt background */}
+      {/* Features Section */}
       <FeatureGrid
         label="The only toolkit you'll ever need"
         title="Cross-functional eCommerce team that can help you rapidly scale your DTC Brand."
         items={FEATURES}
         columns={2}
-        theme="light"
         background="muted"
       />
 
-      {/* Capabilities Section - Light background */}
+      {/* Capabilities Section */}
       <FeatureGrid
         label="Your eCommerce development experts"
         title="Built to sell. Engineered to scale."
         description="We design and develop ecommerce platforms with the architecture, performance, and flexibility to grow as you do."
         items={CAPABILITIES}
         columns={3}
-        theme="light"
         centerText
       />
 
-      {/* FAQ Section - Light alt background, two-column layout */}
+      {/* FAQ Section */}
       <FAQAccordion
         title="See if we have what you need."
         items={FAQ_ITEMS}
-        theme="light"
         background="muted"
         layout="two-column"
       />
 
-      {/* Final CTA Section - Dark background */}
+      {/* Final CTA Section */}
       <CTA />
-    </div>
+    </>
   );
 }

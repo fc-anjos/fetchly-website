@@ -4,6 +4,7 @@ import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { Heading } from '@/components/ui/Heading';
 import { Text } from '@/components/ui/Text';
+import { LogoMarquee } from '@/components/sections/LogoMarquee';
 
 export const metadata: Metadata = {
   title: 'Case Studies',
@@ -42,34 +43,40 @@ export default function CaseStudiesPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
+      <section className="relative min-h-screen flex flex-col items-center justify-center pt-(--header-height) overflow-hidden">
+        {/* Video Background */}
         <div className="absolute inset-0">
-          <Image
-            src="/images/header.avif"
-            alt=""
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gray-950/80" />
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="/videos/case-studies-poster.jpg"
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/videos/case-studies.webm" type="video/webm" />
+            <source src="/videos/case-studies.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gray-950/60" />
         </div>
         <Container className="relative z-10">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl mx-auto text-center">
             <Heading level="display-1" className="text-white mb-6">
               Proven solutions,
               <br />
-              <span className="text-primary">real results</span>
+              real results
             </Heading>
-            <Text size="lg" className="text-gray-300 mb-8">
+            <Text size="lg" className="text-gray-300">
               Browse case studies of innovative products
               <br />
               we&apos;ve shipped, from MVP to enterprise launches
             </Text>
-            <Button href="/intake/step-1" size="lg">
-              Start Your Project
-            </Button>
           </div>
         </Container>
+        {/* Logo Marquee */}
+        <div className="dark absolute bottom-8 left-0 right-0 z-10">
+          <LogoMarquee variant="transparent" />
+        </div>
       </section>
 
       {/* Case Studies Grid */}

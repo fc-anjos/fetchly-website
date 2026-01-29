@@ -3,8 +3,8 @@ import type { SectionProps } from '@/types';
 
 const backgrounds = {
   default: 'bg-transparent',
-  muted: 'bg-gray-900/50',
-  dark: 'bg-gray-950',
+  muted: 'bg-surface-muted',
+  dark: 'bg-surface',
 };
 
 export function Section({ children, className, id, background = 'default' }: SectionProps) {

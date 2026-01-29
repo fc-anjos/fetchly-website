@@ -1,10 +1,11 @@
 import { Badge } from '@/components/ui/Badge';
-import { Heading } from '@/components/ui/Heading';
 import { Text } from '@/components/ui/Text';
+import { SplitText } from '@/components/effects/SplitText';
+import { ScrollReveal } from '@/components/effects/ScrollReveal';
 import { cn } from '@/lib/utils';
 
 export interface SectionHeaderProps {
-  /** Small label displayed above the title (shown as badge in dark theme, uppercase text in light) */
+  /** Small label displayed above the title */
   label?: string;
   /** Main section title */
   title: string;
@@ -14,8 +15,6 @@ export interface SectionHeaderProps {
   align?: 'left' | 'center';
   /** Size variant affecting title size */
   size?: 'default' | 'large';
-  /** Theme variant for styling */
-  theme?: 'dark' | 'light';
   /** Additional className for the container */
   className?: string;
 }
@@ -26,11 +25,8 @@ export function SectionHeader({
   description,
   align = 'center',
   size = 'default',
-  theme = 'dark',
   className,
 }: SectionHeaderProps) {
-  const isDark = theme === 'dark';
-
   return (
     <div
       className={cn(
@@ -41,27 +37,31 @@ export function SectionHeader({
       )}
     >
       {label && (
-        isDark ? (
+        <ScrollReveal direction="up" distance={20} duration={0.5}>
           <Badge className="mb-4">{label}</Badge>
-        ) : (
-          <Text size="sm" className="uppercase tracking-[1px] font-semibold text-black/60 mb-4">
-            {label}
-          </Text>
-        )
+        </ScrollReveal>
       )}
-      <Heading
-        level={size === 'large' ? 'display-1' : 'display-2'}
-        className={cn('mb-4', isDark ? 'text-white' : 'text-black')}
+      <SplitText
+        as={size === 'large' ? 'h1' : 'h2'}
+        splitBy="words"
+        trigger="scroll"
+        className={cn(
+          size === 'large'
+            ? 'text-display-1 font-bold leading-[1.05] tracking-tight'
+            : 'text-display-2 font-bold leading-[1.1] tracking-tight',
+          'mb-4',
+          'text-foreground'
+        )}
+        animation={{ duration: 0.6, stagger: 0.04, ease: 'power3.out', y: 35 }}
       >
         {title}
-      </Heading>
+      </SplitText>
       {description && (
-        <Text
-          size="lg"
-          className={isDark ? 'text-gray-300' : 'text-light-text-muted'}
-        >
-          {description}
-        </Text>
+        <ScrollReveal direction="up" distance={20} duration={0.6} delay={0.2}>
+          <Text size="lg" className="text-foreground-muted">
+            {description}
+          </Text>
+        </ScrollReveal>
       )}
     </div>
   );

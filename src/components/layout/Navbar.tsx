@@ -3,25 +3,24 @@
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { TransitionLink } from '@/components/effects/TransitionLink';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { NAV_LINKS } from '@/lib/constants';
 
-// Pages that use light theme
-const LIGHT_THEME_PAGES = ['/e-commerce', '/saas-home', '/our-model', '/services'];
+/** Routes whose hero section has a dark video background */
+const VIDEO_HERO_ROUTES = ['/', '/case-studies'];
 
-interface NavbarProps {
-  variant?: 'dark' | 'light';
-}
-
-export function Navbar({ variant }: NavbarProps) {
+export function Navbar() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Auto-detect light theme based on pathname, or use explicit variant
-  const isLight = variant === 'light' || (variant === undefined && LIGHT_THEME_PAGES.includes(pathname));
+  const hasVideoHero = VIDEO_HERO_ROUTES.includes(pathname);
+  // Force dark theme when navbar is transparent over a dark video hero
+  const forceDarkTheme = hasVideoHero && !isScrolled;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,40 +47,39 @@ export function Navbar({ variant }: NavbarProps) {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled
-          ? isLight
-            ? 'bg-white/95 backdrop-blur-md shadow-lg'
-            : 'bg-gray-950/95 backdrop-blur-md shadow-lg'
-          : 'bg-transparent'
+          ? 'bg-surface/95 backdrop-blur-md shadow-lg'
+          : 'bg-transparent',
+        forceDarkTheme && 'dark'
       )}
     >
       <Container>
-        <nav className="flex items-center justify-between h-20">
+        <nav className="flex items-center justify-between h-(--header-height)">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <FetchlyLogo
-              className={cn(
-                'h-8 w-auto transition-colors',
-                isLight ? 'text-gray-900' : 'text-white'
-              )}
-            />
-          </Link>
+          <TransitionLink href="/" className="flex items-center" data-cursor="hover">
+            <FetchlyLogo className="h-8 w-auto transition-colors text-foreground" />
+          </TransitionLink>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  'transition-colors text-sm font-medium',
-                  isLight
-                    ? 'text-gray-600 hover:text-gray-900'
-                    : 'text-gray-300 hover:text-white'
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <TransitionLink
+                  key={link.href}
+                  href={link.href}
+                  data-cursor="hover"
+                  className={cn(
+                    'transition-colors text-sm font-medium border-b-2 py-1',
+                    isActive
+                      ? 'text-foreground border-foreground'
+                      : 'text-foreground-muted hover:text-foreground border-transparent'
+                  )}
+                >
+                  {link.label}
+                </TransitionLink>
+              );
+            })}
+            <ThemeToggle />
             <Button href="/intake/step-1" size="sm">
               Get in Touch
             </Button>
@@ -95,10 +93,7 @@ export function Navbar({ variant }: NavbarProps) {
             aria-expanded={isMobileMenuOpen}
           >
             <svg
-              className={cn(
-                'w-6 h-6',
-                isLight ? 'text-gray-900' : 'text-white'
-              )}
+              className="w-6 h-6 text-foreground"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -119,29 +114,25 @@ export function Navbar({ variant }: NavbarProps) {
             isMobileMenuOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
           )}
         >
-          <div
-            className={cn(
-              'py-4 border-t',
-              isLight ? 'border-gray-200 bg-white' : 'border-white/10'
-            )}
-          >
+          <div className="py-4 border-t border-border bg-surface">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
                   'block py-3 transition-colors',
-                  isLight
-                    ? 'text-gray-600 hover:text-gray-900'
-                    : 'text-gray-300 hover:text-white'
+                  pathname === link.href
+                    ? 'text-foreground font-medium border-l-2 border-foreground pl-3'
+                    : 'text-foreground-muted hover:text-foreground'
                 )}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
-            <div className="pt-4">
-              <Button href="/intake/step-1" className="w-full">
+            <div className="pt-4 flex items-center gap-3">
+              <ThemeToggle />
+              <Button href="/intake/step-1" className="flex-1">
                 Get in Touch
               </Button>
             </div>

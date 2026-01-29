@@ -39,9 +39,9 @@ export function Checkbox({
         <div
           className={cn(
             'w-5 h-5 border-2 rounded transition-all duration-200',
-            'border-white/30 bg-transparent',
+            'border-border bg-transparent',
             'peer-checked:bg-primary peer-checked:border-primary',
-            'peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-gray-950'
+            'peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-surface'
           )}
         />
         <svg
@@ -57,7 +57,7 @@ export function Checkbox({
           <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
         </svg>
       </div>
-      <span className="text-white">{label}</span>
+      <span className="text-foreground">{label}</span>
     </label>
   );
 }

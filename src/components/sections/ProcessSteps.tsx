@@ -3,6 +3,7 @@ import { Section } from '@/components/ui/Section';
 import { Heading } from '@/components/ui/Heading';
 import { Text } from '@/components/ui/Text';
 import { SectionHeader } from './SectionHeader';
+import { ScrollReveal } from '@/components/effects/ScrollReveal';
 import { cn } from '@/lib/utils';
 
 export interface ProcessStep {
@@ -15,9 +16,7 @@ export interface ProcessStepsProps {
   title?: string;
   /** Array of process steps (defaults to DEFAULT_PROCESS_STEPS) */
   steps?: ProcessStep[];
-  /** Theme variant */
-  theme?: 'dark' | 'light';
-  /** Background variant (dark theme only) */
+  /** Background variant */
   background?: 'default' | 'muted';
   /** Additional className for the section */
   className?: string;
@@ -45,49 +44,37 @@ export const DEFAULT_PROCESS_STEPS: ProcessStep[] = [
 export function ProcessSteps({
   title = 'Our seamless collaboration process',
   steps = DEFAULT_PROCESS_STEPS,
-  theme = 'dark',
   background = 'default',
   className,
 }: ProcessStepsProps) {
-  const isDark = theme === 'dark';
-
   return (
     <Section
-      background={isDark ? background : undefined}
-      className={cn(
-        'py-24 md:py-32',
-        !isDark && (background === 'muted' ? 'bg-light-bg-alt' : 'bg-light-bg'),
-        className
-      )}
+      background={background}
+      className={cn('py-24 md:py-32', className)}
     >
       <Container>
-        <SectionHeader title={title} theme={theme} />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {steps.map((step, index) => (
-            <div
-              key={step.title}
-              className={cn(
-                'p-8 rounded-2xl transition-colors',
-                isDark
-                  ? 'bg-gray-900/50 border border-white/10'
-                  : 'bg-light-card border border-black/10 hover:bg-light-card-hover rounded-[1rem]'
-              )}
-            >
-              <Text size="sm" className="font-semibold mb-4 text-primary">
-                0{index + 1}
-              </Text>
-              <Heading
-                level="h4"
-                className={cn('mb-4 capitalize', isDark ? 'text-white' : 'text-black')}
+        <SectionHeader title={title} />
+        <ScrollReveal stagger={0.15} direction="up">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {steps.map((step, index) => (
+              <div
+                key={step.title}
+                data-reveal
+                className="p-8 rounded-2xl transition-colors bg-surface-card border border-border"
               >
-                {step.title}
-              </Heading>
-              <Text className={isDark ? 'text-gray-400' : 'text-light-text-muted'}>
-                {step.description}
-              </Text>
-            </div>
-          ))}
-        </div>
+                <Text size="sm" className="font-semibold mb-4 text-primary">
+                  0{index + 1}
+                </Text>
+                <Heading level="h4" className="mb-4 capitalize text-foreground">
+                  {step.title}
+                </Heading>
+                <Text className="text-foreground-muted">
+                  {step.description}
+                </Text>
+              </div>
+            ))}
+          </div>
+        </ScrollReveal>
       </Container>
     </Section>
   );
