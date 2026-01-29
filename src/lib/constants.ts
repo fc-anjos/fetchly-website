@@ -9,16 +9,16 @@ export const NAV_LINKS = [
 
 // Footer links
 export const FOOTER_LINKS = {
-  navigation: [
+  pages: [
     { label: 'eComm', href: '/e-commerce' },
-    { label: 'SaaS', href: '/saas-home' },
-    { label: 'Our Model', href: '/our-model' },
     { label: 'Our Services', href: '/services' },
     { label: 'Case Studies', href: '/case-studies' },
+    { label: 'Our Model', href: '/our-model' },
+    { label: 'SaaS', href: '/saas-home' },
   ],
-  contact: [
-    { label: 'Get in Touch', href: '/intake/step-1' },
+  legal: [
     { label: 'Privacy Policy', href: '/privacy-policy' },
+    { label: 'Cookies Settings', href: '#' },
   ],
 } as const;
 

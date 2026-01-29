@@ -40,8 +40,8 @@ export function Checkbox({
           className={cn(
             'w-5 h-5 border-2 rounded transition-all duration-200',
             'border-white/30 bg-transparent',
-            'peer-checked:bg-[#69E5FB] peer-checked:border-[#69E5FB]',
-            'peer-focus-visible:ring-2 peer-focus-visible:ring-[#69E5FB] peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-gray-950'
+            'peer-checked:bg-primary peer-checked:border-primary',
+            'peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-gray-950'
           )}
         />
         <svg

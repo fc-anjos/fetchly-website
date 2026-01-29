@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { Container } from '@/components/ui/Container';
 import { LogoMarquee } from '@/components/sections/LogoMarquee';
+import { Heading } from '@/components/ui/Heading';
+import { Text } from '@/components/ui/Text';
 
 export function Hero() {
   const [email, setEmail] = useState('');
@@ -47,13 +49,13 @@ export function Hero() {
 
       <Container className="relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-display-1 text-white mb-6 animate-fade-in">
+          <Heading level="display-1" className="text-white mb-6 animate-fade-in">
             Your Dev Team as a Service™
-          </h1>
+          </Heading>
 
-          <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-2xl mx-auto animate-slide-up">
+          <Text size="xl" className="text-gray-300 mb-10 max-w-2xl mx-auto animate-slide-up">
             Development, Project Management, QA, Design, DevOps, and more
-          </p>
+          </Text>
 
           {/* Email form */}
           <div className="w-full max-w-md mx-auto animate-slide-up">

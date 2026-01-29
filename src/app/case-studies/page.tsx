@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
+import { Heading } from '@/components/ui/Heading';
+import { Text } from '@/components/ui/Text';
 
 export const metadata: Metadata = {
   title: 'Case Studies',
@@ -53,16 +55,16 @@ export default function CaseStudiesPage() {
         </div>
         <Container className="relative z-10">
           <div className="max-w-3xl">
-            <h1 className="text-display-1 text-white mb-6">
+            <Heading level="display-1" className="text-white mb-6">
               Proven solutions,
               <br />
               <span className="text-primary">real results</span>
-            </h1>
-            <p className="text-xl text-gray-300 mb-8">
+            </Heading>
+            <Text size="lg" className="text-gray-300 mb-8">
               Browse case studies of innovative products
               <br />
               we&apos;ve shipped, from MVP to enterprise launches
-            </p>
+            </Text>
             <Button href="/intake/step-1" size="lg">
               Start Your Project
             </Button>
@@ -102,19 +104,21 @@ export default function CaseStudiesPage() {
 
                 {/* Content */}
                 <div className={index % 2 === 1 ? 'lg:col-start-1' : ''}>
-                  <div className="text-sm text-primary font-medium mb-2">{study.category}</div>
-                  <h2 className="text-3xl md:text-4xl font-semibold text-white mb-4">
+                  <Text size="sm" className="text-primary font-medium mb-2">{study.category}</Text>
+                  <Heading level="h1" className="text-white mb-4">
                     {study.title}
-                  </h2>
-                  <p className="text-lg text-gray-400 mb-6">{study.description}</p>
+                  </Heading>
+                  <Text size="lg" className="text-gray-400 mb-6">{study.description}</Text>
                   <div className="flex flex-wrap gap-2">
                     {study.tags.map((tag) => (
-                      <span
+                      <Text
                         key={tag}
-                        className="px-3 py-1 text-sm rounded-full bg-gray-800 text-gray-300 border border-white/10"
+                        as="span"
+                        size="sm"
+                        className="px-3 py-1 rounded-full bg-gray-800 text-gray-300 border border-white/10"
                       >
                         {tag}
-                      </span>
+                      </Text>
                     ))}
                   </div>
                 </div>
@@ -128,13 +132,13 @@ export default function CaseStudiesPage() {
       <section className="py-24 md:py-32 bg-gray-900/50">
         <Container>
           <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-display-2 text-white mb-6">
+            <Heading level="display-2" className="text-white mb-6">
               Ready to be our next success story?
-            </h2>
-            <p className="text-xl text-gray-300 mb-8">
+            </Heading>
+            <Text size="lg" className="text-gray-300 mb-8">
               Let&apos;s discuss how we can help bring your vision to life with our proven development
               process.
-            </p>
+            </Text>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button href="/intake/step-1" size="lg">
                 Get in Touch

@@ -3,6 +3,8 @@
 import Image from 'next/image';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
+import { Heading } from '@/components/ui/Heading';
+import { Text } from '@/components/ui/Text';
 import { CTA } from '@/components/sections/CTA';
 import { ProcessSteps } from '@/components/sections/ProcessSteps';
 import { FeatureGrid } from '@/components/sections/FeatureGrid';
@@ -99,17 +101,17 @@ export default function EcommercePage() {
       <section className="py-28 bg-light-bg-alt">
         <Container>
           <div className="max-w-4xl mx-auto text-center">
-            <p className="text-sm uppercase tracking-[1px] font-semibold text-black/60 mb-6">
+            <Text size="sm" className="uppercase tracking-[1px] font-semibold text-black/60 mb-6">
               The best web development company
-            </p>
-            <h2 className="text-display-2 text-black mb-6">
+            </Text>
+            <Heading level="display-2" className="text-black mb-6">
               Trusted by brands that don&apos;t want to build another team.
-            </h2>
-            <p className="text-lg text-light-text-muted">
+            </Heading>
+            <Text size="lg" className="text-light-text-muted">
               For years, many clients have relied on Fetchly as their only outside dev team. Why? Fetchly gives you more than just code. You get a full-stack team, a tightly managed process, and a smarter way to build and scale your store.
               <br />
               <strong className="text-black">70+ applications launched. 7+ years strong.</strong>
-            </p>
+            </Text>
           </div>
         </Container>
       </section>
@@ -122,18 +124,18 @@ export default function EcommercePage() {
         <Container>
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <p className="text-sm uppercase tracking-[1px] font-semibold text-black/60 mb-4">
+              <Text size="sm" className="uppercase tracking-[1px] font-semibold text-black/60 mb-4">
                 What our clients say
-              </p>
-              <h2 className="text-display-2 text-black">
+              </Text>
+              <Heading level="display-2" className="text-black">
                 Trusted by industry leaders
-              </h2>
+              </Heading>
             </div>
             {/* Featured testimonial */}
             <div className="p-8 md:p-12 rounded-[1.25rem] bg-light-card border border-black/10">
-              <blockquote className="text-xl md:text-2xl text-black leading-relaxed mb-6">
+              <Text as="blockquote" size="xl" className="text-black leading-relaxed mb-6">
                 &ldquo;I was, without exaggerating, blown away by the quality, appearance, and functionality of the app.&rdquo;
-              </blockquote>
+              </Text>
               <div className="flex items-center gap-4">
                 <Image
                   src="/images/university-denver.svg"
@@ -143,8 +145,8 @@ export default function EcommercePage() {
                   className="h-12 w-auto"
                 />
                 <div>
-                  <p className="font-semibold text-black">Douglas H. Clements, Ph.D</p>
-                  <p className="text-sm text-light-text-muted">Distinguished Professor and Kennedy Endowed Chair University of Denver</p>
+                  <Text className="font-semibold text-black">Douglas H. Clements, Ph.D</Text>
+                  <Text size="sm" className="text-light-text-muted">Distinguished Professor and Kennedy Endowed Chair University of Denver</Text>
                 </div>
               </div>
             </div>
@@ -158,14 +160,14 @@ export default function EcommercePage() {
           <div className="rounded-[3rem] bg-dark-card text-white overflow-hidden">
             <div className="grid grid-cols-1 lg:grid-cols-2">
               <div className="p-12 lg:p-16 flex flex-col justify-center">
-                <h2 className="text-display-2 mb-6">
+                <Heading level="display-2" className="mb-6">
                   Ready to build
                   <br />
                   something amazing?
-                </h2>
-                <p className="text-lg text-gray-400 mb-8">
+                </Heading>
+                <Text size="lg" className="text-gray-400 mb-8">
                   Get a high-performing e-commerce platform that&apos;s designed, built, and managed by a team that does this every day.
-                </p>
+                </Text>
                 <div>
                   <Button href="/intake/step-1" size="lg" variant="primary">
                     Get in Touch

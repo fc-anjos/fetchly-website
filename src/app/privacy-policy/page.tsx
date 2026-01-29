@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { Container } from '@/components/ui/Container';
+import { Heading } from '@/components/ui/Heading';
+import { Text } from '@/components/ui/Text';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy - Data Protection & User Rights',
@@ -14,8 +16,8 @@ export default function PrivacyPolicyPage() {
       <header className="py-24 md:py-32">
         <Container size="sm">
           <div className="text-center">
-            <h1 className="text-display-1 text-white mb-4">Privacy Policy</h1>
-            <p className="text-lg text-gray-400">Effective date: July 22, 2025</p>
+            <Heading level="display-1" className="text-white mb-4">Privacy Policy</Heading>
+            <Text size="lg" className="text-gray-400">Effective date: July 22, 2025</Text>
           </div>
         </Container>
       </header>

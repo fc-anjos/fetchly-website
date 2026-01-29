@@ -3,17 +3,17 @@ import { cn } from '@/lib/utils';
 import type { ButtonProps } from '@/types';
 
 const variants = {
-  primary: 'bg-[#69E5FB] text-black hover:bg-[#4dd4ec] font-medium',
+  primary: 'bg-primary text-black hover:bg-primary-dark font-medium',
   secondary: 'bg-gray-800 text-white hover:bg-gray-700',
   outline: 'border-2 border-white/30 bg-transparent hover:bg-white/10 text-white',
   ghost: 'bg-transparent hover:bg-white/10 text-white',
-  icon: 'bg-[#69E5FB] text-black hover:bg-[#4dd4ec] p-0',
+  icon: 'bg-primary text-black hover:bg-primary-dark p-0',
 };
 
 const sizes = {
   sm: 'px-4 py-2 text-sm',
-  md: 'px-6 py-3 text-base',
-  lg: 'px-8 py-4 text-lg',
+  md: 'px-5 py-2.5 text-sm',
+  lg: 'px-6 py-3 text-base',
 };
 
 const iconSizes = {
@@ -37,7 +37,7 @@ export function Button({
 
   const classes = cn(
     'inline-flex items-center justify-center gap-2 rounded-xl transition-all duration-200',
-    'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#69E5FB] focus:ring-offset-gray-950',
+    'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-gray-950',
     'disabled:opacity-50 disabled:cursor-not-allowed',
     variants[variant],
     isIconOnly ? iconSizes[size] : sizes[size],

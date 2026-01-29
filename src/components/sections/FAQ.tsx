@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Badge } from '@/components/ui/Badge';
+import { Heading } from '@/components/ui/Heading';
+import { Text } from '@/components/ui/Text';
 import { FAQ_ITEMS } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 
@@ -19,9 +21,9 @@ export function FAQ() {
       <Container size="md">
         <div className="text-center mb-16">
           <Badge className="mb-4">FAQ</Badge>
-          <h2 className="text-display-2 text-white mb-4">
+          <Heading level="display-2" className="text-white mb-4">
             FAQs
-          </h2>
+          </Heading>
         </div>
 
         <div className="space-y-4">
@@ -35,9 +37,9 @@ export function FAQ() {
                 className="w-full flex items-center justify-between p-6 text-left hover:bg-white/5 transition-colors"
                 aria-expanded={openIndex === index}
               >
-                <span className="text-white font-semibold pr-4">
+                <Text as="span" className="text-white font-semibold pr-4">
                   {item.question}
-                </span>
+                </Text>
                 <span
                   className={cn(
                     'flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-white/10 transition-transform duration-200',
@@ -61,9 +63,9 @@ export function FAQ() {
                   openIndex === index ? 'max-h-96' : 'max-h-0'
                 )}
               >
-                <div className="px-6 pb-6 text-gray-400">
+                <Text as="div" className="px-6 pb-6 text-gray-400">
                   {item.answer}
-                </div>
+                </Text>
               </div>
             </div>
           ))}

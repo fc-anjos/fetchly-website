@@ -1,113 +1,139 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Container } from '@/components/ui/Container';
-import { FOOTER_LINKS, SOCIAL_LINKS } from '@/lib/constants';
+import { Heading } from '@/components/ui/Heading';
+import { Text } from '@/components/ui/Text';
+
+const PAGES_LINKS = [
+  { label: 'eComm', href: '/e-commerce' },
+  { label: 'Our Services', href: '/services' },
+  { label: 'Case Studies', href: '/case-studies' },
+  { label: 'Our Model', href: '/our-model' },
+  { label: 'SaaS', href: '/saas-home' },
+];
+
+const LEGAL_LINKS = [
+  { label: 'Privacy Policy', href: '/privacy-policy' },
+  { label: 'Cookies Settings', href: '/privacy-policy' },
+];
 
 export function Footer() {
   return (
-    <footer className="relative bg-gray-950 border-t border-white/10">
+    <footer className="relative text-white overflow-hidden">
       {/* Video Background */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 z-0 w-full h-full brightness-[0.85]">
         <video
           autoPlay
           muted
           loop
           playsInline
           poster="/videos/abstract-glass-poster.jpg"
-          className="absolute inset-0 w-full h-full object-cover opacity-20"
+          className="w-full h-full object-cover"
         >
-          <source src="/videos/abstract-glass.webm" type="video/webm" />
           <source src="/videos/abstract-glass.mp4" type="video/mp4" />
+          <source src="/videos/abstract-glass.webm" type="video/webm" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/95 to-gray-950/80" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 py-16">
-        <Container>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            {/* Brand */}
-            <div className="lg:col-span-2">
-              <Link href="/" className="inline-block mb-4">
-                <Image
+      <div className="relative z-10 px-4 md:px-8 lg:px-12 py-8 lg:py-12">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_0.5fr] gap-6 lg:gap-8 items-stretch">
+
+          {/* Left Content */}
+          <div className="flex flex-col justify-between max-w-sm">
+            <div>
+              <Link href="/">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src="/images/fetchly-logo.svg"
                   alt="Fetchly"
-                  width={120}
-                  height={40}
-                  className="h-10 w-auto"
+                  style={{ height: '72px', width: 'auto' }}
                 />
               </Link>
-              <p className="text-gray-400 max-w-md mb-6">
-                Your dev team as a service. We help companies build great products with
-                fully aligned, high-performing development teams.
-              </p>
-              {/* Social Links */}
-              <div className="flex gap-4">
-                {SOCIAL_LINKS.map((social) => (
-                  <a
-                    key={social.name}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all"
-                    aria-label={social.name}
+            </div>
+            <div>
+              <Heading level="h4" className="leading-tight">
+                Ready to build
+                <br />
+                something amazing?
+              </Heading>
+            </div>
+            <div>
+              <Link
+                href="/intake/request"
+                className="inline-flex items-center justify-center px-5 py-2.5 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-sm text-white font-medium transition-colors"
+              >
+                Get in Touch
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Content */}
+          <div className="flex flex-col justify-between text-left lg:text-right">
+            {/* Menu Links */}
+            <div className="grid grid-cols-2 gap-x-6 gap-y-2">
+              {/* Pages Column */}
+              <div className="flex flex-col gap-0.5 items-start lg:items-end">
+                <div className="text-xs text-white/60 mb-1">PAGES</div>
+                {PAGES_LINKS.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-sm text-white py-0.5 hover:text-white/80 transition-colors"
                   >
-                    {social.icon === 'linkedin' && <LinkedInIcon className="w-5 h-5" />}
-                  </a>
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+
+              {/* Legal Column */}
+              <div className="flex flex-col gap-0.5 items-start lg:items-end">
+                <div className="text-xs text-white/60 mb-1">LEGAL</div>
+                {LEGAL_LINKS.map((link) => (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    className="text-sm text-white py-0.5 hover:text-white/80 transition-colors"
+                  >
+                    {link.label}
+                  </Link>
                 ))}
               </div>
             </div>
 
-            {/* Navigation */}
-            <div>
-              <h4 className="text-white font-semibold mb-4">Navigation</h4>
-              <ul className="space-y-3">
-                {FOOTER_LINKS.navigation.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-gray-400 hover:text-white transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Contact */}
-            <div>
-              <h4 className="text-white font-semibold mb-4">Get in Touch</h4>
-              <ul className="space-y-3">
-                {FOOTER_LINKS.contact.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-gray-400 hover:text-white transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+            {/* Bottom Section */}
+            <div className="flex flex-col gap-2 items-start lg:items-end">
+              {/* Social Links */}
+              <div className="flex gap-2">
+                {/* X/Twitter */}
+                <a
+                  href="https://x.com/fetchlylabs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-8 h-8 text-white hover:text-white/80 transition-colors"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.1761 4H19.9362L13.9061 10.7774L21 20H15.4456L11.0951 14.4066L6.11723 20H3.35544L9.80517 12.7508L3 4H8.69545L12.6279 9.11262L17.1761 4ZM16.2073 18.3754H17.7368L7.86441 5.53928H6.2232L16.2073 18.3754Z" fill="currentColor"/>
+                  </svg>
+                </a>
+                {/* LinkedIn */}
+                <a
+                  href="https://www.linkedin.com/company/fetchly-labs/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-8 h-8 text-white hover:text-white/80 transition-colors"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M4.5 3C3.67157 3 3 3.67157 3 4.5V19.5C3 20.3284 3.67157 21 4.5 21H19.5C20.3284 21 21 20.3284 21 19.5V4.5C21 3.67157 20.3284 3 19.5 3H4.5ZM8.52076 7.00272C8.52639 7.95897 7.81061 8.54819 6.96123 8.54397C6.16107 8.53975 5.46357 7.90272 5.46779 7.00413C5.47201 6.15897 6.13998 5.47975 7.00764 5.49944C7.88795 5.51913 8.52639 6.1646 8.52076 7.00272ZM12.2797 9.76176H9.75971H9.7583V18.3216H12.4217V18.1219C12.4217 17.742 12.4214 17.362 12.4211 16.9819V16.9818V16.9816V16.9815V16.9812C12.4203 15.9674 12.4194 14.9532 12.4246 13.9397C12.426 13.6936 12.4372 13.4377 12.5005 13.2028C12.7381 12.3253 13.5271 11.7586 14.4074 11.8979C14.9727 11.9864 15.3467 12.3141 15.5042 12.8471C15.6013 13.1803 15.6449 13.5389 15.6491 13.8863C15.6605 14.9339 15.6589 15.9815 15.6573 17.0292V17.0294C15.6567 17.3992 15.6561 17.769 15.6561 18.1388V18.3202H18.328V18.1149C18.328 17.6629 18.3278 17.211 18.3275 16.7591V16.759V16.7588C18.327 15.6293 18.3264 14.5001 18.3294 13.3702C18.3308 12.8597 18.276 12.3563 18.1508 11.8627C17.9638 11.1286 17.5771 10.5211 16.9485 10.0824C16.5027 9.77019 16.0133 9.5691 15.4663 9.5466C15.404 9.54401 15.3412 9.54062 15.2781 9.53721C14.9984 9.52209 14.7141 9.50673 14.4467 9.56066C13.6817 9.71394 13.0096 10.0641 12.5019 10.6814C12.4429 10.7522 12.3852 10.8241 12.2991 10.9314L12.2797 10.9557V9.76176ZM5.68164 18.3244H8.33242V9.76733H5.68164V18.3244Z" fill="currentColor"/>
+                  </svg>
+                </a>
+              </div>
+              <div className="text-xs text-white/60">© 2025 Fetchly All rights reserved.</div>
+              <div className="text-xs text-white">Austin, TX | Denver, CO | Santa Barbara, CA</div>
             </div>
           </div>
-
-          {/* Bottom */}
-          <div className="mt-12 pt-8 border-t border-white/10 text-center text-gray-500 text-sm">
-            <p>&copy; {new Date().getFullYear()} Fetchly Labs. All rights reserved.</p>
-          </div>
-        </Container>
+        </div>
       </div>
     </footer>
-  );
-}
-
-function LinkedInIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-    </svg>
   );
 }
 

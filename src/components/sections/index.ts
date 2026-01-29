@@ -1,7 +1,24 @@
 export { Hero } from './Hero';
+export { Bento } from './Bento';
 export { LogoMarquee } from './LogoMarquee';
 export { Comparison } from './Comparison';
 export { Services } from './Services';
 export { Testimonials } from './Testimonials';
 export { FAQ } from './FAQ';
-export { CTA } from './CTA';
+export { SectionHeader } from './SectionHeader';
+export { ProcessSteps, DEFAULT_PROCESS_STEPS } from './ProcessSteps';
+export { FAQAccordion } from './FAQAccordion';
+export { FeatureGrid } from './FeatureGrid';
+export { StatsGrid, DEFAULT_STATS } from './StatsGrid';
+export { CaseStudyGrid, DEFAULT_CASE_STUDIES } from './CaseStudyGrid';
+export { PageHero } from './PageHero';
+export { IconGrid } from './IconGrid';
+
+export type { SectionHeaderProps } from './SectionHeader';
+export type { ProcessStep, ProcessStepsProps } from './ProcessSteps';
+export type { FAQItem, FAQAccordionProps } from './FAQAccordion';
+export type { FeatureItem, FeatureGridProps } from './FeatureGrid';
+export type { StatItem, StatsGridProps } from './StatsGrid';
+export type { CaseStudy, CaseStudyGridProps } from './CaseStudyGrid';
+export type { PageHeroProps } from './PageHero';
+export type { IconGridItem, IconGridProps } from './IconGrid';

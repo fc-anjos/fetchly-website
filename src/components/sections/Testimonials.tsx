@@ -5,6 +5,9 @@ import Image from 'next/image';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Badge } from '@/components/ui/Badge';
+import { Heading } from '@/components/ui/Heading';
+import { Text } from '@/components/ui/Text';
+import { cn } from '@/lib/utils';
 
 const testimonials = [
   {
@@ -22,7 +25,7 @@ const testimonials = [
   {
     quote: "I was, without exaggerating, blown away by the quality, appearance, and functionality of the app.",
     author: "Douglas H. Clements, Ph.D",
-    role: "Distinguished Professor and Kennedy Endowed Chair, University of Denver",
+    role: "Distinguished Professor and Kennedy Endowed Chair University of Denver",
     logo: "/images/university-denver.svg",
   },
   {
@@ -33,8 +36,13 @@ const testimonials = [
   },
 ];
 
-export function Testimonials() {
+interface TestimonialsProps {
+  theme?: 'dark' | 'light';
+}
+
+export function Testimonials({ theme = 'dark' }: TestimonialsProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const isDark = theme === 'dark';
 
   const goToPrevious = () => {
     setCurrentIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
@@ -47,35 +55,65 @@ export function Testimonials() {
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <Section id="testimonials" className="py-24 md:py-32">
+    <Section
+      id="testimonials"
+      className={cn(
+        'py-24 md:py-32',
+        isDark ? 'bg-gray-950' : 'bg-light-bg-alt'
+      )}
+    >
       <Container>
         <div className="text-center mb-12">
-          <Badge className="mb-4">Testimonials</Badge>
-          <h2 className="text-display-2 text-white">
+          <Badge className="mb-4" variant={isDark ? 'default' : 'light'}>
+            Testimonials
+          </Badge>
+          <Heading level="display-2" className={isDark ? 'text-white' : 'text-black'}>
             What our clients say
-          </h2>
+          </Heading>
         </div>
 
         <div className="max-w-4xl mx-auto">
           {/* Testimonial Card */}
           <div className="relative">
-            <div className="bg-gray-900/50 rounded-2xl border border-white/10 p-8 md:p-12">
+            <div
+              className={cn(
+                'rounded-2xl p-8 md:p-12',
+                isDark
+                  ? 'bg-gray-900/50 border border-white/10'
+                  : 'bg-light-card border border-black/10'
+              )}
+            >
               {/* Stars */}
               <div className="flex gap-1 mb-6">
                 {[1, 2, 3, 4, 5].map((star) => (
-                  <StarIcon key={star} className="w-6 h-6 text-[#1F444B]" />
+                  <StarIcon
+                    key={star}
+                    className={cn('w-6 h-6', isDark ? 'text-dark' : 'text-primary')}
+                  />
                 ))}
               </div>
 
               {/* Quote */}
-              <blockquote className="text-xl md:text-2xl text-white font-normal leading-relaxed mb-8">
+              <Text
+                as="blockquote"
+                size="xl"
+                className={cn(
+                  'font-normal mb-8',
+                  isDark ? 'text-white' : 'text-black'
+                )}
+              >
                 &ldquo;{currentTestimonial.quote}&rdquo;
-              </blockquote>
+              </Text>
 
               {/* Author */}
               <div className="flex items-center gap-4">
                 {currentTestimonial.logo ? (
-                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center p-2">
+                  <div
+                    className={cn(
+                      'w-12 h-12 rounded-full flex items-center justify-center p-2',
+                      isDark ? 'bg-white/5' : 'bg-black/5'
+                    )}
+                  >
                     <Image
                       src={currentTestimonial.logo}
                       alt={currentTestimonial.author}
@@ -94,8 +132,12 @@ export function Testimonials() {
                   />
                 ) : null}
                 <div>
-                  <p className="text-white font-semibold">{currentTestimonial.author}</p>
-                  <p className="text-gray-400 text-sm">{currentTestimonial.role}</p>
+                  <p className={cn('font-semibold', isDark ? 'text-white' : 'text-black')}>
+                    {currentTestimonial.author}
+                  </p>
+                  <p className={cn('text-sm', isDark ? 'text-gray-400' : 'text-light-text-muted')}>
+                    {currentTestimonial.role}
+                  </p>
                 </div>
               </div>
             </div>
@@ -104,7 +146,12 @@ export function Testimonials() {
             <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 -left-16 -right-16 justify-between pointer-events-none">
               <button
                 onClick={goToPrevious}
-                className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 transition-colors pointer-events-auto"
+                className={cn(
+                  'w-12 h-12 rounded-full border flex items-center justify-center transition-colors pointer-events-auto',
+                  isDark
+                    ? 'bg-white/5 border-white/10 text-white hover:bg-white/10'
+                    : 'bg-black/5 border-black/10 text-black hover:bg-black/10'
+                )}
                 aria-label="Previous testimonial"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -113,7 +160,12 @@ export function Testimonials() {
               </button>
               <button
                 onClick={goToNext}
-                className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 transition-colors pointer-events-auto"
+                className={cn(
+                  'w-12 h-12 rounded-full border flex items-center justify-center transition-colors pointer-events-auto',
+                  isDark
+                    ? 'bg-white/5 border-white/10 text-white hover:bg-white/10'
+                    : 'bg-black/5 border-black/10 text-black hover:bg-black/10'
+                )}
                 aria-label="Next testimonial"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -129,9 +181,16 @@ export function Testimonials() {
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                  index === currentIndex ? 'bg-white' : 'bg-white/20 hover:bg-white/40'
-                }`}
+                className={cn(
+                  'w-2.5 h-2.5 rounded-full transition-colors',
+                  index === currentIndex
+                    ? isDark
+                      ? 'bg-white'
+                      : 'bg-black'
+                    : isDark
+                      ? 'bg-white/20 hover:bg-white/40'
+                      : 'bg-black/20 hover:bg-black/40'
+                )}
                 aria-label={`Go to testimonial ${index + 1}`}
               />
             ))}

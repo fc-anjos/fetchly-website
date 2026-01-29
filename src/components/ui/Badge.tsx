@@ -2,14 +2,15 @@ import { cn } from '@/lib/utils';
 
 interface BadgeProps {
   children: React.ReactNode;
-  variant?: 'default' | 'accent' | 'outline';
+  variant?: 'default' | 'accent' | 'outline' | 'light';
   className?: string;
 }
 
 const variants = {
-  default: 'bg-[#69E5FB]/10 text-[#69E5FB] border-[#69E5FB]/20',
-  accent: 'bg-[#04FFA8]/10 text-[#04FFA8] border-[#04FFA8]/20',
+  default: 'bg-primary/10 text-primary border-primary/20',
+  accent: 'bg-accent/10 text-accent border-accent/20',
   outline: 'bg-transparent text-white border-white/30',
+  light: 'bg-black/5 text-black/80 border-black/10',
 };
 
 export function Badge({ children, variant = 'default', className }: BadgeProps) {

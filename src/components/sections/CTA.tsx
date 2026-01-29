@@ -2,6 +2,7 @@
 
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
+import { Heading } from '@/components/ui/Heading';
 
 export function CTA() {
   return (
@@ -24,11 +25,11 @@ export function CTA() {
 
       <Container className="relative z-10">
         <div className="max-w-2xl">
-          <h2 className="text-display-2 text-white mb-6">
+          <Heading level="display-2" className="text-white mb-6">
             Ready to build
             <br />
             something amazing?
-          </h2>
+          </Heading>
           <Button href="/intake/step-1" size="lg">
             Get in Touch
           </Button>

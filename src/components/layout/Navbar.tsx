@@ -1,15 +1,27 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
 import { NAV_LINKS } from '@/lib/constants';
 
-export function Navbar() {
+// Pages that use light theme
+const LIGHT_THEME_PAGES = ['/e-commerce', '/saas-home', '/our-model', '/services'];
+
+interface NavbarProps {
+  variant?: 'dark' | 'light';
+}
+
+export function Navbar({ variant }: NavbarProps) {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Auto-detect light theme based on pathname, or use explicit variant
+  const isLight = variant === 'light' || (variant === undefined && LIGHT_THEME_PAGES.includes(pathname));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,14 +47,23 @@ export function Navbar() {
     <header
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        isScrolled ? 'bg-gray-950/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+        isScrolled
+          ? isLight
+            ? 'bg-white/95 backdrop-blur-md shadow-lg'
+            : 'bg-gray-950/95 backdrop-blur-md shadow-lg'
+          : 'bg-transparent'
       )}
     >
       <Container>
         <nav className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <FetchlyLogo className="h-8 w-auto text-white" />
+            <FetchlyLogo
+              className={cn(
+                'h-8 w-auto transition-colors',
+                isLight ? 'text-gray-900' : 'text-white'
+              )}
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -51,7 +72,12 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
+                className={cn(
+                  'transition-colors text-sm font-medium',
+                  isLight
+                    ? 'text-gray-600 hover:text-gray-900'
+                    : 'text-gray-300 hover:text-white'
+                )}
               >
                 {link.label}
               </Link>
@@ -68,7 +94,15 @@ export function Navbar() {
             aria-label="Toggle menu"
             aria-expanded={isMobileMenuOpen}
           >
-            <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg
+              className={cn(
+                'w-6 h-6',
+                isLight ? 'text-gray-900' : 'text-white'
+              )}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
               {isMobileMenuOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               ) : (
@@ -85,12 +119,22 @@ export function Navbar() {
             isMobileMenuOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
           )}
         >
-          <div className="py-4 border-t border-white/10">
+          <div
+            className={cn(
+              'py-4 border-t',
+              isLight ? 'border-gray-200 bg-white' : 'border-white/10'
+            )}
+          >
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="block py-3 text-gray-300 hover:text-white transition-colors"
+                className={cn(
+                  'block py-3 transition-colors',
+                  isLight
+                    ? 'text-gray-600 hover:text-gray-900'
+                    : 'text-gray-300 hover:text-white'
+                )}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.label}
