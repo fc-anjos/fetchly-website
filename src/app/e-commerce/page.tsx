@@ -95,30 +95,6 @@ export default function EcommercePage() {
         image="/images/casper.jpg"
         imageAlt="Casper website homepage highlighting 20% off Dream mattresses, 30% off bundles, pillows, and a bed with call-to-action buttons."
         badgeImage="/images/badge-ecommerce.svg"
-        imageOverlay={
-          <>
-            {/* Casper logo overlay */}
-            <div className="absolute top-4 left-4 z-10 w-24">
-              <Image
-                src="/images/casper-logo.svg"
-                alt="Casper"
-                width={96}
-                height={32}
-                className="w-full h-auto"
-              />
-            </div>
-            {/* iPhone mockup */}
-            <div className="absolute -bottom-4 -left-8 z-10 w-28 md:w-36">
-              <Image
-                src="/images/casper-iphone.avif"
-                alt="Casper mobile website"
-                width={180}
-                height={360}
-                className="w-full h-auto rounded-xl shadow-2xl"
-              />
-            </div>
-          </>
-        }
       />
 
       {/* Trust Section */}
@@ -156,22 +132,24 @@ export default function EcommercePage() {
               </Heading>
             </div>
             {/* Featured testimonial */}
-            <div className="p-8 md:p-12 rounded-[1.25rem] bg-surface-card border border-border">
-              <Text as="blockquote" size="xl" className="text-foreground leading-relaxed mb-6">
-                &ldquo;I was, without exaggerating, blown away by the quality, appearance, and functionality of the app.&rdquo;
-              </Text>
-              <div className="flex items-center gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-[1fr,240px] gap-8 md:gap-12 p-8 md:p-12 rounded-[1.25rem] bg-surface-card border border-border">
+              <blockquote>
+                <Text size="xl" className="text-foreground leading-relaxed italic">
+                  &ldquo;I was, without exaggerating, blown away by the quality, appearance, and functionality of the app.&rdquo;
+                </Text>
+              </blockquote>
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <Text className="font-semibold text-foreground">Douglas H. Clements, Ph.D</Text>
+                  <Text size="sm" className="text-foreground-muted mt-1">Distinguished Professor and Kennedy Endowed Chair University of Denver</Text>
+                </div>
                 <Image
                   src="/images/university-denver.svg"
                   alt="University of Denver"
-                  width={48}
-                  height={48}
-                  className="h-12 w-auto dark:invert"
+                  width={122}
+                  height={36}
+                  className="w-20 h-auto dark:invert shrink-0"
                 />
-                <div>
-                  <Text className="font-semibold text-foreground">Douglas H. Clements, Ph.D</Text>
-                  <Text size="sm" className="text-foreground-muted">Distinguished Professor and Kennedy Endowed Chair University of Denver</Text>
-                </div>
               </div>
             </div>
           </div>

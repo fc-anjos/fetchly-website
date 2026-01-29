@@ -103,7 +103,7 @@ export default function ServicesPage() {
     <>
       {/* Hero Section */}
       <PageHero
-        title={<>Explore our comprehensive<br />service offerings</>}
+        title="Explore our comprehensive service offerings"
         description="Our diverse range of services is designed to meet your unique needs, ensuring quality and satisfaction at every step. From personalized consultations to innovative solutions, we are here to help you achieve your goals."
         ctaText="Talk to us"
         ctaHref="/intake/request"

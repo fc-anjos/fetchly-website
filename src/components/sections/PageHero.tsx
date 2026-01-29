@@ -48,8 +48,8 @@ export function PageHero({
   ctaHref = '/intake/request',
   secondaryText,
   secondaryHref = '/our-model',
-  image = '/images/projects.png',
-  imageAlt = 'Project showcase',
+  image,
+  imageAlt = '',
   showBadge = true,
   badgeImage = '/images/badge.svg',
   imageOverlay,
@@ -73,33 +73,33 @@ export function PageHero({
     const animate = async () => {
       const { gsap } = await import('gsap');
       ctx = gsap.context(() => {
-        const tl = gsap.timeline({ delay: 0.3 });
+        const tl = gsap.timeline({ delay: 0.075 });
         if (subtitleRef.current) {
           tl.fromTo(subtitleRef.current,
             { opacity: 0, y: 20 },
             { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' },
-            0.4
+            0.1
           );
         }
         if (descRef.current) {
           tl.fromTo(descRef.current,
             { opacity: 0, y: 20 },
             { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' },
-            0.55
+            0.25
           );
         }
         if (ctaRef.current) {
           tl.fromTo(ctaRef.current,
             { opacity: 0, y: 20 },
             { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' },
-            0.7
+            0.4
           );
         }
         if (imageRef.current) {
           tl.fromTo(imageRef.current,
             { opacity: 0, x: 60, scale: 0.95 },
             { opacity: 1, x: 0, scale: 1, duration: 1, ease: 'power3.out' },
-            0.5
+            0.2
           );
         }
       });
@@ -119,7 +119,10 @@ export function PageHero({
       )}
     >
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-center py-8">
+        <div className={cn(
+          'grid grid-cols-1 items-center py-8',
+          image ? 'lg:grid-cols-2 gap-16 lg:gap-32' : 'max-w-3xl'
+        )}>
           {/* Left Content */}
           <div className="z-10">
             {titleIsString ? (
@@ -182,35 +185,35 @@ export function PageHero({
           </div>
 
           {/* Right Image */}
-          <div ref={imageRef} className="relative z-10" style={{ opacity: 0 }}>
-            <Parallax speed={0.15}>
-              <div className="relative aspect-[4/3] rounded-[1.25rem] overflow-hidden">
-                <Image
-                  src={image}
-                  alt={imageAlt}
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </div>
-            </Parallax>
-            {/* Image overlay elements */}
-            {imageOverlay}
-            {/* Floating badge */}
-            {showBadge && (
-              <Parallax speed={-0.1}>
-                <div className="absolute -top-4 -right-4 w-32 h-32">
+          {image && (
+            <div ref={imageRef} className="relative z-10" style={{ opacity: 0 }}>
+              <Parallax speed={0.15}>
+                <div className="relative aspect-[4/3] rounded-[1.25rem] overflow-hidden">
                   <Image
-                    src={badgeImage}
-                    alt=""
-                    width={127}
-                    height={127}
-                    className="w-full h-full animate-spin-slow"
+                    src={image}
+                    alt={imageAlt}
+                    fill
+                    className="object-contain"
+                    priority
                   />
                 </div>
               </Parallax>
-            )}
-          </div>
+              {imageOverlay}
+              {showBadge && (
+                <Parallax speed={-0.1}>
+                  <div className="absolute -top-4 -right-4 w-32 h-32">
+                    <Image
+                      src={badgeImage}
+                      alt=""
+                      width={127}
+                      height={127}
+                      className="w-full h-full animate-spin-slow"
+                    />
+                  </div>
+                </Parallax>
+              )}
+            </div>
+          )}
         </div>
       </Container>
 

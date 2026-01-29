@@ -11,8 +11,8 @@ interface HeadingProps {
 }
 
 const levelStyles: Record<HeadingLevel, string> = {
-  'display-1': 'text-display-1 font-bold leading-[1.05] tracking-tight',
-  'display-2': 'text-display-2 font-bold leading-[1.1] tracking-tight',
+  'display-1': 'text-display-1',
+  'display-2': 'text-display-2',
   h1: 'text-h1 font-semibold leading-[1.2]',
   h2: 'text-h2 font-semibold leading-[1.25]',
   h3: 'text-h3 font-semibold leading-[1.3]',

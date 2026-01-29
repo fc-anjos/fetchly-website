@@ -9,7 +9,8 @@
     "lint": "eslint",
     "migrate": "node scripts/migrate.js",
     "migrate:preserve": "node scripts/migrate-preserve.js",
-    "migrate:structured": "node scripts/migrate-structured.js"
+    "migrate:structured": "node scripts/migrate-structured.js",
+    "serve:ngrok": "bash scripts/serve-ngrok.sh"
   },
   "dependencies": {
     "clsx": "^2.1.0",
