@@ -8,19 +8,6 @@ import { Text } from '@/components/ui/Text';
 import { ScrollReveal } from '@/components/effects/ScrollReveal';
 import { assetPath } from '@/lib/utils';
 
-// Per-element fall config: y offset, rotateX (tilt around center), timeline position
-const FALL_CONFIG = [
-  { y: -380, rx: 32, at: 0    },  // video
-  { y: -540, rx: 42, at: 0.14 },  // tapp
-  { y: -440, rx: 36, at: 0.05 },  // winc
-  { y: -620, rx: 48, at: 0.25 },  // projects
-  { y: -400, rx: 33, at: 0.09 },  // testimonial
-  { y: -580, rx: 45, at: 0.30 },  // colorado
-  { y: -680, rx: 54, at: 0.40 },  // 66k
-  { y: -480, rx: 38, at: 0.18 },  // casper
-  { y: -560, rx: 43, at: 0.34 },  // vast
-];
-
 export function Bento() {
   const gridRef = useRef<HTMLDivElement>(null);
 
@@ -42,36 +29,37 @@ export function Bento() {
       if (!items.length) return;
 
       ctx = gsap.context(() => {
-        // Single scrubbed timeline — cards land one by one as you scroll
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: grid,
             start: 'top bottom',
-            end: 'top 20%',
+            end: 'top+=25% top',
             scrub: 0.6,
           },
         });
 
         items.forEach((item, i) => {
-          const cfg = FALL_CONFIG[i] || FALL_CONFIG[0];
+          const depth = 200 + (i % 3) * 120;
+          const blur = 12 + (i % 4) * 4;
+          const stagger = i * 0.07;
 
           tl.fromTo(
             item,
             {
-              y: cfg.y,
-              rotateX: cfg.rx,
+              z: -depth,
+              filter: `blur(${blur}px)`,
               opacity: 0,
-              transformPerspective: 800,
+              transformPerspective: 1000,
               transformOrigin: 'center center',
             },
             {
-              y: 0,
-              rotateX: 0,
+              z: 0,
+              filter: 'blur(0px)',
               opacity: 1,
               duration: 1,
-              ease: 'back.out(1)',
+              ease: 'power3.out',
             },
-            cfg.at // staggered position in the timeline
+            stagger
           );
         });
       }, grid);
@@ -95,7 +83,7 @@ export function Bento() {
           </div>
         </ScrollReveal>
 
-        {/* Bento Grid — 100vh perspective stage, cards fall into place on approach */}
+        {/* Bento Grid — 100vh perspective stage, cards animate into place on approach */}
         <div ref={gridRef} className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 h-[100svh] overflow-visible" style={{ perspective: '800px', perspectiveOrigin: '50% 30%' }}>
           {/* Column 1 */}
           <div className="flex flex-col gap-3 lg:gap-4 min-h-0">
@@ -106,7 +94,7 @@ export function Bento() {
                 loop
                 playsInline
                 poster={assetPath("/videos/13s-poster.jpg")}
-                className="absolute inset-0 w-full h-full object-cover saturate-[0.7] brightness-90 group-hover:saturate-100 group-hover:brightness-110 transition-all duration-300"
+                className="absolute inset-0 w-full h-full object-cover saturate-[0.6] brightness-90 group-hover:saturate-100 group-hover:brightness-110 transition-all duration-300"
               >
                 <source src={assetPath("/videos/13s.webm")} type="video/webm" />
                 <source src={assetPath("/videos/13s.mp4")} type="video/mp4" />
@@ -117,7 +105,7 @@ export function Bento() {
                 src="/images/tapp.png"
                 alt="Tapp project showcase"
                 fill
-                className="object-cover saturate-[0.7] brightness-90 hover:saturate-100 hover:brightness-110 transition-all duration-300"
+                className="object-cover saturate-[0.6] brightness-90 hover:saturate-100 hover:brightness-110 transition-all duration-300"
               />
             </div>
           </div>
@@ -129,7 +117,7 @@ export function Bento() {
                 src="/images/winc.png"
                 alt="Winc project showcase"
                 fill
-                className="object-cover saturate-[0.7] brightness-90 hover:saturate-100 hover:brightness-110 transition-all duration-300"
+                className="object-cover saturate-[0.6] brightness-90 hover:saturate-100 hover:brightness-110 transition-all duration-300"
               />
             </div>
             <div data-bento-item className="relative flex-1 min-h-0 rounded-[10px] lg:rounded-[20px] overflow-hidden will-change-transform">
@@ -137,7 +125,7 @@ export function Bento() {
                 src="/images/projects.png"
                 alt="Projects showcase"
                 fill
-                className="object-cover saturate-[0.7] brightness-90 hover:saturate-100 hover:brightness-110 transition-all duration-300"
+                className="object-cover saturate-[0.6] brightness-90 hover:saturate-100 hover:brightness-110 transition-all duration-300"
               />
             </div>
           </div>
@@ -149,7 +137,7 @@ export function Bento() {
                 src="/images/testimonial.png"
                 alt="Client testimonial"
                 fill
-                className="object-cover saturate-[0.7] brightness-90 hover:saturate-100 hover:brightness-110 transition-all duration-300"
+                className="object-cover saturate-[0.6] brightness-90 hover:saturate-100 hover:brightness-110 transition-all duration-300"
               />
             </div>
             <div data-bento-item className="relative flex-1 min-h-0 rounded-[10px] lg:rounded-[20px] overflow-hidden will-change-transform">
@@ -157,7 +145,7 @@ export function Bento() {
                 src="/images/colorado.png"
                 alt="Colorado project"
                 fill
-                className="object-cover saturate-[0.7] brightness-90 hover:saturate-100 hover:brightness-110 transition-all duration-300"
+                className="object-cover saturate-[0.6] brightness-90 hover:saturate-100 hover:brightness-110 transition-all duration-300"
               />
             </div>
             <div data-bento-item className="relative flex-1 min-h-0 rounded-[10px] lg:rounded-[20px] overflow-hidden will-change-transform">
@@ -165,7 +153,7 @@ export function Bento() {
                 src="/images/66k.png"
                 alt="66k metric"
                 fill
-                className="object-cover saturate-[0.7] brightness-90 hover:saturate-100 hover:brightness-110 transition-all duration-300"
+                className="object-cover saturate-[0.6] brightness-90 hover:saturate-100 hover:brightness-110 transition-all duration-300"
               />
             </div>
           </div>
@@ -177,7 +165,7 @@ export function Bento() {
                 src="/images/casper.png"
                 alt="Casper project showcase"
                 fill
-                className="object-cover saturate-[0.7] brightness-90 hover:saturate-100 hover:brightness-110 transition-all duration-300"
+                className="object-cover saturate-[0.6] brightness-90 hover:saturate-100 hover:brightness-110 transition-all duration-300"
               />
             </div>
             <div data-bento-item className="relative flex-1 min-h-0 rounded-[10px] lg:rounded-[20px] overflow-hidden will-change-transform">
@@ -185,7 +173,7 @@ export function Bento() {
                 src="/images/vast.png"
                 alt="Vast project showcase"
                 fill
-                className="object-cover saturate-[0.7] brightness-90 hover:saturate-100 hover:brightness-110 transition-all duration-300"
+                className="object-cover saturate-[0.6] brightness-90 hover:saturate-100 hover:brightness-110 transition-all duration-300"
               />
             </div>
           </div>
