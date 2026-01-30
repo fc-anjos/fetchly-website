@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { ScrollReveal } from '@/components/effects/ScrollReveal';
 
 // Client logos extracted from original Webflow design
@@ -27,8 +26,8 @@ export function LogoMarquee({ variant = 'default' }: LogoMarqueeProps) {
   return (
     <ScrollReveal direction="none" duration={1}>
       <section className={`dark py-8 ${isTransparent ? 'bg-transparent' : 'bg-[#0a0a0a]'} ${isTransparent ? '' : 'border-y border-border'} overflow-hidden`}>
-        <p className="text-center text-foreground-muted text-sm uppercase tracking-wider mb-8">
-          Trusted by innovative companies
+        <p className="text-center text-foreground-muted text-xs uppercase tracking-wider mb-4">
+          TRUSTED BY
         </p>
 
         {/* Marquee wrapper - overflow hidden */}
@@ -40,12 +39,11 @@ export function LogoMarquee({ variant = 'default' }: LogoMarqueeProps) {
                 key={`${logo.alt}-${index}`}
                 className="flex items-center justify-center px-6 md:px-10"
               >
-                <Image
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src={logo.src}
                   alt={logo.alt}
-                  width={120}
-                  height={32}
-                  className="h-6 md:h-8 w-auto object-contain opacity-70"
+                  className="h-7 md:h-9 w-auto object-contain opacity-70"
                 />
               </div>
             ))}

@@ -132,7 +132,7 @@ export function Hero() {
 
       {/* Logo Marquee at bottom of hero */}
       <div className="dark absolute bottom-8 left-0 right-0 z-20">
-        <div className="flex justify-center px-6 mb-6">
+        <div className="flex justify-center px-6 mb-14">
           <div ref={formRef} className="w-full max-w-md" style={{ opacity: 0 }}>
             <div className="flex flex-col sm:flex-row rounded-xl bg-white/15 backdrop-blur-[12px] overflow-hidden shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)]">
               <input

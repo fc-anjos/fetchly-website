@@ -41,7 +41,7 @@ export function Footer() {
 
           {/* Left Content */}
           <div className="flex flex-col justify-between max-w-sm">
-            <div>
+            <div className="flex flex-col items-start gap-4">
               <Link href="/">
                 <Image
                   src="/images/fetchly-logo.svg"
@@ -51,18 +51,14 @@ export function Footer() {
                   className="h-[72px] w-auto"
                 />
               </Link>
-            </div>
-            <div>
               <Heading level="h4" className="leading-tight">
                 Ready to build
                 <br />
                 something amazing?
               </Heading>
-            </div>
-            <div>
               <Link
                 href="/intake/request"
-                className="inline-flex items-center justify-center px-5 py-2.5 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-sm text-white font-medium transition-colors"
+                className="flex items-center justify-center w-full py-2.5 bg-black/40 hover:bg-black/60 backdrop-blur-xl border border-white/10 rounded-lg text-sm text-white font-bold transition-colors shadow-lg"
               >
                 Get in Touch
               </Link>
@@ -130,7 +126,7 @@ export function Footer() {
                 </a>
               </div>
               <div className="text-xs text-white/60">© 2025 Fetchly All rights reserved.</div>
-              <div className="text-xs text-white">Austin, TX | Denver, CO | Santa Barbara, CA</div>
+              <div className="text-xs text-white px-3 py-1.5 bg-black/40 backdrop-blur-xl border border-white/10 rounded-lg shadow-lg">Austin, TX | Denver, CO | Santa Barbara, CA</div>
             </div>
           </div>
         </div>
