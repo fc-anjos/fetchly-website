@@ -1,4 +1,5 @@
 import { ScrollReveal } from '@/components/effects/ScrollReveal';
+import { assetPath } from '@/lib/utils';
 
 // Client logos extracted from original Webflow design
 const LOGOS = [
@@ -41,7 +42,7 @@ export function LogoMarquee({ variant = 'default' }: LogoMarqueeProps) {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={logo.src}
+                  src={assetPath(logo.src)}
                   alt={logo.alt}
                   className="h-7 md:h-9 w-auto object-contain opacity-70"
                 />
