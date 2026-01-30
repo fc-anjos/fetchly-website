@@ -13,9 +13,7 @@ export function CTA() {
           <div className="max-w-2xl">
             <div data-reveal>
               <Heading level="display-2" className="text-foreground mb-6">
-                Ready to build
-                <br />
-                something amazing?
+                Ready to start building?
               </Heading>
             </div>
             <div data-reveal>

@@ -24,7 +24,14 @@
       "WebFetch(domain:www.pixelunion.net)",
       "WebFetch(domain:www.loungelizard.com)",
       "WebFetch(domain:www.fuelmade.com)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "WebFetch(domain:www.conspireagency.com)",
+      "WebFetch(domain:www.electriceye.io)",
+      "WebFetch(domain:disco.co)",
+      "WebFetch(domain:www.wolfpoint.agency)",
+      "WebFetch(domain:www.blueswitch.com)",
+      "WebFetch(domain:www.wemakewebsites.com)",
+      "WebFetch(domain:mote.agency)"
     ]
   }
 }

@@ -55,8 +55,9 @@ export function Navbar() {
       <Container>
         <nav className="flex items-center justify-between h-(--header-height)">
           {/* Logo */}
-          <TransitionLink href="/" className="flex items-center" data-cursor="hover">
-            <FetchlyLogo className="h-8 w-auto transition-colors text-foreground" />
+          <TransitionLink href="/" className="group relative flex items-center pb-2" data-cursor="hover">
+            <FetchlyLogo className="h-8 w-auto transition-all duration-300 text-foreground group-hover:scale-110" />
+            <span className="absolute -bottom-0.5 -left-3 h-0.5 w-0 bg-foreground transition-all duration-300 group-hover:w-[calc(100%+1.25rem)]" />
           </TransitionLink>
 
           {/* Desktop Navigation */}

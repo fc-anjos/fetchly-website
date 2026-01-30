@@ -27,22 +27,22 @@ export const DEFAULT_PROCESS_STEPS: ProcessStep[] = [
   {
     title: 'Initial consultation and discovery',
     description:
-      'Kickstart your journey with our Initial Consultation and Discovery — where your needs meet expert insight. Discover the path to your best solutions, tailored just for you from day one!',
+      'We start with a deep dive into your product, your users, and your goals. Just a real conversation about what you need built and why.',
   },
   {
     title: 'Collaborative planning and strategy',
     description:
-      'Supercharge your success with Collaborative Planning and Strategy — where every voice counts and every step is smarter. Harness the power of teamwork to turn goals into game-changing results!',
+      'We map out every screen, feature, and milestone before writing a line of code. You review the plan, we adjust, and nothing moves forward until we agree on the direction.',
   },
   {
     title: 'Design and development execution',
     description:
-      'Unlock innovation with seamless Design and Development Execution — where bold ideas become reality, fast. Experience the perfect blend of creativity and precision to bring your vision to life, from concept to launch!',
+      'Your team starts building. You get weekly test builds and live preview links so you can see real progress, not just status updates. We test, iterate, and ship.',
   },
 ];
 
 export function ProcessSteps({
-  title = 'Our seamless collaboration process',
+  title = 'How we work together',
   steps = DEFAULT_PROCESS_STEPS,
   background = 'default',
   className,

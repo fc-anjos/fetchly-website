@@ -10,13 +10,13 @@ import { PageHero } from '@/components/sections/PageHero';
 export const metadata: Metadata = {
   title: 'Services',
   description:
-    'Our diverse range of services is designed to meet your unique needs, ensuring quality and satisfaction at every step. From personalized consultations to innovative solutions, we are here to help you achieve your goals.',
+    'One team handles your entire product lifecycle. Strategy, design, development, QA, and ongoing support, all on a flexible month-to-month basis.',
 };
 
 const SERVICES = [
   {
     title: 'Quality Assurance',
-    description: 'Expertise that drives results and satisfaction.',
+    description: 'Manual and automated testing across every device and browser your users care about.',
     icon: (
       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -25,7 +25,7 @@ const SERVICES = [
   },
   {
     title: 'Software Architecture',
-    description: 'Customized plans to meet your unique challenges.',
+    description: 'System design built for your scale, your stack, and your growth plan.',
     icon: (
       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
@@ -34,7 +34,7 @@ const SERVICES = [
   },
   {
     title: 'Shopify Development',
-    description: 'Partner with us for exceptional service delivery.',
+    description: 'Custom themes, app integrations, and Shopify Plus builds from a certified partner.',
     icon: (
       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
@@ -43,7 +43,7 @@ const SERVICES = [
   },
   {
     title: 'Project Management',
-    description: 'Our team is always within reach.',
+    description: 'Weekly syncs, shared boards, and a dedicated PM who keeps everything on track.',
     icon: (
       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
@@ -52,7 +52,7 @@ const SERVICES = [
   },
   {
     title: 'Results-Driven Marketing Services',
-    description: 'Boost your visibility and engagement with our strategies.',
+    description: 'SEO, paid media, and conversion optimization tied directly to your product goals.',
     icon: (
       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
@@ -61,7 +61,7 @@ const SERVICES = [
   },
   {
     title: 'Design',
-    description: 'Stay ahead with our advanced tech services.',
+    description: 'UI/UX design grounded in user research, not guesswork.',
     icon: (
       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
@@ -103,8 +103,8 @@ export default function ServicesPage() {
     <>
       {/* Hero Section */}
       <PageHero
-        title="Explore our comprehensive service offerings"
-        description="Our diverse range of services is designed to meet your unique needs, ensuring quality and satisfaction at every step. From personalized consultations to innovative solutions, we are here to help you achieve your goals."
+        title="Design, development, and QA under one roof"
+        description="One team handles your entire product lifecycle. Strategy, design, development, QA, and ongoing support, all on a flexible month-to-month basis."
         ctaText="Talk to us"
         ctaHref="/intake/request"
         secondaryText="Learn more"

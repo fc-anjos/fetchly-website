@@ -18,21 +18,21 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.fetch.ly'),
   title: {
-    default: 'Fetchly | We help companies build great products.',
+    default: 'Fetchly | Your product team, month to month.',
     template: '%s | Fetchly',
   },
-  description: 'Fetchly provides a fully aligned, high-performing web and app development team at a fraction of the cost of traditional agencies or staff augmentation. We are the cost-effective solution for tech teams.',
+  description: 'Fetchly is a custom software and Shopify Plus agency offering design, engineering, QA, and DevOps on a monthly plan.',
   openGraph: {
-    title: 'Fetchly - We help companies build great products.',
-    description: 'Fetchly provides a fully aligned, high-performing web and app development team at a fraction of the cost of traditional agencies or staff augmentation. We are the cost-effective solution for tech teams.',
+    title: 'Fetchly - Your product team, month to month.',
+    description: 'Fetchly is a custom software and Shopify Plus agency offering design, engineering, QA, and DevOps on a monthly plan.',
     images: [`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/open-graph.png`],
     type: 'website',
     siteName: 'Fetchly',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fetchly - We help companies build great products.',
-    description: 'Fetchly provides a fully aligned, high-performing web and app development team at a fraction of the cost of traditional agencies or staff augmentation. We are the cost-effective solution for tech teams.',
+    title: 'Fetchly - Your product team, month to month.',
+    description: 'Fetchly is a custom software and Shopify Plus agency offering design, engineering, QA, and DevOps on a monthly plan.',
   },
   icons: {
     icon: '/images/favicon.png',

@@ -22,7 +22,7 @@ const VALUE_PROPS = [
   {
     title: 'Costs 50% less than agencies.',
     description:
-      "You get the firepower of a full product team for less than half the cost of hiring in-house. Month-to-month flexibility. Global talent. Zero overhead. We do our due diligence. We plan every tiny detail. We design based on data. You get true specialists in system architecture and development.",
+      "A full product team for less than half the cost of hiring in-house. Month-to-month flexibility. No overhead. Specialists in system architecture and development.",
   },
 ];
 
@@ -79,7 +79,7 @@ export default function SaaSHomePage() {
       <PageHero
         title={<>Custom software<br />development as a service</>}
         subtitle="Web, mobile & data software"
-        description="Launch your SaaS with a full-stack dev team on standby. Fetchly brings everything you need to bring your app to life, all wrapped in one low, month-to-month price."
+        description="A full-stack dev team that builds, tests, and ships your SaaS product. Design, engineering, QA, and DevOps on a month-to-month plan."
         ctaText="Talk to us"
         ctaHref="/intake/request"
         secondaryText="Learn more"
@@ -119,8 +119,8 @@ export default function SaaSHomePage() {
       {/* Value Props Section */}
       <FeatureGrid
         label="The SaaS developers behind your next app"
-        title="Launch your product with our team"
-        description="See what 7+ years in business, 120+ employees, and 100+ engineers can do for your next big idea."
+        title="7+ years in business. 120+ employees. 100+ engineers."
+        description="Real products built by a team that stays with you from first commit to launch and beyond."
         items={VALUE_PROPS}
         columns={3}
         background="muted"

@@ -11,7 +11,7 @@ import { IconGrid } from '@/components/sections/IconGrid';
 export const metadata: Metadata = {
   title: 'Our Model',
   description:
-    'At Fetchly, we provide you with top-tier developers and essential support services, ensuring your project thrives. Experience a seamless collaboration that brings your app vision to life.',
+    'A full product team on a monthly plan. Engineering, design, QA, architecture, DevOps, and project management, all working on your product.',
 };
 
 const TEAM_ROLES = [
@@ -115,9 +115,9 @@ export default function OurModelPage() {
     <>
       {/* Hero Section */}
       <PageHero
-        title={<>Your dedicated<br />development team awaits</>}
+        title={<>Your dedicated<br />development team</>}
         subtitle="Web, mobile & data software"
-        description="At Fetchly, we provide you with top-tier developers and essential support services, ensuring your project thrives. Experience a seamless collaboration that brings your app vision to life."
+        description="A full product team on a monthly plan. Engineering, design, QA, architecture, DevOps, and project management, all working on your product."
         ctaText="Talk to us"
         ctaHref="/intake/request"
         secondaryText="Learn more"
@@ -129,8 +129,8 @@ export default function OurModelPage() {
 
       {/* Team Model Section */}
       <IconGrid
-        title="Smarter, Leaner, and Aligned Tech Teams — All for a convenient monthly fee."
-        description="Fetchly delivers a fully-aligned, high-performing development team at a fraction of traditional agency or staff augmentation costs—on average, 50% less, according to competitive market analysis."
+        title="A full tech team for one monthly fee."
+        description="On average, 50% less than traditional agencies or staff augmentation. Same team, same process, every month."
         items={TEAM_ROLES}
         columns={8}
         size="default"
