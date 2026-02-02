@@ -24,6 +24,7 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 2,
+      prevent: (node: HTMLElement) => node.closest('[data-lenis-prevent]') !== null,
     });
 
     setLenis(lenisInstance);

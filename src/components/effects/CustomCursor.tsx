@@ -99,11 +99,11 @@ export function CustomCursor() {
 
   // Theme-aware colors
   const ringColor = isLight
-    ? 'rgba(31, 68, 75, 0.7)'
-    : 'rgba(105, 229, 251, 0.6)';
+    ? 'rgba(31, 68, 75, 0.85)'
+    : 'rgba(105, 229, 251, 0.85)';
   const ringHoverBg = isLight
-    ? 'rgba(31, 68, 75, 0.1)'
-    : 'rgba(105, 229, 251, 0.08)';
+    ? 'rgba(31, 68, 75, 0.15)'
+    : 'rgba(105, 229, 251, 0.12)';
   const dotColor = isLight ? '#1F444B' : '#69E5FB';
 
   return (
@@ -137,7 +137,7 @@ export function CustomCursor() {
           background: dotColor,
           transform: `scale(${innerScale})`,
           transition: 'transform 0.3s, background 0.3s',
-          opacity: isVisible ? 0.5 : 0,
+          opacity: isVisible ? 0.9 : 0,
         }}
       />
     </>

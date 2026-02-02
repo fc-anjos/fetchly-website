@@ -36,6 +36,8 @@ export interface PageHeroProps {
   badgeImage?: string;
   /** Additional overlay elements rendered on top of the hero image */
   imageOverlay?: ReactNode;
+  /** Custom ReactNode rendered in the right column instead of the image */
+  rightContent?: ReactNode;
   /** Additional className */
   className?: string;
 }
@@ -53,6 +55,7 @@ export function PageHero({
   showBadge = true,
   badgeImage = '/images/badge.svg',
   imageOverlay,
+  rightContent,
   className,
 }: PageHeroProps) {
   const subtitleRef = useRef<HTMLDivElement>(null);
@@ -96,8 +99,9 @@ export function PageHero({
           );
         }
         if (imageRef.current) {
+          const useOpacity = !rightContent;
           tl.fromTo(imageRef.current,
-            { opacity: 0, x: 60, scale: 0.95 },
+            { opacity: useOpacity ? 0 : 1, x: 60, scale: 0.95 },
             { opacity: 1, x: 0, scale: 1, duration: 1, ease: 'power3.out' },
             0.2
           );
@@ -121,7 +125,7 @@ export function PageHero({
       <Container>
         <div className={cn(
           'grid grid-cols-1 items-center py-8',
-          image ? 'lg:grid-cols-2 gap-16 lg:gap-32' : 'max-w-3xl'
+          (image || rightContent) ? 'lg:grid-cols-2 gap-16 lg:gap-32' : 'max-w-3xl'
         )}>
           {/* Left Content */}
           <div className="z-10">
@@ -184,31 +188,35 @@ export function PageHero({
             </div>
           </div>
 
-          {/* Right Image */}
-          {image && (
-            <div ref={imageRef} className="relative z-10" style={{ opacity: 0 }}>
-              <Parallax speed={0.5}>
-                <div className="relative aspect-[4/3] rounded-[1.25rem] overflow-hidden">
-                  <Image
-                    src={image}
-                    alt={imageAlt}
-                    fill
-                    className="object-contain"
-                    priority
-                  />
-                </div>
-              </Parallax>
-              {imageOverlay}
-              {showBadge && (
-                <Parallax speed={-0.3} className="absolute -top-4 -right-4 w-32 h-32 z-20">
-                  <Image
-                    src={badgeImage}
-                    alt=""
-                    width={127}
-                    height={127}
-                    className="w-full h-full animate-spin-slow"
-                  />
-                </Parallax>
+          {/* Right Column */}
+          {(image || rightContent) && (
+            <div ref={imageRef} className="relative z-10" style={{ opacity: rightContent ? 1 : 0 }}>
+              {rightContent ? rightContent : (
+                <>
+                  <Parallax speed={0.5}>
+                    <div className="relative aspect-[4/3] rounded-[1.25rem] overflow-hidden">
+                      <Image
+                        src={image!}
+                        alt={imageAlt}
+                        fill
+                        className="object-contain"
+                        priority
+                      />
+                    </div>
+                  </Parallax>
+                  {imageOverlay}
+                  {showBadge && (
+                    <Parallax speed={-0.3} className="absolute -top-4 -right-4 w-32 h-32 z-20">
+                      <Image
+                        src={badgeImage}
+                        alt=""
+                        width={127}
+                        height={127}
+                        className="w-full h-full animate-spin-slow"
+                      />
+                    </Parallax>
+                  )}
+                </>
               )}
             </div>
           )}

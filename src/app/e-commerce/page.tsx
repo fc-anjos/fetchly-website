@@ -11,6 +11,7 @@ import { FeatureGrid } from '@/components/sections/FeatureGrid';
 import { FAQ } from '@/components/sections/FAQ';
 import { PageHero } from '@/components/sections/PageHero';
 import { ParallaxSection } from '@/components/effects/ParallaxSection';
+import { CheckoutForm } from '@/components/sections/ecommerce/CheckoutForm';
 
 const FEATURES = [
   {
@@ -93,9 +94,7 @@ export default function EcommercePage() {
         ctaHref="/intake/request"
         secondaryText="Learn more"
         secondaryHref="/our-model"
-        image="/images/casper.jpg"
-        imageAlt="Casper website homepage highlighting 20% off Dream mattresses, 30% off bundles, pillows, and a bed with call-to-action buttons."
-        badgeImage="/images/badge-ecommerce.svg"
+        rightContent={<CheckoutForm />}
       />
 
       {/* Trust Section — fades as it scrolls away */}
