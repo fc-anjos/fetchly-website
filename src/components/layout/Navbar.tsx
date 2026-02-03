@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { NAV_LINKS } from '@/lib/constants';
+import { MegaMenu, MobileAccordion } from './MegaMenu';
 
 /** Routes whose hero section has a dark video background */
 const VIDEO_HERO_ROUTES = ['/', '/case-studies'];
@@ -19,7 +20,6 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const hasVideoHero = VIDEO_HERO_ROUTES.includes(pathname);
-  // Force dark theme when navbar is transparent over a dark video hero
   const forceDarkTheme = hasVideoHero && !isScrolled;
 
   useEffect(() => {
@@ -30,7 +30,6 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.documentElement.classList.add('scroll-locked');
@@ -62,12 +61,17 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
-            {NAV_LINKS.map((link) => {
-              const isActive = pathname === link.href;
+            {NAV_LINKS.map((navItem) => {
+              // Items with dropdown children → MegaMenu
+              if (navItem.items?.length) {
+                return <MegaMenu key={navItem.label} item={navItem} />;
+              }
+              // Simple link items
+              const isActive = pathname === navItem.href;
               return (
                 <TransitionLink
-                  key={link.href}
-                  href={link.href}
+                  key={navItem.href}
+                  href={navItem.href!}
                   data-cursor="hover"
                   className={cn(
                     'transition-colors text-sm font-medium border-b-2 py-1',
@@ -76,7 +80,7 @@ export function Navbar() {
                       : 'text-foreground-muted hover:text-foreground border-transparent'
                   )}
                 >
-                  {link.label}
+                  {navItem.label}
                 </TransitionLink>
               );
             })}
@@ -112,25 +116,36 @@ export function Navbar() {
         <div
           className={cn(
             'lg:hidden overflow-hidden transition-all duration-300',
-            isMobileMenuOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
+            isMobileMenuOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
           )}
         >
           <div className="py-4 border-t border-border bg-surface">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  'block py-3 transition-colors',
-                  pathname === link.href
-                    ? 'text-foreground font-medium border-l-2 border-foreground pl-3'
-                    : 'text-foreground-muted hover:text-foreground'
-                )}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {NAV_LINKS.map((navItem) => {
+              if (navItem.items?.length) {
+                return (
+                  <MobileAccordion
+                    key={navItem.label}
+                    item={navItem}
+                    onNavigate={() => setIsMobileMenuOpen(false)}
+                  />
+                );
+              }
+              return (
+                <Link
+                  key={navItem.href}
+                  href={navItem.href!}
+                  className={cn(
+                    'block py-3 transition-colors',
+                    pathname === navItem.href
+                      ? 'text-foreground font-medium border-l-2 border-foreground pl-3'
+                      : 'text-foreground-muted hover:text-foreground'
+                  )}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {navItem.label}
+                </Link>
+              );
+            })}
             <div className="pt-4 flex items-center gap-3">
               <ThemeToggle />
               <Button href="/intake/step-1" className="flex-1">

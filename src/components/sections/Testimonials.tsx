@@ -1,40 +1,32 @@
 'use client';
 
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import Image from 'next/image';
 import { Section } from '@/components/ui/Section';
 import { Text } from '@/components/ui/Text';
 import { ScrollReveal } from '@/components/effects/ScrollReveal';
 import { cn } from '@/lib/utils';
+import { TESTIMONIALS_DATA } from '@/lib/page-data';
+import type { TestimonialItem } from '@/types';
 
-const testimonials = [
-  {
-    quote: "Working with Fetchly to build VRTSync has been a positive and collaborative experience. Their project management is strong, and they've helped translate a complex vision into a functional product. We've appreciated their responsiveness and technical capability throughout the process.",
-    author: "Randy Mangel",
-    role: "Founder of VRTSync",
-    logo: "/images/VRTSync.svg",
-  },
-  {
-    quote: "The team at Fetchly has fit our evolving development needs perfectly, giving us the flexibility to allocate talented developers to projects as needed. They consistently deliver high-quality work, and their project managers do a great job keeping everything on track.",
-    author: "Spencer Steffen",
-    role: "VP of Engineering at Oats Overnight",
-    logo: "/images/oats-overnight.svg",
-  },
-  {
-    quote: "I was, without exaggerating, blown away by the quality, appearance, and functionality of the app.",
-    author: "Douglas H. Clements, Ph.D",
-    role: "Distinguished Professor and Kennedy Endowed Chair University of Denver",
-    logo: "/images/university-denver.svg",
-  },
-  {
-    quote: "Fetch.ly was an outstanding development partner. They were responsive, clear communicators, and excellent at breaking down technical concepts so everyone stayed on the same page. They delivered an app our client loves, and I am excited to work with them on future projects!",
-    author: "Dan Mulligan",
-    role: "Partner at YellowDog Design Print and Marketing",
-    image: "/images/image.webp",
-  },
-];
+export interface TestimonialsProps {
+  items?: TestimonialItem[];
+  filterIndustry?: string;
+  filterSolution?: string;
+}
 
-export function Testimonials() {
+export function Testimonials({ items, filterIndustry, filterSolution }: TestimonialsProps = {}) {
+  const testimonials = useMemo(() => {
+    if (items) return items;
+    let filtered = TESTIMONIALS_DATA;
+    if (filterIndustry) {
+      filtered = filtered.filter((t) => t.industries?.includes(filterIndustry));
+    }
+    if (filterSolution) {
+      filtered = filtered.filter((t) => t.solutions?.includes(filterSolution));
+    }
+    return filtered.length > 0 ? filtered : TESTIMONIALS_DATA.slice(0, 4);
+  }, [items, filterIndustry, filterSolution]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);

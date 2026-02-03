@@ -85,3 +85,74 @@ export interface ComparisonRow {
   staffAug: boolean | 'partial';
   agency: boolean | 'partial';
 }
+
+// Funnel-based site restructure types
+
+export interface SolutionDefinition {
+  slug: string;
+  title: string;
+  shortTitle: string;
+  description: string;
+  icon: string;
+  href: string;
+}
+
+export interface IndustryDefinition {
+  slug: string;
+  title: string;
+  shortTitle: string;
+  description: string;
+  icon: string;
+  href: string;
+}
+
+export interface TechnologyDefinition {
+  slug: string;
+  title: string;
+  shortTitle: string;
+  category: 'migration' | 'build-with' | 'platform' | 'capability';
+  description: string;
+  icon: string;
+  href: string;
+}
+
+export interface LocationDefinition {
+  slug: string;
+  city: string;
+  state: string;
+  stateAbbr: string;
+  address: string;
+  coordinates: { lat: number; lng: number };
+  phone: string;
+  href: string;
+}
+
+export interface TestimonialItem {
+  quote: string;
+  author: string;
+  role: string;
+  logo?: string;
+  image?: string;
+  industries?: string[];
+  solutions?: string[];
+}
+
+export interface NavDropdownItem {
+  label: string;
+  href: string;
+  description?: string;
+  icon?: string;
+}
+
+export interface NavItemWithDropdown {
+  label: string;
+  href?: string;
+  items?: NavDropdownItem[];
+}
+
+export interface PageSEO {
+  title: string;
+  description: string;
+  ogTitle?: string;
+  ogDescription?: string;
+}

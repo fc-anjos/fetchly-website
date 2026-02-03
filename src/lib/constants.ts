@@ -1,24 +1,56 @@
-// Navigation links
-export const NAV_LINKS = [
-  { label: 'eComm', href: '/e-commerce' },
-  { label: 'SaaS', href: '/saas-home' },
-  { label: 'Our Model', href: '/our-model' },
-  { label: 'Our Services', href: '/services' },
-  { label: 'Case Studies', href: '/case-studies' },
-] as const;
+// Navigation links — nested structure with dropdown support
+import type { NavItemWithDropdown } from '@/types';
 
-// Footer links
+export const NAV_LINKS: NavItemWithDropdown[] = [
+  {
+    label: 'Solutions',
+    items: [
+      { label: 'Rescue & Replace', href: '/solutions/rescue', description: 'Your last agency didn\'t work out. We get it.' },
+      { label: 'Scale My Team', href: '/solutions/scale-team', description: 'Dedicated developers who integrate with your team.' },
+      { label: 'Build My MVP', href: '/solutions/build-mvp', description: 'From idea to launched product, fast.' },
+      { label: 'Modernize & Migrate', href: '/solutions/modernize', description: 'Modernize aging applications incrementally.' },
+      { label: 'QA & Testing', href: '/solutions/qa-testing', description: 'Find the bugs before your users do.' },
+      { label: 'Design & UX', href: '/solutions/design', description: 'Design that converts, not just looks good.' },
+      { label: 'DevOps & Infrastructure', href: '/solutions/devops', description: 'Deploy on Friday without sweating.' },
+      { label: 'AI Integration', href: '/solutions/ai', description: 'Add AI to your product in weeks.' },
+    ],
+  },
+  {
+    label: 'Industries',
+    items: [
+      { label: 'E-Commerce & Marketplaces', href: '/industries/ecommerce', description: 'Shopify, custom marketplaces, subscriptions.' },
+      { label: 'Healthcare & MedTech', href: '/industries/healthcare', description: 'HIPAA-compliant platforms and patient portals.' },
+      { label: 'HR Tech & Recruitment', href: '/industries/hr-tech', description: 'AI matching, ATS integrations, PEO platforms.' },
+      { label: 'Logistics & Supply Chain', href: '/industries/logistics', description: 'Tracking, rates, and carrier integrations.' },
+      { label: 'FinTech & Real Estate', href: '/industries/fintech', description: 'Payments, mortgages, and property management.' },
+      { label: 'Hospitality & Events', href: '/industries/hospitality', description: 'Event platforms, bookings, and ticketing.' },
+    ],
+  },
+  {
+    label: 'About',
+    items: [
+      { label: 'Our Model', href: '/our-model', description: 'How we work and why it\'s different.' },
+      { label: 'Case Studies', href: '/case-studies', description: 'Real products with real results.' },
+    ],
+  },
+];
+
+// Footer links — 3-column structure
 export const FOOTER_LINKS = {
-  pages: [
-    { label: 'eComm', href: '/e-commerce' },
-    { label: 'Our Services', href: '/services' },
-    { label: 'Case Studies', href: '/case-studies' },
+  solutions: [
+    { label: 'Rescue & Replace', href: '/solutions/rescue' },
+    { label: 'Scale My Team', href: '/solutions/scale-team' },
+    { label: 'Build My MVP', href: '/solutions/build-mvp' },
+    { label: 'Modernize & Migrate', href: '/solutions/modernize' },
+  ],
+  company: [
     { label: 'Our Model', href: '/our-model' },
-    { label: 'SaaS', href: '/saas-home' },
+    { label: 'Case Studies', href: '/case-studies' },
+    { label: 'Services', href: '/services' },
   ],
   legal: [
     { label: 'Privacy Policy', href: '/privacy-policy' },
-    { label: 'Cookies Settings', href: '#' },
+    { label: 'Cookies Settings', href: '/privacy-policy' },
   ],
 } as const;
 
