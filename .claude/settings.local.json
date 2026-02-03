@@ -31,7 +31,9 @@
       "WebFetch(domain:www.wolfpoint.agency)",
       "WebFetch(domain:www.blueswitch.com)",
       "WebFetch(domain:www.wemakewebsites.com)",
-      "WebFetch(domain:mote.agency)"
+      "WebFetch(domain:mote.agency)",
+      "Bash(npx tailwindcss --help:*)",
+      "Bash(node -e:*)"
     ]
   }
 }
