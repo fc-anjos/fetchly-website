@@ -10,14 +10,10 @@ const location = LOCATIONS.find((l) => l.slug === 'denver')!;
 export const metadata: Metadata = {
   title: 'Software Development Agency in Denver | Fetchly',
   description:
-    'Denver-based software development agency. Custom web and mobile development, design, QA, and DevOps from our Denver office.',
+    'Denver-based software development agency. Custom web and mobile development, design, QA, and DevOps.',
 };
 
 const FAQ_ITEMS = [
-  {
-    question: 'Where is your Denver office?',
-    answer: `Our Denver office is located at ${location.address}. We're in the heart of downtown, easily accessible from LoDo and the surrounding tech corridor.`,
-  },
   {
     question: 'Do you work with Denver-area startups?',
     answer:
@@ -26,12 +22,12 @@ const FAQ_ITEMS = [
   {
     question: 'Can we meet in person?',
     answer:
-      'Absolutely. Our Denver team is available for in-person meetings, workshops, and working sessions. We also support remote and hybrid collaboration.',
+      'Our Denver team is available for in-person meetings, workshops, and working sessions. We also support remote and hybrid collaboration.',
   },
   {
     question: 'What services does your Denver team offer?',
     answer:
-      'Our Denver office provides full-stack development, design, QA, project management, DevOps, and AI integration — the same comprehensive service as all our locations.',
+      'Our Denver team provides full-stack development, design, QA, project management, DevOps, and AI integration — the same comprehensive service as all our locations.',
   },
 ];
 
@@ -44,7 +40,7 @@ export default function DenverPage() {
       </Container>
       <PageHero
         title="Denver's development partner for ambitious companies."
-        description={`Custom software development from our Denver office at ${location.address}. Full-stack engineering, design, QA, and DevOps — all from a team that knows the Colorado tech scene.`}
+        description="Custom software development in Denver. Full-stack engineering, design, QA, and DevOps — all from a team that knows the Colorado tech scene."
         ctaText="Talk to our Denver team"
         ctaHref="/intake/step-1"
         secondaryText="See our work"
@@ -62,14 +58,13 @@ export default function DenverPage() {
       </section>
       <SolutionsGrid
         title="What we do"
-        description="Full-service software development from our Denver office."
+        description="Full-service software development from our Denver team."
         solutions={SOLUTIONS}
         columns={4}
       />
-      <FAQ items={FAQ_ITEMS} title="FAQ" label="Denver Office" />
+      <FAQ items={FAQ_ITEMS} title="FAQ" label="Denver" />
       <CTA
-        title="Visit us in Denver"
-        description={`${location.address} · ${location.phone}`}
+        title="Work with our Denver team"
         buttonText="Book a Call"
       />
     </>

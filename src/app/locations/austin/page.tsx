@@ -10,14 +10,10 @@ const location = LOCATIONS.find((l) => l.slug === 'austin')!;
 export const metadata: Metadata = {
   title: 'Software Development Agency in Austin | Fetchly',
   description:
-    'Austin-based software development agency. Custom web and mobile development, design, QA, and DevOps from our Austin office.',
+    'Austin-based software development agency. Custom web and mobile development, design, QA, and DevOps.',
 };
 
 const FAQ_ITEMS = [
-  {
-    question: 'Where is your Austin office?',
-    answer: `Our Austin office is located at ${location.address}, right in the heart of downtown Austin near the Capitol district.`,
-  },
   {
     question: 'Do you work with Austin-area startups?',
     answer:
@@ -26,7 +22,7 @@ const FAQ_ITEMS = [
   {
     question: 'Can we meet in person?',
     answer:
-      'Of course. Our Austin team is available for in-person meetings, workshops, and collaborative working sessions at our downtown office.',
+      'Of course. Our Austin team is available for in-person meetings, workshops, and collaborative working sessions.',
   },
   {
     question: 'What services does your Austin team offer?',
@@ -44,7 +40,7 @@ export default function AustinPage() {
       </Container>
       <PageHero
         title="Austin's development partner for growing companies."
-        description={`Custom software development from our Austin office at ${location.address}. Full-stack engineering, design, QA, and DevOps — built by a team embedded in the Austin tech scene.`}
+        description="Custom software development in Austin. Full-stack engineering, design, QA, and DevOps — built by a team embedded in the Austin tech scene."
         ctaText="Talk to our Austin team"
         ctaHref="/intake/step-1"
         secondaryText="See our work"
@@ -55,21 +51,20 @@ export default function AustinPage() {
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-display-2 font-bold text-foreground mb-4">Building in the heart of Austin tech</h2>
             <p className="text-lg text-foreground-muted">
-              Austin is home to some of the most ambitious tech companies in the country. Our Austin office puts us at the center of that ecosystem — working with startups, scale-ups, and enterprises building the next generation of products.
+              Austin is home to some of the most ambitious tech companies in the country. Our Austin team is at the center of that ecosystem — working with startups, scale-ups, and enterprises building the next generation of products.
             </p>
           </div>
         </Container>
       </section>
       <SolutionsGrid
         title="What we do"
-        description="Full-service software development from our Austin office."
+        description="Full-service software development from our Austin team."
         solutions={SOLUTIONS}
         columns={4}
       />
-      <FAQ items={FAQ_ITEMS} title="FAQ" label="Austin Office" />
+      <FAQ items={FAQ_ITEMS} title="FAQ" label="Austin" />
       <CTA
-        title="Visit us in Austin"
-        description={`${location.address} · ${location.phone}`}
+        title="Work with our Austin team"
         buttonText="Book a Call"
       />
     </>

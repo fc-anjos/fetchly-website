@@ -10,14 +10,10 @@ const location = LOCATIONS.find((l) => l.slug === 'santa-barbara')!;
 export const metadata: Metadata = {
   title: 'Software Development Agency in Santa Barbara | Fetchly',
   description:
-    'Santa Barbara-based software development agency. Custom web and mobile development, design, QA, and DevOps from our Santa Barbara office.',
+    'Santa Barbara-based software development agency. Custom web and mobile development, design, QA, and DevOps.',
 };
 
 const FAQ_ITEMS = [
-  {
-    question: 'Where is your Santa Barbara office?',
-    answer: `Our Santa Barbara office is located at ${location.address}, in the heart of downtown Santa Barbara's business district.`,
-  },
   {
     question: 'Do you work with Central Coast companies?',
     answer:
@@ -26,7 +22,7 @@ const FAQ_ITEMS = [
   {
     question: 'Can we meet in person?',
     answer:
-      'Absolutely. Our Santa Barbara team welcomes in-person meetings and collaborative sessions at our State Street office.',
+      'Our Santa Barbara team welcomes in-person meetings and collaborative sessions.',
   },
   {
     question: 'What services does your Santa Barbara team offer?',
@@ -44,7 +40,7 @@ export default function SantaBarbaraPage() {
       </Container>
       <PageHero
         title="Santa Barbara's development partner."
-        description={`Custom software development from our Santa Barbara office at ${location.address}. Full-stack engineering, design, QA, and DevOps — from California's tech corridor.`}
+        description="Custom software development in Santa Barbara. Full-stack engineering, design, QA, and DevOps — from California's tech corridor."
         ctaText="Talk to our Santa Barbara team"
         ctaHref="/intake/step-1"
         secondaryText="See our work"
@@ -55,21 +51,20 @@ export default function SantaBarbaraPage() {
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-display-2 font-bold text-foreground mb-4">California's tech corridor</h2>
             <p className="text-lg text-foreground-muted">
-              Santa Barbara sits at the intersection of LA's tech scene and Silicon Valley's innovation culture. Our office here gives clients access to California's deep talent pool with the quality of life that attracts top engineers.
+              Santa Barbara sits at the intersection of LA's tech scene and Silicon Valley's innovation culture. Our team here gives clients access to California's deep talent pool with the quality of life that attracts top engineers.
             </p>
           </div>
         </Container>
       </section>
       <SolutionsGrid
         title="What we do"
-        description="Full-service software development from our Santa Barbara office."
+        description="Full-service software development from our Santa Barbara team."
         solutions={SOLUTIONS}
         columns={4}
       />
-      <FAQ items={FAQ_ITEMS} title="FAQ" label="Santa Barbara Office" />
+      <FAQ items={FAQ_ITEMS} title="FAQ" label="Santa Barbara" />
       <CTA
-        title="Visit us in Santa Barbara"
-        description={`${location.address} · ${location.phone}`}
+        title="Work with our Santa Barbara team"
         buttonText="Book a Call"
       />
     </>

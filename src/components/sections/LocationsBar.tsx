@@ -20,7 +20,7 @@ export function LocationsBar({ locations = LOCATIONS, className }: LocationsBarP
         <ScrollReveal direction="up" distance={20}>
           <div className="text-center mb-8">
             <Heading level="h3" className="text-foreground">
-              Offices across the US
+              Serving clients across the US
             </Heading>
           </div>
         </ScrollReveal>

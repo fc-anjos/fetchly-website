@@ -743,16 +743,7 @@ export default function PrivacyPolicyPage() {
               <a href="mailto:info@fetch.ly">
                 <strong>info@fetch.ly</strong>
               </a>{' '}
-              or by post to:
-            </p>
-            <p>
-              <strong>Fetchly, LLC</strong>
-              <br />
-              801 Barton Springs Road
-              <br />
-              Austin, TX 78704
-              <br />
-              United States
+
             </p>
 
             <h2>13. How can you review, update, or delete the data we collect from you?</h2>

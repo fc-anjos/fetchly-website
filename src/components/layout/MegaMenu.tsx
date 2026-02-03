@@ -47,6 +47,8 @@ export function MegaMenu({ item }: { item: NavItemWithDropdown }) {
 
   if (!item.items?.length) return null;
 
+  const wide = item.items.length > 10;
+
   return (
     <div
       ref={ref}
@@ -80,20 +82,24 @@ export function MegaMenu({ item }: { item: NavItemWithDropdown }) {
       {/* Dropdown panel */}
       <div
         className={cn(
-          'absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[28rem] rounded-xl border border-border bg-surface shadow-xl z-50',
+          'absolute top-full left-1/2 -translate-x-1/2 mt-2 rounded-xl border border-border bg-surface shadow-xl z-50',
           'transition-all duration-200 origin-top',
+          wide ? 'w-[42rem]' : 'w-[28rem]',
           open
             ? 'opacity-100 scale-100 pointer-events-auto'
             : 'opacity-0 scale-95 pointer-events-none',
         )}
       >
-        <div className="p-3 grid grid-cols-1 gap-0.5">
+        <div className={cn('p-3 grid gap-0.5', wide ? 'grid-cols-2' : 'grid-cols-1')}>
           {item.items.map((subItem) => (
             <Link
               key={subItem.href}
               href={subItem.href}
               onClick={() => setOpen(false)}
-              className="flex flex-col gap-0.5 px-4 py-3 rounded-lg hover:bg-surface-card-hover transition-colors"
+              className={cn(
+                'flex flex-col gap-0.5 rounded-lg hover:bg-surface-card-hover transition-colors',
+                wide ? 'px-3 py-2' : 'px-4 py-3',
+              )}
               data-cursor="hover"
             >
               <span className="text-sm font-medium text-foreground">{subItem.label}</span>

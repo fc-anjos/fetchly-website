@@ -58,24 +58,5 @@ export function localBusinessSchema(location: LocationDefinition) {
     name: `Fetchly — ${location.city}`,
     description: `Software development agency in ${location.city}, ${location.state}.`,
     url: `https://www.fetch.ly${location.href}`,
-    telephone: location.phone,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: location.address.split(',')[0],
-      addressLocality: location.city,
-      addressRegion: location.stateAbbr,
-      addressCountry: 'US',
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: location.coordinates.lat,
-      longitude: location.coordinates.lng,
-    },
-    openingHoursSpecification: {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '09:00',
-      closes: '17:00',
-    },
   };
 }

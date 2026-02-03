@@ -121,9 +121,6 @@ export interface LocationDefinition {
   city: string;
   state: string;
   stateAbbr: string;
-  address: string;
-  coordinates: { lat: number; lng: number };
-  phone: string;
   href: string;
 }
 

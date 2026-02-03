@@ -169,9 +169,6 @@ export const LOCATIONS: LocationDefinition[] = [
     city: 'Denver',
     state: 'Colorado',
     stateAbbr: 'CO',
-    address: '1550 Wewatta St, Suite 200, Denver, CO 80202',
-    coordinates: { lat: 39.7536, lng: -104.9994 },
-    phone: '(720) 703-5444',
     href: '/locations/denver',
   },
   {
@@ -179,9 +176,6 @@ export const LOCATIONS: LocationDefinition[] = [
     city: 'Austin',
     state: 'Texas',
     stateAbbr: 'TX',
-    address: '701 Brazos St, Suite 500, Austin, TX 78701',
-    coordinates: { lat: 30.2672, lng: -97.7431 },
-    phone: '(512) 960-3941',
     href: '/locations/austin',
   },
   {
@@ -189,9 +183,6 @@ export const LOCATIONS: LocationDefinition[] = [
     city: 'Santa Barbara',
     state: 'California',
     stateAbbr: 'CA',
-    address: '735 State St, Suite 500, Santa Barbara, CA 93101',
-    coordinates: { lat: 34.4208, lng: -119.6982 },
-    phone: '(805) 845-8891',
     href: '/locations/santa-barbara',
   },
 ];

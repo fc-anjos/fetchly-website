@@ -114,7 +114,7 @@ export function Footer() {
               </div>
               <div className="text-xs text-white/60">&copy; 2025 Fetchly All rights reserved.</div>
               <Link href="/locations/denver" className="text-xs text-white px-3 py-1.5 bg-black/40 backdrop-blur-xl border border-white/10 rounded-lg shadow-lg hover:bg-black/60 transition-colors">
-                Denver, CO | Austin, TX | Santa Barbara, CA
+                Denver | Austin | Santa Barbara
               </Link>
             </div>
           </div>
