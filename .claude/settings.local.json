@@ -33,7 +33,8 @@
       "WebFetch(domain:www.wemakewebsites.com)",
       "WebFetch(domain:mote.agency)",
       "Bash(npx tailwindcss --help:*)",
-      "Bash(node -e:*)"
+      "Bash(node -e:*)",
+      "Bash(tree:*)"
     ]
   }
 }
