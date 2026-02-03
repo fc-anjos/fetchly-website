@@ -4,6 +4,7 @@ import type { NavItemWithDropdown } from '@/types';
 export const NAV_LINKS: NavItemWithDropdown[] = [
   {
     label: 'Solutions',
+    href: '/solutions',
     items: [
       { label: 'Rescue & Replace', href: '/solutions/rescue', description: 'Your last agency didn\'t work out. We get it.' },
       { label: 'Scale My Team', href: '/solutions/scale-team', description: 'Dedicated developers who integrate with your team.' },
@@ -17,6 +18,7 @@ export const NAV_LINKS: NavItemWithDropdown[] = [
   },
   {
     label: 'Industries',
+    href: '/industries',
     items: [
       { label: 'E-Commerce & Marketplaces', href: '/industries/ecommerce', description: 'Shopify, custom marketplaces, subscriptions.' },
       { label: 'Healthcare & MedTech', href: '/industries/healthcare', description: 'HIPAA-compliant platforms and patient portals.' },
@@ -28,6 +30,7 @@ export const NAV_LINKS: NavItemWithDropdown[] = [
   },
   {
     label: 'Technologies',
+    href: '/technologies',
     items: [
       // Build With
       { label: 'React', href: '/technologies/react' },
@@ -36,24 +39,11 @@ export const NAV_LINKS: NavItemWithDropdown[] = [
       { label: 'React Native', href: '/technologies/react-native' },
       { label: 'Python & Django', href: '/technologies/python' },
       { label: 'Vue.js', href: '/technologies/vuejs' },
-      // Platform
-      { label: 'Shopify', href: '/technologies/shopify' },
-      { label: 'AWS', href: '/technologies/aws' },
-      { label: 'Stripe', href: '/technologies/stripe' },
-      { label: 'Contentful', href: '/technologies/contentful' },
       // Capability
       { label: 'AI & Machine Learning', href: '/technologies/ai-ml' },
       { label: 'API Development', href: '/technologies/api-development' },
       { label: 'DevOps & Docker', href: '/technologies/devops-docker' },
       { label: 'PostgreSQL', href: '/technologies/postgresql' },
-      // Migration
-      { label: 'Rails Migration', href: '/technologies/rails-migration' },
-      { label: 'React Modernization', href: '/technologies/react-modernization' },
-      { label: 'Vue 2 → 3 Migration', href: '/technologies/vue-migration' },
-      { label: 'Heroku Migration', href: '/technologies/heroku-migration' },
-      { label: 'AngularJS Migration', href: '/technologies/angular-migration' },
-      { label: 'Database Migration', href: '/technologies/database-migration' },
-      { label: 'Legacy Modernization', href: '/technologies/legacy-modernization' },
     ],
   },
   {

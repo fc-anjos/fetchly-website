@@ -56,28 +56,47 @@ export function MegaMenu({ item }: { item: NavItemWithDropdown }) {
       onMouseEnter={handleOpen}
       onMouseLeave={handleClose}
     >
-      <button
-        onClick={() => setOpen((o) => !o)}
+      <div
         className={cn(
-          'flex items-center gap-1 text-sm font-medium border-b-2 py-1 transition-colors',
+          'flex items-center gap-1 border-b-2 py-1 transition-colors',
           open
             ? 'text-foreground border-foreground'
             : 'text-foreground-muted hover:text-foreground border-transparent',
         )}
-        aria-expanded={open}
-        aria-haspopup="true"
       >
-        {item.label}
-        <svg
-          className={cn('w-3.5 h-3.5 transition-transform duration-200', open && 'rotate-180')}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
+        {item.href ? (
+          <Link
+            href={item.href}
+            className="text-sm font-medium transition-colors hover:text-foreground"
+          >
+            {item.label}
+          </Link>
+        ) : (
+          <button
+            onClick={() => setOpen((o) => !o)}
+            className="text-sm font-medium"
+          >
+            {item.label}
+          </button>
+        )}
+        <button
+          onClick={() => setOpen((o) => !o)}
+          className="p-0.5"
+          aria-expanded={open}
+          aria-haspopup="true"
+          aria-label={`Toggle ${item.label} menu`}
         >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
+          <svg
+            className={cn('w-3.5 h-3.5 transition-transform duration-200', open && 'rotate-180')}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+      </div>
 
       {/* Dropdown panel */}
       <div
@@ -122,22 +141,37 @@ export function MobileAccordion({ item, onNavigate }: { item: NavItemWithDropdow
 
   return (
     <div>
-      <button
-        onClick={() => setOpen((o) => !o)}
-        className="w-full flex items-center justify-between py-3 text-foreground-muted hover:text-foreground transition-colors"
-        aria-expanded={open}
-      >
-        <span className="font-medium">{item.label}</span>
-        <svg
-          className={cn('w-4 h-4 transition-transform duration-200', open && 'rotate-180')}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
+      <div className="flex items-center justify-between py-3 text-foreground-muted hover:text-foreground transition-colors">
+        {item.href ? (
+          <Link
+            href={item.href}
+            onClick={onNavigate}
+            className="font-medium transition-colors hover:text-foreground"
+          >
+            {item.label}
+          </Link>
+        ) : (
+          <button onClick={() => setOpen((o) => !o)} className="font-medium">
+            {item.label}
+          </button>
+        )}
+        <button
+          onClick={() => setOpen((o) => !o)}
+          className="p-1"
+          aria-expanded={open}
+          aria-label={`Toggle ${item.label} menu`}
         >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
+          <svg
+            className={cn('w-4 h-4 transition-transform duration-200', open && 'rotate-180')}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+      </div>
       <div
         className={cn(
           'overflow-hidden transition-all duration-300',
