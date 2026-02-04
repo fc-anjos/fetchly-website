@@ -2,11 +2,13 @@ import type { Metadata } from 'next';
 import { PageHero, SolutionsGrid, CTA } from '@/components/sections';
 import { getAllSolutions, getSolutionsPage } from '@/lib/content';
 
-export const metadata: Metadata = {
-  title: 'Software Development Solutions | Fetchly',
-  description:
-    'From rescuing failed projects to building MVPs and scaling teams — explore Fetchly\'s full range of software development solutions.',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getSolutionsPage();
+  return {
+    title: page.metaTitle,
+    description: page.metaDescription,
+  };
+}
 
 export default async function SolutionsPage() {
   const [solutions, page] = await Promise.all([

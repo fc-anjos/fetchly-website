@@ -38,7 +38,8 @@
       "Bash(npx tsx scripts/seed-keystatic.ts)",
       "Bash(npx tsx:*)",
       "Bash(git mv:*)",
-      "WebFetch(domain:keystatic.com)"
+      "WebFetch(domain:keystatic.com)",
+      "Bash(xxd:*)"
     ]
   }
 }

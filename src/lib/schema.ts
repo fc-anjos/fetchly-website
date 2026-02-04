@@ -55,7 +55,7 @@ export function localBusinessSchema(location: LocationDefinition) {
   return {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    name: `Fetchly — ${location.city}`,
+    name: `Fetchly | ${location.city}`,
     description: `Software development agency in ${location.city}, ${location.state}.`,
     url: `https://www.fetch.ly${location.href}`,
   };

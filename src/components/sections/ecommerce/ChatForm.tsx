@@ -867,7 +867,7 @@ export function ChatForm() {
       return;
     }
 
-    chat.advanceStep(`${chat.fields.name} — ${chat.fields.email}`);
+    chat.advanceStep(`${chat.fields.name} | ${chat.fields.email}`);
     await chat.submitForm();
   }, [chat]);
 

@@ -168,8 +168,8 @@ export default function PrivacyPolicyPage() {
 
             <h3>Information automatically collected</h3>
             <p>
-              <strong>In short:</strong> Some information — such as your Internet Protocol (IP)
-              address and/or browser and device characteristics — is collected automatically when
+              <strong>In short:</strong> Some information, such as your Internet Protocol (IP)
+              address and/or browser and device characteristics, is collected automatically when
               you visit our Services.
             </p>
             <p>

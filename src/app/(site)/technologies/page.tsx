@@ -8,11 +8,13 @@ import { Text } from '@/components/ui/Text';
 import { ScrollReveal } from '@/components/effects/ScrollReveal';
 import { getAllTechnologies, getTechnologiesPage } from '@/lib/content';
 
-export const metadata: Metadata = {
-  title: 'Technologies & Tech Stack | Fetchly',
-  description:
-    'React, Next.js, Rails, Python, Shopify, AWS, AI/ML, and more — explore the full technology stack Fetchly uses to build production software.',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getTechnologiesPage();
+  return {
+    title: page.metaTitle,
+    description: page.metaDescription,
+  };
+}
 
 export default async function TechnologiesPage() {
   const [technologies, page] = await Promise.all([

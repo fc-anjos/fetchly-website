@@ -44,7 +44,7 @@ const HOMEPAGE_CASE_STUDIES = [
   },
   {
     title: 'Container Alliance',
-    description: 'Comprehensive digital transformation — rebuilt CRM and a modern, conversion-focused website.',
+    description: 'Comprehensive digital transformation. Rebuilt CRM and a modern, conversion-focused website.',
     image: '/images/container-alliance.png',
     href: '/case-studies',
   },

@@ -8,11 +8,13 @@ import { CTA } from '@/components/sections/CTA';
 import { PageHero } from '@/components/sections/PageHero';
 import { getAllSolutions, getAllIndustries, getAllTestimonials, getServicesPage } from '@/lib/content';
 
-export const metadata: Metadata = {
-  title: 'Services — Full-Stack Development, Design, QA & More | Fetchly',
-  description:
-    'One team handles your entire product lifecycle. Strategy, design, development, QA, and ongoing support, all on a flexible month-to-month basis.',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getServicesPage();
+  return {
+    title: page.metaTitle,
+    description: page.metaDescription,
+  };
+}
 
 export default async function ServicesPage() {
   const [solutions, industries, testimonials, page] = await Promise.all([

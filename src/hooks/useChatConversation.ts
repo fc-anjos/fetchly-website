@@ -67,7 +67,7 @@ export const STEPS: StepDef[] = [
     skippable: true,
   },
   {
-    botMessage: 'Last step — where can we reach you?',
+    botMessage: 'Last step, where can we reach you?',
     inputMode: 'contact',
     field: null,
   },

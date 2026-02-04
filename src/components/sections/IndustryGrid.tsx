@@ -26,7 +26,7 @@ export interface IndustryGridProps {
 
 export function IndustryGrid({
   title = 'Who we help',
-  description = 'We build software for companies in these industries — with domain knowledge and relevant case studies.',
+  description = 'We build software for companies in these industries, with domain knowledge and relevant case studies.',
   industries,
   className,
 }: IndustryGridProps) {

@@ -29,7 +29,7 @@ export interface SolutionsGridProps {
 
 export function SolutionsGrid({
   title = 'What brings you here?',
-  description = 'Whether you need to build something new, fix something broken, or scale what you have — we have a solution.',
+  description = 'Whether you need to build something new, fix something broken, or scale what you have, we have a solution.',
   solutions,
   columns = 4,
   className,

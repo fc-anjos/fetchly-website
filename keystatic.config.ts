@@ -534,6 +534,8 @@ export default config({
       path: 'src/content/services-page',
       format: 'yaml',
       schema: {
+        metaTitle: fields.text({ label: 'Meta Title' }),
+        metaDescription: fields.text({ label: 'Meta Description', multiline: true }),
         heroTitle: fields.text({ label: 'Hero Title', validation: { isRequired: true } }),
         heroDescription: fields.text({ label: 'Hero Description', multiline: true }),
         heroCtaText: fields.text({ label: 'Hero CTA Text' }),
@@ -579,6 +581,8 @@ export default config({
       path: 'src/content/industries-page',
       format: 'yaml',
       schema: {
+        metaTitle: fields.text({ label: 'Meta Title' }),
+        metaDescription: fields.text({ label: 'Meta Description', multiline: true }),
         heroTitle: fields.text({ label: 'Hero Title', validation: { isRequired: true } }),
         heroDescription: fields.text({ label: 'Hero Description', multiline: true }),
         industryGridTitle: fields.text({ label: 'Industry Grid Title' }),
@@ -594,6 +598,8 @@ export default config({
       path: 'src/content/solutions-page',
       format: 'yaml',
       schema: {
+        metaTitle: fields.text({ label: 'Meta Title' }),
+        metaDescription: fields.text({ label: 'Meta Description', multiline: true }),
         heroTitle: fields.text({ label: 'Hero Title', validation: { isRequired: true } }),
         heroDescription: fields.text({ label: 'Hero Description', multiline: true }),
         solutionsGridTitle: fields.text({ label: 'Solutions Grid Title' }),
@@ -609,6 +615,8 @@ export default config({
       path: 'src/content/technologies-page',
       format: 'yaml',
       schema: {
+        metaTitle: fields.text({ label: 'Meta Title' }),
+        metaDescription: fields.text({ label: 'Meta Description', multiline: true }),
         heroTitle: fields.text({ label: 'Hero Title', validation: { isRequired: true } }),
         heroDescription: fields.text({ label: 'Hero Description', multiline: true }),
         categories: fields.array(

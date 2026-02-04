@@ -257,6 +257,8 @@ export async function getHomepage() {
 export async function getServicesPage() {
   const data = requireSingleton('services-page', await reader.singletons['services-page'].read());
   return {
+    metaTitle: data.metaTitle,
+    metaDescription: data.metaDescription,
     heroTitle: data.heroTitle,
     heroDescription: data.heroDescription,
     heroCtaText: data.heroCtaText,
@@ -298,6 +300,8 @@ export async function getOurModelPage() {
 export async function getIndustriesPage() {
   const data = requireSingleton('industries-page', await reader.singletons['industries-page'].read());
   return {
+    metaTitle: data.metaTitle,
+    metaDescription: data.metaDescription,
     heroTitle: data.heroTitle,
     heroDescription: data.heroDescription,
     industryGridTitle: data.industryGridTitle,
@@ -311,6 +315,8 @@ export async function getIndustriesPage() {
 export async function getSolutionsPage() {
   const data = requireSingleton('solutions-page', await reader.singletons['solutions-page'].read());
   return {
+    metaTitle: data.metaTitle,
+    metaDescription: data.metaDescription,
     heroTitle: data.heroTitle,
     heroDescription: data.heroDescription,
     solutionsGridTitle: data.solutionsGridTitle,
@@ -324,6 +330,8 @@ export async function getSolutionsPage() {
 export async function getTechnologiesPage() {
   const data = requireSingleton('technologies-page', await reader.singletons['technologies-page'].read());
   return {
+    metaTitle: data.metaTitle,
+    metaDescription: data.metaDescription,
     heroTitle: data.heroTitle,
     heroDescription: data.heroDescription,
     categories: data.categories,

@@ -1,5 +1,7 @@
+metaTitle: "Technologies & Tech Stack | Fetchly"
+metaDescription: "React, Next.js, Rails, Python, Shopify, AWS, AI/ML, and more. Explore the full technology stack Fetchly uses to build production software."
 heroTitle: "Technologies"
-heroDescription: "We pick the right tool for the job \u2014 not the trendiest one. Here's what we work with every day."
+heroDescription: "We pick the right tool for the job, not the trendiest one. Here's what we work with every day."
 categories:
   - key: "build-with"
     title: "Build With"
