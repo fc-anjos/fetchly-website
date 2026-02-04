@@ -15,6 +15,7 @@ export interface IntakeFields {
   name: string;
   email: string;
   phone: string;
+  linkedin: string;
   companyName: string;
   companyWebsite: string;
   message: string;
@@ -26,6 +27,7 @@ export interface IntakeErrors {
   name?: string;
   email?: string;
   phone?: string;
+  linkedin?: string;
   companyName?: string;
   companyWebsite?: string;
   message?: string;
@@ -34,7 +36,7 @@ export interface IntakeErrors {
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const REQUIRED_KEYS: (keyof IntakeFields)[] = ['projectType', 'companySize', 'name', 'email', 'companyName', 'message'];
-const FIELD_KEYS: (keyof IntakeFields)[] = ['projectType', 'companySize', 'name', 'email', 'phone', 'companyName', 'companyWebsite', 'message'];
+const FIELD_KEYS: (keyof IntakeFields)[] = ['projectType', 'companySize', 'name', 'email', 'phone', 'linkedin', 'companyName', 'companyWebsite', 'message'];
 
 const initialFields: IntakeFields = {
   projectType: '',
@@ -42,6 +44,7 @@ const initialFields: IntakeFields = {
   name: '',
   email: '',
   phone: '',
+  linkedin: '',
   companyName: '',
   companyWebsite: '',
   message: '',
@@ -98,7 +101,7 @@ export function useIntakeForm(formId = 'intake-form') {
 
   const validateField = useCallback((key: keyof IntakeFields): string | undefined => {
     const val = fields[key];
-    if (key === 'companyWebsite' || key === 'phone') return undefined; // optional
+    if (key === 'companyWebsite' || key === 'phone' || key === 'linkedin') return undefined; // optional
     if (!val || val.trim().length === 0) return 'This field is required';
     if (key === 'email' && !EMAIL_REGEX.test(val)) return 'Please enter a valid email';
     return undefined;
@@ -132,6 +135,7 @@ export function useIntakeForm(formId = 'intake-form') {
       company_size: fields.companySize,
     };
     if (fields.phone) payload.phone = fields.phone;
+    if (fields.linkedin) payload.linkedin = fields.linkedin;
     if (fields.companyWebsite) payload.website = fields.companyWebsite;
 
     // Attach UTM params

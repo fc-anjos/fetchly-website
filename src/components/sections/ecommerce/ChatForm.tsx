@@ -584,10 +584,10 @@ function TextareaInputBar({ placeholder, disabled, skippable, onSend, onSkip }: 
 // ---------------------------------------------------------------------------
 
 interface ContactGroupInputProps {
-  fields: { name: string; phone: string; email: string };
-  errors: { name?: string; phone?: string; email?: string };
+  fields: { name: string; phone: string; email: string; linkedin: string };
+  errors: { name?: string; phone?: string; email?: string; linkedin?: string };
   disabled: boolean;
-  onFieldChange: (key: 'name' | 'phone' | 'email', value: string) => void;
+  onFieldChange: (key: 'name' | 'phone' | 'email' | 'linkedin', value: string) => void;
   onSubmit: () => void;
 }
 
@@ -662,6 +662,15 @@ function ContactGroupInput({
         error={errors.email}
         className={glassInput}
       />
+      <Input
+        label="LinkedIn (optional)"
+        type="url"
+        placeholder="https://linkedin.com/in/you"
+        value={fields.linkedin}
+        onChange={e => onFieldChange('linkedin', e.target.value)}
+        error={errors.linkedin}
+        className={glassInput}
+      />
       <button
         type="submit"
         disabled={disabled}
@@ -686,12 +695,12 @@ interface InputAreaProps {
   isBotTyping: boolean;
   isSuccess: boolean;
   submitting: boolean;
-  fields: { name: string; phone: string; email: string };
-  errors: { name?: string; phone?: string; email?: string };
+  fields: { name: string; phone: string; email: string; linkedin: string };
+  errors: { name?: string; phone?: string; email?: string; linkedin?: string };
   onChipSelect: (value: string) => void;
   onTextSend: (value: string) => void;
   onSkip: () => void;
-  onContactFieldChange: (key: 'name' | 'phone' | 'email', value: string) => void;
+  onContactFieldChange: (key: 'name' | 'phone' | 'email' | 'linkedin', value: string) => void;
   onContactSubmit: () => void;
 }
 
@@ -852,7 +861,7 @@ export function ChatForm() {
   }, [chat, dismissAttention]);
 
   const handleContactFieldChange = useCallback(
-    (key: 'name' | 'phone' | 'email', value: string) => {
+    (key: 'name' | 'phone' | 'email' | 'linkedin', value: string) => {
       dismissAttention();
       chat.setField(key, value);
     },
@@ -883,11 +892,13 @@ export function ChatForm() {
       name: chat.fields.name,
       phone: chat.fields.phone,
       email: chat.fields.email,
+      linkedin: chat.fields.linkedin,
     },
     errors: {
       name: chat.errors.name,
       phone: chat.errors.phone,
       email: chat.errors.email,
+      linkedin: chat.errors.linkedin,
     },
     onChipSelect: handleChipSelect,
     onTextSend: handleTextSend,

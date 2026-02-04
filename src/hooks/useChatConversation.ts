@@ -67,6 +67,13 @@ export const STEPS: StepDef[] = [
     skippable: true,
   },
   {
+    botMessage: 'Got a LinkedIn profile? (helps us learn about you)',
+    inputMode: 'text',
+    field: 'linkedin',
+    placeholder: 'https://linkedin.com/in/janesmith',
+    skippable: true,
+  },
+  {
     botMessage: 'Last step, where can we reach you?',
     inputMode: 'contact',
     field: null,

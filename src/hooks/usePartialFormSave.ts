@@ -25,6 +25,7 @@ export function usePartialFormSave(fields: IntakeFields) {
       if (fields.companyName) payload.company = fields.companyName;
       if (fields.companyWebsite) payload.website = fields.companyWebsite;
       if (fields.phone) payload.phone = fields.phone;
+      if (fields.linkedin) payload.linkedin = fields.linkedin;
       if (fields.message) payload.message = fields.message;
       if (fields.projectType) payload.project_type = fields.projectType;
       if (fields.companySize) payload.company_size = fields.companySize;

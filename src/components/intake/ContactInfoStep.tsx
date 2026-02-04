@@ -49,6 +49,15 @@ export function ContactInfoStep({
         error={errors.phone}
       />
 
+      <Input
+        label="LinkedIn (optional)"
+        type="url"
+        placeholder="https://linkedin.com/in/janesmith"
+        value={fields.linkedin}
+        onChange={(e) => onFieldChange('linkedin', e.target.value)}
+        error={errors.linkedin}
+      />
+
       <div className="flex gap-3 pt-2">
         <button
           type="button"
