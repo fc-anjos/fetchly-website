@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-export function middleware() {
+export function proxy() {
   if (process.env.VERCEL) {
     return new NextResponse(null, { status: 404 });
   }
