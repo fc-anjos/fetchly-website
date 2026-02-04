@@ -1,11 +1,12 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { useIntakeForm } from '@/hooks/useIntakeForm';
 import { ProjectInfoStep } from './ProjectInfoStep';
 import { ContactInfoStep } from './ContactInfoStep';
 import { SuccessStep } from './SuccessStep';
+import { FormTracker } from '@/components/tracking/FormTracker';
 
 type Step = 'project' | 'contact' | 'success';
 
@@ -20,10 +21,20 @@ const STEP_ORDER: Step[] = ['project', 'contact', 'success'];
 interface IntakeFormProps {
   preselectedType?: string;
   heading?: string;
+  initialEmail?: string;
 }
 
-export function IntakeForm({ preselectedType, heading }: IntakeFormProps) {
-  const form = useIntakeForm();
+export function IntakeForm({ preselectedType, heading, initialEmail }: IntakeFormProps) {
+  const form = useIntakeForm('intake-form');
+
+  // Pre-fill email from Hero redirect
+  useEffect(() => {
+    if (initialEmail) {
+      form.setField('email', initialEmail);
+    }
+    // Only run on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const [step, setStep] = useState<Step>('project');
 
   const currentIndex = STEP_ORDER.indexOf(step);
@@ -113,6 +124,7 @@ export function IntakeForm({ preselectedType, heading }: IntakeFormProps) {
       )}
 
       {/* Form card */}
+      <FormTracker formId="intake-form">
       <div className="bg-surface-card border border-border rounded-xl p-6 sm:p-8">
         {step === 'project' && (
           <ProjectInfoStep
@@ -137,6 +149,7 @@ export function IntakeForm({ preselectedType, heading }: IntakeFormProps) {
 
         {step === 'success' && <SuccessStep />}
       </div>
+      </FormTracker>
     </div>
   );
 }

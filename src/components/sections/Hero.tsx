@@ -7,6 +7,8 @@ import { SplitText } from '@/components/effects/SplitText';
 import { Text } from '@/components/ui/Text';
 import { Parallax } from '@/components/effects/Parallax';
 import { assetPath } from '@/lib/utils';
+import { FormTracker } from '@/components/tracking/FormTracker';
+import { trackEvent } from '@/lib/analytics';
 export interface HeroProps {
   title: string;
   subtitle: string;
@@ -77,6 +79,7 @@ export function Hero({ title, subtitle, ctaText }: HeroProps) {
       return;
     }
     setError(false);
+    trackEvent('hero_email_submit');
     window.location.href = `/intake/request?email=${encodeURIComponent(email)}`;
   };
 
@@ -137,6 +140,7 @@ export function Hero({ title, subtitle, ctaText }: HeroProps) {
       {/* Logo Marquee at bottom of hero */}
       <div className="dark absolute bottom-8 left-0 right-0 z-20">
         <div className="flex justify-center px-6 mb-14">
+          <FormTracker formId="hero-email">
           <div ref={formRef} className="w-full max-w-md" style={{ opacity: 0 }}>
             <div className="flex flex-col sm:flex-row rounded-xl bg-white/15 backdrop-blur-[12px] overflow-hidden shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)] transition-shadow duration-200 has-[:focus]:shadow-[inset_0_0_0_1px_rgba(105,229,251,0.6),0_0_0_1px_rgba(105,229,251,0.5),0_0_12px_rgba(105,229,251,0.4)]">
               <input
@@ -171,6 +175,7 @@ export function Hero({ title, subtitle, ctaText }: HeroProps) {
               </div>
             )}
           </div>
+          </FormTracker>
         </div>
         <LogoMarquee variant="transparent" />
       </div>

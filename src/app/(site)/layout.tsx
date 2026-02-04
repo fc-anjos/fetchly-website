@@ -4,6 +4,7 @@ import { FooterServer } from '@/components/layout/FooterServer';
 import { SmoothScroll } from '@/components/effects/SmoothScroll';
 import { CursorProvider, CustomCursor } from '@/components/effects/CustomCursor';
 import { Preloader } from '@/components/effects/Preloader';
+import { RB2BLoader, UTMCapture, ExitIntentPopup } from '@/components/tracking';
 
 export default function SiteLayout({
   children,
@@ -16,6 +17,9 @@ export default function SiteLayout({
       <SmoothScroll>
         <CursorProvider>
           <CustomCursor />
+          <RB2BLoader />
+          <UTMCapture />
+          <ExitIntentPopup />
           <a href="#main-content" className="skip-link">
             Skip to main content
           </a>

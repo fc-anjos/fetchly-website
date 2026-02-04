@@ -19,6 +19,7 @@ const SOLUTION_HEADINGS: Record<string, string> = {
 function IntakeRequestContent() {
   const searchParams = useSearchParams();
   const solution = searchParams.get('solution') ?? '';
+  const email = searchParams.get('email') ?? '';
   const heading = SOLUTION_HEADINGS[solution] || undefined;
 
   // Map solution query param to project type chip pre-selection
@@ -39,6 +40,7 @@ function IntakeRequestContent() {
     <IntakeForm
       heading={heading}
       preselectedType={preselectedType}
+      initialEmail={email || undefined}
     />
   );
 }

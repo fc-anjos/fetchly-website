@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { GA4Script } from '@/components/tracking/GA4Script';
 import '@/styles/globals.css';
 
 const inter = Inter({
@@ -47,6 +48,7 @@ export default function RootLayout({
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body className="min-h-screen flex flex-col antialiased">
         {children}
+        <GA4Script />
       </body>
     </html>
   );

@@ -4,3 +4,7 @@ export { useCursor } from './useCursor';
 export { useIntakeForm } from './useIntakeForm';
 export { useChatConversation } from './useChatConversation';
 export { useCalendlyEvents } from './useCalendlyEvents';
+export { useUTM } from './useUTM';
+export { useFormImpression } from './useFormImpression';
+export { usePartialFormSave } from './usePartialFormSave';
+export { useExitIntent } from './useExitIntent';

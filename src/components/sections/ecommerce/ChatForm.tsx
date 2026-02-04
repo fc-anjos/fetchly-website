@@ -16,6 +16,7 @@ import {
   type StepDef,
 } from '@/hooks/useChatConversation';
 import type { IntakeFields } from '@/hooks/useIntakeForm';
+import { FormTracker } from '@/components/tracking/FormTracker';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -896,6 +897,7 @@ export function ChatForm() {
   };
 
   return (
+    <FormTracker formId="ecommerce-chat">
     <div className="relative -mx-6 lg:-mx-10">
       {/* Notification dot — outside card so overflow:hidden doesn't clip it */}
       {showAttention && <NotificationDot />}
@@ -942,6 +944,7 @@ export function ChatForm() {
         )}
       </div>
     </div>
+    </FormTracker>
   );
 }
 

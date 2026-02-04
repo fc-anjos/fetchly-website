@@ -1,6 +1,10 @@
 'use client';
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useRef } from 'react';
+import { submitToHubSpot } from '@/lib/hubspot';
+import { getUTMForHubSpot } from '@/lib/utm';
+import { trackEvent } from '@/lib/analytics';
+import { usePartialFormSave } from './usePartialFormSave';
 
 export type ProjectType = string;
 export type CompanySize = '1-5' | '6-10' | '11-49' | '50-250' | '251+' | '';
@@ -43,11 +47,15 @@ const initialFields: IntakeFields = {
   message: '',
 };
 
-export function useIntakeForm() {
+export function useIntakeForm(formId = 'intake-form') {
   const [fields, setFields] = useState<IntakeFields>(initialFields);
   const [errors, setErrors] = useState<IntakeErrors>({});
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const formStartedRef = useRef(false);
+
+  // Partial saves: sends to HubSpot as user fills fields
+  usePartialFormSave(fields);
 
   const setField = useCallback(<K extends keyof IntakeFields>(key: K, value: IntakeFields[K]) => {
     setFields(prev => ({ ...prev, [key]: value }));
@@ -57,7 +65,19 @@ export function useIntakeForm() {
       delete next[key];
       return next;
     });
-  }, []);
+
+    // Fire form_start on first interaction
+    if (!formStartedRef.current) {
+      formStartedRef.current = true;
+      trackEvent('form_start', { form_id: formId });
+    }
+
+    // Fire form_field_complete when field gets a valid value
+    const isValid = key === 'email' ? EMAIL_REGEX.test(value as string) : (value as string).trim().length > 0;
+    if (isValid) {
+      trackEvent('form_field_complete', { form_id: formId, field: key });
+    }
+  }, [formId]);
 
   const isFieldComplete = useCallback((key: keyof IntakeFields): boolean => {
     const val = fields[key];
@@ -101,16 +121,41 @@ export function useIntakeForm() {
   const handleSubmit = useCallback(async () => {
     if (!validate()) return;
     setSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 800));
+    trackEvent('form_submit', { form_id: formId });
+
+    const payload: Record<string, string> = {
+      email: fields.email,
+      firstname: fields.name,
+      company: fields.companyName,
+      message: fields.message,
+      project_type: fields.projectType,
+      company_size: fields.companySize,
+    };
+    if (fields.phone) payload.phone = fields.phone;
+    if (fields.companyWebsite) payload.website = fields.companyWebsite;
+
+    // Attach UTM params
+    const utm = getUTMForHubSpot();
+    Object.assign(payload, utm);
+
+    const result = await submitToHubSpot(payload);
+
+    if (result.ok) {
+      trackEvent('form_submit_success', { form_id: formId });
+    } else {
+      trackEvent('form_submit_error', { form_id: formId, error: `status_${result.status}` });
+    }
+
     setSubmitting(false);
     setSubmitted(true);
-  }, [validate]);
+  }, [validate, fields, formId]);
 
   const reset = useCallback(() => {
     setFields(initialFields);
     setErrors({});
     setSubmitted(false);
     setSubmitting(false);
+    formStartedRef.current = false;
   }, []);
 
   return {
