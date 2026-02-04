@@ -5,22 +5,22 @@ import { Heading } from '@/components/ui/Heading';
 import { Text } from '@/components/ui/Text';
 import { ScrollReveal } from '@/components/effects/ScrollReveal';
 import { cn } from '@/lib/utils';
-import { LOCATIONS } from '@/lib/page-data';
 import type { LocationDefinition } from '@/types';
 
 export interface LocationsBarProps {
-  locations?: LocationDefinition[];
+  title: string;
+  locations: LocationDefinition[];
   className?: string;
 }
 
-export function LocationsBar({ locations = LOCATIONS, className }: LocationsBarProps) {
+export function LocationsBar({ title, locations, className }: LocationsBarProps) {
   return (
     <Section background="muted" className={cn('py-10 md:py-12', className)}>
       <Container>
         <ScrollReveal direction="up" distance={20}>
           <div className="text-center mb-8">
             <Heading level="h3" className="text-foreground">
-              Serving clients across the US
+              {title}
             </Heading>
           </div>
         </ScrollReveal>

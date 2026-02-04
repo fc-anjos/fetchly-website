@@ -1,0 +1,121 @@
+items:
+  - label: "Solutions"
+    href: "/solutions"
+    children:
+      - label: "Rescue & Replace"
+        href: "/solutions/rescue"
+        description: "Your last agency didn't work out. We get it."
+        featured: false
+      - label: "Scale My Team"
+        href: "/solutions/scale-team"
+        description: "Dedicated developers who integrate with your team."
+        featured: false
+      - label: "Build My MVP"
+        href: "/solutions/build-mvp"
+        description: "From idea to launched product, fast."
+        featured: false
+      - label: "Modernize & Migrate"
+        href: "/solutions/modernize"
+        description: "Modernize aging applications incrementally."
+        featured: false
+      - label: "QA & Testing"
+        href: "/solutions/qa-testing"
+        description: "Find the bugs before your users do."
+        featured: false
+      - label: "Design & UX"
+        href: "/solutions/design"
+        description: "Design that converts, not just looks good."
+        featured: false
+      - label: "DevOps & Infrastructure"
+        href: "/solutions/devops"
+        description: "Deploy on Friday without sweating."
+        featured: false
+      - label: "AI Integration"
+        href: "/solutions/ai"
+        description: "Add AI to your product in weeks."
+        featured: false
+  - label: "Industries"
+    href: "/industries"
+    children:
+      - label: "E-Commerce & Marketplaces"
+        href: "/industries/ecommerce"
+        description: "Shopify, custom marketplaces, subscriptions."
+        featured: true
+      - label: "Healthcare & MedTech"
+        href: "/industries/healthcare"
+        description: "HIPAA-compliant platforms and patient portals."
+        featured: false
+      - label: "HR Tech & Recruitment"
+        href: "/industries/hr-tech"
+        description: "AI matching, ATS integrations, PEO platforms."
+        featured: false
+      - label: "Logistics & Supply Chain"
+        href: "/industries/logistics"
+        description: "Tracking, rates, and carrier integrations."
+        featured: false
+      - label: "FinTech & Real Estate"
+        href: "/industries/fintech"
+        description: "Payments, mortgages, and property management."
+        featured: false
+      - label: "Hospitality & Events"
+        href: "/industries/hospitality"
+        description: "Event platforms, bookings, and ticketing."
+        featured: false
+  - label: "Technologies"
+    href: "/technologies"
+    children:
+      - label: "Ruby on Rails"
+        href: "/technologies/rails"
+        description: "Full-stack apps built fast with convention over configuration."
+        featured: true
+      - label: "Shopify"
+        href: "/industries/ecommerce"
+        description: "Shopify Plus themes, custom apps, and headless commerce."
+        featured: true
+      - label: "Next.js"
+        href: "/technologies/nextjs"
+        description: ""
+        featured: false
+      - label: "Python & Django"
+        href: "/technologies/python"
+        description: ""
+        featured: false
+      - label: "React"
+        href: "/technologies/react"
+        description: ""
+        featured: false
+      - label: "React Native"
+        href: "/technologies/react-native"
+        description: ""
+        featured: false
+      - label: "Vue.js"
+        href: "/technologies/vuejs"
+        description: ""
+        featured: false
+      - label: "AI & Machine Learning"
+        href: "/technologies/ai-ml"
+        description: ""
+        featured: false
+      - label: "API Development"
+        href: "/technologies/api-development"
+        description: ""
+        featured: false
+      - label: "DevOps & Docker"
+        href: "/technologies/devops-docker"
+        description: ""
+        featured: false
+      - label: "PostgreSQL"
+        href: "/technologies/postgresql"
+        description: ""
+        featured: false
+  - label: "About"
+    href: ""
+    children:
+      - label: "Our Model"
+        href: "/our-model"
+        description: "How we work and why it's different."
+        featured: false
+      - label: "Case Studies"
+        href: "/case-studies"
+        description: "Real products with real results."
+        featured: false

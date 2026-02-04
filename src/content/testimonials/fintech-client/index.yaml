@@ -1,0 +1,11 @@
+slug: "fintech-client"
+quote: "Fetchly modernized our legacy application without any downtime. They migrated us from an aging Rails 5 app to Rails 7 with a modern frontend, and our deployment time went from hours to minutes."
+author: "FinTech Client"
+role: "CTO at HomeSavi"
+logo: ""
+image: ""
+industries:
+  - "fintech"
+solutions:
+  - "modernize"
+sortOrder: 7

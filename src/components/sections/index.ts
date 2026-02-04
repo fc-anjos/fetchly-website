@@ -7,7 +7,7 @@ export { Testimonials } from './Testimonials';
 export { FAQ } from './FAQ';
 export { CTA } from './CTA';
 export { SectionHeader } from './SectionHeader';
-export { ProcessSteps, DEFAULT_PROCESS_STEPS } from './ProcessSteps';
+export { ProcessSteps } from './ProcessSteps';
 export { FeatureGrid } from './FeatureGrid';
 export { StatsGrid, DEFAULT_STATS } from './StatsGrid';
 export { CaseStudyGrid } from './CaseStudyGrid';

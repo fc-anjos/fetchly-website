@@ -8,21 +8,21 @@ import { Badge } from '@/components/ui/Badge';
 import { ScrollReveal } from '@/components/effects/ScrollReveal';
 
 export interface FeaturedCaseStudyProps {
-  title?: string;
-  description?: string;
-  logoSrc?: string;
-  ctaText?: string;
-  ctaHref?: string;
-  label?: string;
+  title: string;
+  description: string;
+  logoSrc: string;
+  ctaText: string;
+  ctaHref: string;
+  label: string;
 }
 
 export function FeaturedCaseStudy({
-  title = 'Oats Overnight: 250K+ subscribers. 94% subscription revenue.',
-  description = 'We built the subscription platform, custom checkout, and Shopify theme that helped Oats Overnight turn first-time buyers into a quarter-million active subscribers.',
-  logoSrc = '/images/oats-overnight.svg',
-  ctaText = 'See how we built it',
-  ctaHref = '/case-studies',
-  label = 'Featured Case Study',
+  title,
+  description,
+  logoSrc,
+  ctaText,
+  ctaHref,
+  label,
 }: FeaturedCaseStudyProps) {
   return (
     <Section className="py-12 md:py-16 bg-surface-alt">

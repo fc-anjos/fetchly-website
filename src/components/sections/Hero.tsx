@@ -7,7 +7,13 @@ import { SplitText } from '@/components/effects/SplitText';
 import { Text } from '@/components/ui/Text';
 import { Parallax } from '@/components/effects/Parallax';
 import { assetPath } from '@/lib/utils';
-export function Hero() {
+export interface HeroProps {
+  title: string;
+  subtitle: string;
+  ctaText: string;
+}
+
+export function Hero({ title, subtitle, ctaText }: HeroProps) {
   const [email, setEmail] = useState('');
   const [error, setError] = useState(false);
   const [preloaderDone, setPreloaderDone] = useState(false);
@@ -113,13 +119,13 @@ export function Hero() {
                 animation={{ duration: 0.7, stagger: 0.06, ease: 'power4.out', y: 50 }}
                 delay={0.3}
               >
-                Your Dev Team as a Service™
+                {title}
               </SplitText>
             )}
 
             <div ref={subtitleRef} style={{ opacity: 0 }}>
               <Text size="xl" className="text-gray-300/90 max-w-2xl mx-auto">
-                Development, Project Management, QA, Design, DevOps, and more
+                {subtitle}
               </Text>
             </div>
           </div>
@@ -132,7 +138,7 @@ export function Hero() {
       <div className="dark absolute bottom-8 left-0 right-0 z-20">
         <div className="flex justify-center px-6 mb-14">
           <div ref={formRef} className="w-full max-w-md" style={{ opacity: 0 }}>
-            <div className="flex flex-col sm:flex-row rounded-xl bg-white/15 backdrop-blur-[12px] overflow-hidden shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)]">
+            <div className="flex flex-col sm:flex-row rounded-xl bg-white/15 backdrop-blur-[12px] overflow-hidden shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)] transition-shadow duration-200 has-[:focus]:shadow-[inset_0_0_0_1px_rgba(105,229,251,0.6),0_0_0_1px_rgba(105,229,251,0.5),0_0_12px_rgba(105,229,251,0.4)]">
               <input
                 type="email"
                 value={email}
@@ -143,7 +149,7 @@ export function Hero() {
                 placeholder="Enter your email"
                 maxLength={256}
                 id="homepage-email-input"
-                className="flex-1 px-4 py-2 bg-transparent text-white placeholder-white/60 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 m-px"
+                className="flex-1 px-4 py-2 bg-transparent text-white placeholder-white/60 text-sm focus:outline-none"
               />
               <button
                 type="button"
@@ -151,7 +157,7 @@ export function Hero() {
                 id="homepage-email-button"
                 className="px-5 py-2 bg-primary text-gray-900 font-semibold text-sm hover:bg-primary/90 transition-colors whitespace-nowrap"
               >
-                Scale with Fetchly
+                {ctaText}
               </button>
             </div>
 

@@ -6,7 +6,6 @@ import { Text } from '@/components/ui/Text';
 import { SectionHeader } from './SectionHeader';
 import { ScrollReveal } from '@/components/effects/ScrollReveal';
 import { cn } from '@/lib/utils';
-import { SOLUTIONS } from '@/lib/page-data';
 import type { SolutionDefinition } from '@/types';
 
 const ICONS: Record<string, React.ReactNode> = {
@@ -23,7 +22,7 @@ const ICONS: Record<string, React.ReactNode> = {
 export interface SolutionsGridProps {
   title?: string;
   description?: string;
-  solutions?: SolutionDefinition[];
+  solutions: SolutionDefinition[];
   columns?: 2 | 4;
   className?: string;
 }
@@ -31,7 +30,7 @@ export interface SolutionsGridProps {
 export function SolutionsGrid({
   title = 'What brings you here?',
   description = 'Whether you need to build something new, fix something broken, or scale what you have — we have a solution.',
-  solutions = SOLUTIONS.slice(0, 4),
+  solutions,
   columns = 4,
   className,
 }: SolutionsGridProps) {

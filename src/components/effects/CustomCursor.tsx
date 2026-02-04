@@ -12,6 +12,15 @@ export function CursorProvider({ children }: CursorProviderProps) {
 
   const setCursorType = useCallback((t: CursorType) => setType(t), []);
 
+  useEffect(() => {
+    document.documentElement.classList.add('site');
+    document.body.classList.add('site', 'custom-cursor');
+    return () => {
+      document.documentElement.classList.remove('site');
+      document.body.classList.remove('site', 'custom-cursor');
+    };
+  }, []);
+
   return (
     <CursorContext.Provider value={{ type, setCursorType }}>
       {children}

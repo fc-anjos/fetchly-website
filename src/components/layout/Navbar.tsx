@@ -8,13 +8,14 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
-import { NAV_LINKS } from '@/lib/constants';
 import { MegaMenu, MobileAccordion } from './MegaMenu';
+import type { NavItemWithDropdown } from '@/types';
 
 /** Routes whose hero section has a dark video background */
 const VIDEO_HERO_ROUTES = ['/', '/case-studies'];
 
-export function Navbar() {
+export function Navbar({ navLinks }: { navLinks: NavItemWithDropdown[] }) {
+  const NAV_LINKS = navLinks;
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

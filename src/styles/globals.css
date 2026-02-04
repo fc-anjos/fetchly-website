@@ -138,47 +138,47 @@
    Base Styles
    ============================================ */
 
-/* Responsive font sizing (preserved from Webflow) */
-html {
+/* Responsive font sizing (preserved from Webflow) — scoped to site routes */
+html.site {
   font-size: 1.125rem;
 }
 
 @media screen and (max-width: 1920px) {
-  html {
+  html.site {
     font-size: calc(0.625rem + 0.417vw);
   }
 }
 
 @media screen and (max-width: 1440px) {
-  html {
+  html.site {
     font-size: calc(0.813rem + 0.208vw);
   }
 }
 
 @media screen and (max-width: 479px) {
-  html {
+  html.site {
     font-size: calc(0.749rem + 0.837vw);
   }
 }
 
-body {
+body.site {
   @apply bg-surface text-foreground antialiased;
   font-family: var(--font-sans);
 }
 
-/* Text Selection */
-::selection {
+/* Text Selection — scoped to site routes */
+.site ::selection {
   background: var(--color-primary);
   color: #000000;
 }
 
-::-moz-selection {
+.site ::-moz-selection {
   background: var(--color-primary);
   color: #000000;
 }
 
-/* Focus Styles */
-:focus-visible {
+/* Focus Styles — scoped to site routes (exclude form elements which have their own) */
+.site :focus-visible:not(input, textarea, select) {
   @apply outline-none ring-2 ring-offset-2 ring-offset-surface;
   --tw-ring-color: var(--color-primary);
 }
@@ -517,8 +517,8 @@ html.scroll-locked body {
    Constrain Media
    ============================================ */
 
-img,
-video {
+.site img,
+.site video {
   max-width: 100%;
   height: auto;
 }
@@ -764,13 +764,13 @@ html.preloader-active body {
    ============================================ */
 
 @media (pointer: fine) {
-  body,
-  a,
-  button,
-  [role="button"],
-  input,
-  select,
-  textarea {
+  body.custom-cursor,
+  body.custom-cursor a,
+  body.custom-cursor button,
+  body.custom-cursor [role="button"],
+  body.custom-cursor input,
+  body.custom-cursor select,
+  body.custom-cursor textarea {
     cursor: none !important;
   }
 }

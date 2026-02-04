@@ -2,9 +2,22 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Heading } from '@/components/ui/Heading';
 import { assetPath } from '@/lib/utils';
-import { FOOTER_LINKS } from '@/lib/constants';
 
-export function Footer() {
+interface FooterLink {
+  label: string;
+  href: string;
+}
+
+interface FooterProps {
+  footerLinks: {
+    solutions: FooterLink[];
+    company: FooterLink[];
+    legal: FooterLink[];
+  };
+}
+
+export function Footer({ footerLinks }: FooterProps) {
+  const FOOTER_LINKS = footerLinks;
   return (
     <footer className="relative text-white overflow-hidden">
       {/* Video Background */}

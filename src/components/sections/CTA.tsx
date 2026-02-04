@@ -8,17 +8,17 @@ import { ScrollReveal } from '@/components/effects/ScrollReveal';
 import { cn } from '@/lib/utils';
 
 export interface CTAProps {
-  title?: string;
+  title: string;
   description?: string;
-  buttonText?: string;
+  buttonText: string;
   buttonHref?: string;
   className?: string;
 }
 
 export function CTA({
-  title = 'Ready to start building?',
+  title,
   description,
-  buttonText = 'Get in Touch',
+  buttonText,
   buttonHref = '/intake/request',
   className,
 }: CTAProps) {

@@ -12,38 +12,15 @@ export interface ProcessStep {
 }
 
 export interface ProcessStepsProps {
-  /** Section title */
-  title?: string;
-  /** Array of process steps (defaults to DEFAULT_PROCESS_STEPS) */
-  steps?: ProcessStep[];
-  /** Background variant */
+  title: string;
+  steps: ProcessStep[];
   background?: 'default' | 'muted';
-  /** Additional className for the section */
   className?: string;
 }
 
-/** Default process steps used across multiple pages */
-export const DEFAULT_PROCESS_STEPS: ProcessStep[] = [
-  {
-    title: 'Initial consultation and discovery',
-    description:
-      'We start with a deep dive into your product, your users, and your goals. Just a real conversation about what you need built and why.',
-  },
-  {
-    title: 'Collaborative planning and strategy',
-    description:
-      'We map out every screen, feature, and milestone before writing a line of code. You review the plan, we adjust, and nothing moves forward until we agree on the direction.',
-  },
-  {
-    title: 'Design and development execution',
-    description:
-      'Your team starts building. You get weekly test builds and live preview links so you can see real progress, not just status updates. We test, iterate, and ship.',
-  },
-];
-
 export function ProcessSteps({
-  title = 'How we work together',
-  steps = DEFAULT_PROCESS_STEPS,
+  title,
+  steps,
   background = 'default',
   className,
 }: ProcessStepsProps) {

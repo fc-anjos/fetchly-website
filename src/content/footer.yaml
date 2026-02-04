@@ -1,0 +1,25 @@
+solutions:
+  - label: "Rescue & Replace"
+    href: "/solutions/rescue"
+  - label: "Scale My Team"
+    href: "/solutions/scale-team"
+  - label: "Build My MVP"
+    href: "/solutions/build-mvp"
+  - label: "Modernize & Migrate"
+    href: "/solutions/modernize"
+company:
+  - label: "Our Model"
+    href: "/our-model"
+  - label: "Case Studies"
+    href: "/case-studies"
+  - label: "Services"
+    href: "/services"
+legal:
+  - label: "Privacy Policy"
+    href: "/privacy-policy"
+  - label: "Cookies Settings"
+    href: "/privacy-policy"
+socialLinks:
+  - name: "LinkedIn"
+    href: "https://www.linkedin.com/company/fetchly-labs"
+    icon: "linkedin"

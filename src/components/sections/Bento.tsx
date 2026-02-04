@@ -8,7 +8,11 @@ import { Text } from '@/components/ui/Text';
 import { ScrollReveal } from '@/components/effects/ScrollReveal';
 import { assetPath } from '@/lib/utils';
 
-export function Bento() {
+export interface BentoProps {
+  introText: string;
+}
+
+export function Bento({ introText }: BentoProps) {
   const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -76,9 +80,7 @@ export function Bento() {
         <ScrollReveal direction="up" distance={30} duration={0.7}>
           <div className="text-center mb-12 max-w-4xl mx-auto">
             <Text size="xl" className="text-foreground-muted leading-relaxed">
-              Fetchly places developers, designers, PMs, and QA specialists directly into your
-              workflow. You keep full ownership of your product, work month-to-month, and get
-              supplemental services built into every engagement.
+              {introText}
             </Text>
           </div>
         </ScrollReveal>

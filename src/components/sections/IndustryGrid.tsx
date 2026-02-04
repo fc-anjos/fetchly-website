@@ -6,7 +6,6 @@ import { Text } from '@/components/ui/Text';
 import { SectionHeader } from './SectionHeader';
 import { ScrollReveal } from '@/components/effects/ScrollReveal';
 import { cn } from '@/lib/utils';
-import { INDUSTRIES } from '@/lib/page-data';
 import type { IndustryDefinition } from '@/types';
 
 const ICONS: Record<string, React.ReactNode> = {
@@ -21,14 +20,14 @@ const ICONS: Record<string, React.ReactNode> = {
 export interface IndustryGridProps {
   title?: string;
   description?: string;
-  industries?: IndustryDefinition[];
+  industries: IndustryDefinition[];
   className?: string;
 }
 
 export function IndustryGrid({
   title = 'Who we help',
   description = 'We build software for companies in these industries — with domain knowledge and relevant case studies.',
-  industries = INDUSTRIES,
+  industries,
   className,
 }: IndustryGridProps) {
   return (

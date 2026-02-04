@@ -1,32 +1,19 @@
 'use client';
 
-import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { Section } from '@/components/ui/Section';
 import { Text } from '@/components/ui/Text';
 import { ScrollReveal } from '@/components/effects/ScrollReveal';
 import { cn } from '@/lib/utils';
-import { TESTIMONIALS_DATA } from '@/lib/page-data';
 import type { TestimonialItem } from '@/types';
 
 export interface TestimonialsProps {
-  items?: TestimonialItem[];
-  filterIndustry?: string;
-  filterSolution?: string;
+  items: TestimonialItem[];
 }
 
-export function Testimonials({ items, filterIndustry, filterSolution }: TestimonialsProps = {}) {
-  const testimonials = useMemo(() => {
-    if (items) return items;
-    let filtered = TESTIMONIALS_DATA;
-    if (filterIndustry) {
-      filtered = filtered.filter((t) => t.industries?.includes(filterIndustry));
-    }
-    if (filterSolution) {
-      filtered = filtered.filter((t) => t.solutions?.includes(filterSolution));
-    }
-    return filtered.length > 0 ? filtered : TESTIMONIALS_DATA.slice(0, 4);
-  }, [items, filterIndustry, filterSolution]);
+export function Testimonials({ items }: TestimonialsProps) {
+  const testimonials = items;
   const [currentIndex, setCurrentIndex] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);

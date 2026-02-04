@@ -5,10 +5,17 @@ import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
 import { Heading } from '@/components/ui/Heading';
-import { COMPARISON_DATA } from '@/lib/constants';
 import { ScrollReveal } from '@/components/effects/ScrollReveal';
 
-export function Comparison() {
+interface ComparisonProps {
+  data: {
+    headers: string[];
+    rows: { feature: string; staffAug: boolean | 'partial'; fetchly: boolean | 'partial'; agency: boolean | 'partial' }[];
+  };
+}
+
+export function Comparison({ data }: ComparisonProps) {
+  const COMPARISON_DATA = data;
   return (
     <Section id="comparison" className="bg-surface">
       <Container>
