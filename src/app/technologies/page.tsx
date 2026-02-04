@@ -47,7 +47,7 @@ export default function TechnologiesPage() {
                       href={tech.href}
                       data-reveal
                       data-cursor="hover"
-                      className="group flex flex-col p-6 rounded-xl border border-border bg-surface-card hover:border-primary/30 hover:bg-surface-card-hover transition-all duration-200"
+                      className="group flex flex-col p-6 rounded-xl border border-border bg-surface-card hover:border-primary/30 hover:bg-surface-alt transition-all duration-200"
                     >
                       <Heading level="h4" className="text-foreground group-hover:text-primary transition-colors text-base mb-2">
                         {tech.title}

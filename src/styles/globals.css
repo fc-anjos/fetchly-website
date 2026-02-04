@@ -426,7 +426,7 @@ body {
 }
 
 .btn-secondary {
-  @apply bg-surface-card text-foreground hover:bg-surface-card-hover;
+  @apply bg-surface-card text-foreground hover:bg-surface-alt;
 }
 
 .btn-outline {
@@ -443,7 +443,7 @@ body {
 }
 
 .card-hover {
-  @apply transition-all duration-300 hover:bg-surface-card-hover hover:border-primary/20 hover:-translate-y-1;
+  @apply transition-all duration-300 hover:bg-surface-alt hover:border-primary/20 hover:-translate-y-1;
 }
 
 /* Inputs */

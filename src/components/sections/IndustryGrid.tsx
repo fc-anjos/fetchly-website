@@ -43,7 +43,7 @@ export function IndustryGrid({
                 href={industry.href}
                 data-reveal
                 data-cursor="hover"
-                className="group flex gap-4 p-6 rounded-xl border border-border bg-surface-card hover:border-primary/30 hover:bg-surface-card-hover transition-all duration-200"
+                className="group flex gap-4 p-6 rounded-xl border border-border bg-surface-card hover:border-primary/30 hover:bg-surface-alt transition-all duration-200"
               >
                 <div className="shrink-0 w-10 h-10 rounded-lg bg-primary/8 flex items-center justify-center text-primary">
                   {ICONS[industry.icon] || ICONS['briefcase']}

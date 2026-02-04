@@ -46,7 +46,7 @@ export function TechBadgeGrid({
                   data-reveal
                   className={cn(
                     'flex flex-col items-center gap-3 p-5 rounded-xl border border-border bg-surface-card transition-all duration-200',
-                    badge.href && 'hover:border-primary/30 hover:bg-surface-card-hover',
+                    badge.href && 'hover:border-primary/30 hover:bg-surface-alt',
                   )}
                 >
                   <div className="w-10 h-10 flex items-center justify-center text-foreground-muted">

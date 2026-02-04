@@ -32,7 +32,7 @@ export function LocationsBar({ locations = LOCATIONS, className }: LocationsBarP
                 href={loc.href}
                 data-reveal
                 data-cursor="hover"
-                className="group flex items-center gap-3 px-6 py-4 rounded-xl border border-border bg-surface-card hover:border-primary/30 hover:bg-surface-card-hover transition-all duration-200"
+                className="group flex items-center gap-3 px-6 py-4 rounded-xl border border-border bg-surface-card hover:border-primary/30 hover:bg-surface-alt transition-all duration-200"
               >
                 <svg className="w-5 h-5 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />

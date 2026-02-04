@@ -33,11 +33,12 @@ export const NAV_LINKS: NavItemWithDropdown[] = [
     href: '/technologies',
     items: [
       // Build With
-      { label: 'React', href: '/technologies/react' },
+      { label: 'Ruby on Rails', href: '/technologies/rails', description: 'Full-stack apps built fast with convention over configuration.', featured: true },
+      { label: 'Shopify', href: '/industries/ecommerce', description: 'Shopify Plus themes, custom apps, and headless commerce.', featured: true },
       { label: 'Next.js', href: '/technologies/nextjs' },
-      { label: 'Ruby on Rails', href: '/technologies/rails' },
-      { label: 'React Native', href: '/technologies/react-native' },
       { label: 'Python & Django', href: '/technologies/python' },
+      { label: 'React', href: '/technologies/react' },
+      { label: 'React Native', href: '/technologies/react-native' },
       { label: 'Vue.js', href: '/technologies/vuejs' },
       // Capability
       { label: 'AI & Machine Learning', href: '/technologies/ai-ml' },

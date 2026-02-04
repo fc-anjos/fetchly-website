@@ -116,7 +116,7 @@ export function MegaMenu({ item }: { item: NavItemWithDropdown }) {
               href={subItem.href}
               onClick={() => setOpen(false)}
               className={cn(
-                'flex flex-col gap-0.5 rounded-lg hover:bg-surface-card-hover transition-colors',
+                'flex flex-col gap-0.5 rounded-lg hover:bg-surface-alt transition-colors',
                 wide ? 'px-3 py-2' : 'px-4 py-3',
                 subItem.featured && 'border-l-2 border-l-primary bg-primary/5',
               )}

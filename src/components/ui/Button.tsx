@@ -6,7 +6,7 @@ import type { ButtonProps } from '@/types';
 
 const variants = {
   primary: 'bg-primary text-black hover:bg-primary-dark font-medium',
-  secondary: 'bg-surface-card text-foreground hover:bg-surface-card-hover',
+  secondary: 'bg-surface-card text-foreground hover:bg-surface-alt',
   outline: 'border-2 border-border bg-transparent hover:bg-overlay-hover text-foreground',
   ghost: 'bg-transparent hover:bg-overlay-hover text-foreground',
   icon: 'bg-primary text-black hover:bg-primary-dark p-0',
