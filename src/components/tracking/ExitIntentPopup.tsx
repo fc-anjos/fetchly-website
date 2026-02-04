@@ -84,7 +84,7 @@ export function ExitIntentPopup() {
       trackEvent('exit_intent_submit', { email_domain: domain });
 
       const utm = getUTMForHubSpot();
-      await submitToHubSpot({ email, ...utm });
+      await submitToHubSpot({ email, ...utm }, { partial: true });
 
       setSubmitting(false);
       setSubmitted(true);

@@ -13,18 +13,21 @@ export interface IntakeFields {
   projectType: ProjectType;
   companySize: CompanySize;
   name: string;
+  lastName: string;
   email: string;
   phone: string;
   linkedin: string;
   companyName: string;
   companyWebsite: string;
   message: string;
+  _hp: string;
 }
 
 export interface IntakeErrors {
   projectType?: string;
   companySize?: string;
   name?: string;
+  lastName?: string;
   email?: string;
   phone?: string;
   linkedin?: string;
@@ -35,19 +38,21 @@ export interface IntakeErrors {
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const REQUIRED_KEYS: (keyof IntakeFields)[] = ['projectType', 'companySize', 'name', 'email', 'companyName', 'message'];
-const FIELD_KEYS: (keyof IntakeFields)[] = ['projectType', 'companySize', 'name', 'email', 'phone', 'linkedin', 'companyName', 'companyWebsite', 'message'];
+const REQUIRED_KEYS: (keyof IntakeFields)[] = ['projectType', 'companySize', 'name', 'lastName', 'email', 'companyName', 'message'];
+const FIELD_KEYS: (keyof IntakeFields)[] = ['projectType', 'companySize', 'name', 'lastName', 'email', 'phone', 'linkedin', 'companyName', 'companyWebsite', 'message'];
 
 const initialFields: IntakeFields = {
   projectType: '',
   companySize: '',
   name: '',
+  lastName: '',
   email: '',
   phone: '',
   linkedin: '',
   companyName: '',
   companyWebsite: '',
   message: '',
+  _hp: '',
 };
 
 export function useIntakeForm(formId = 'intake-form') {
@@ -101,7 +106,7 @@ export function useIntakeForm(formId = 'intake-form') {
 
   const validateField = useCallback((key: keyof IntakeFields): string | undefined => {
     const val = fields[key];
-    if (key === 'companyWebsite' || key === 'phone' || key === 'linkedin') return undefined; // optional
+    if (key === 'companyWebsite' || key === 'phone' || key === 'linkedin' || key === '_hp') return undefined;
     if (!val || val.trim().length === 0) return 'This field is required';
     if (key === 'email' && !EMAIL_REGEX.test(val)) return 'Please enter a valid email';
     return undefined;
@@ -129,6 +134,7 @@ export function useIntakeForm(formId = 'intake-form') {
     const payload: Record<string, string> = {
       email: fields.email,
       firstname: fields.name,
+      lastname: fields.lastName,
       company: fields.companyName,
       message: fields.message,
       project_type: fields.projectType,
@@ -142,7 +148,7 @@ export function useIntakeForm(formId = 'intake-form') {
     const utm = getUTMForHubSpot();
     Object.assign(payload, utm);
 
-    const result = await submitToHubSpot(payload);
+    const result = await submitToHubSpot(payload, { honeypot: fields._hp });
 
     if (result.ok) {
       trackEvent('form_submit_success', { form_id: formId });

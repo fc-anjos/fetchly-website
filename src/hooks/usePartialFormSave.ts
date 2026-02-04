@@ -22,6 +22,7 @@ export function usePartialFormSave(fields: IntakeFields) {
       const payload: Record<string, string> = {};
       if (fields.email) payload.email = fields.email;
       if (fields.name) payload.firstname = fields.name;
+      if (fields.lastName) payload.lastname = fields.lastName;
       if (fields.companyName) payload.company = fields.companyName;
       if (fields.companyWebsite) payload.website = fields.companyWebsite;
       if (fields.phone) payload.phone = fields.phone;
@@ -39,7 +40,7 @@ export function usePartialFormSave(fields: IntakeFields) {
       if (signature === lastSentRef.current) return;
       lastSentRef.current = signature;
 
-      submitToHubSpot(payload).catch(() => {
+      submitToHubSpot(payload, { partial: true }).catch(() => {
         // Silent fail for partial saves
       });
     }, DEBOUNCE_MS);

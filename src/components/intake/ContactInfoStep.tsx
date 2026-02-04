@@ -23,13 +23,23 @@ export function ContactInfoStep({
 }: ContactInfoStepProps) {
   return (
     <div className="space-y-6">
-      <Input
-        label="Name"
-        placeholder="Jane Smith"
-        value={fields.name}
-        onChange={(e) => onFieldChange('name', e.target.value)}
-        error={errors.name}
-      />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <Input
+          label="First Name"
+          placeholder="Jane"
+          value={fields.name}
+          onChange={(e) => onFieldChange('name', e.target.value)}
+          error={errors.name}
+        />
+
+        <Input
+          label="Last Name"
+          placeholder="Smith"
+          value={fields.lastName}
+          onChange={(e) => onFieldChange('lastName', e.target.value)}
+          error={errors.lastName}
+        />
+      </div>
 
       <Input
         label="Email"
@@ -39,6 +49,18 @@ export function ContactInfoStep({
         onChange={(e) => onFieldChange('email', e.target.value)}
         error={errors.email}
       />
+
+      {/* Honeypot - hidden from humans, bots will fill it */}
+      <div aria-hidden="true" className="absolute opacity-0 h-0 overflow-hidden pointer-events-none" tabIndex={-1}>
+        <input
+          type="text"
+          name="_hp"
+          autoComplete="off"
+          tabIndex={-1}
+          value={fields._hp ?? ''}
+          onChange={(e) => onFieldChange('_hp', e.target.value)}
+        />
+      </div>
 
       <Input
         label="Phone (optional)"
