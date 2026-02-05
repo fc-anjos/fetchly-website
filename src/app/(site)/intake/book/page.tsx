@@ -12,16 +12,18 @@ export const metadata: Metadata = {
 export default function IntakeBookPage() {
   return (
     <section className="py-20 md:py-28">
-      <Container size="md">
-        <div className="text-center mb-10">
-          <h1 className="text-h2 font-bold text-foreground mb-3">
-            Book a Call
-          </h1>
-          <p className="text-body-lg text-foreground-subtle max-w-lg mx-auto">
-            Pick a time that works. We&apos;ll come prepared.
-          </p>
+      <Container size="lg">
+        <div className="grid lg:grid-cols-[1fr_2fr] gap-8 items-start">
+          <div className="lg:sticky lg:top-32">
+            <h1 className="text-h2 font-bold text-foreground mb-3">
+              Book a Call
+            </h1>
+            <p className="text-body-lg text-foreground-subtle">
+              Pick a time that works. We&apos;ll come prepared.
+            </p>
+          </div>
+          <CalendlyEmbed />
         </div>
-        <CalendlyEmbed />
       </Container>
     </section>
   );

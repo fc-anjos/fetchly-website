@@ -584,10 +584,10 @@ function TextareaInputBar({ placeholder, disabled, skippable, onSend, onSkip }: 
 // ---------------------------------------------------------------------------
 
 interface ContactGroupInputProps {
-  fields: { name: string; phone: string; email: string; linkedin: string };
-  errors: { name?: string; phone?: string; email?: string; linkedin?: string };
+  fields: { phone: string; linkedin: string };
+  errors: { phone?: string; linkedin?: string };
   disabled: boolean;
-  onFieldChange: (key: 'name' | 'phone' | 'email' | 'linkedin', value: string) => void;
+  onFieldChange: (key: 'phone' | 'linkedin', value: string) => void;
   onSubmit: () => void;
 }
 
@@ -599,7 +599,7 @@ function ContactGroupInput({
   onSubmit,
 }: ContactGroupInputProps) {
   const wrapRef = useRef<HTMLFormElement>(null);
-  const nameRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!wrapRef.current || prefersReducedMotion()) return;
@@ -621,7 +621,7 @@ function ContactGroupInput({
   }, []);
 
   useEffect(() => {
-    if (!disabled) nameRef.current?.focus();
+    if (!disabled) phoneRef.current?.focus();
   }, [disabled]);
 
   const handleSubmit = (e: FormEvent) => {
@@ -633,33 +633,14 @@ function ContactGroupInput({
 
   return (
     <form ref={wrapRef} onSubmit={handleSubmit} className="space-y-3 text-foreground">
-      <div className="grid grid-cols-2 gap-2">
-        <Input
-          ref={nameRef}
-          label="Name"
-          placeholder="Jane Smith"
-          value={fields.name}
-          onChange={e => onFieldChange('name', e.target.value)}
-          error={errors.name}
-          className={glassInput}
-        />
-        <Input
-          label="Phone"
-          type="tel"
-          placeholder="+1 (405) 123-6789"
-          value={fields.phone}
-          onChange={e => onFieldChange('phone', e.target.value)}
-          error={errors.phone}
-          className={glassInput}
-        />
-      </div>
       <Input
-        label="Email"
-        type="email"
-        placeholder="you@company.com"
-        value={fields.email}
-        onChange={e => onFieldChange('email', e.target.value)}
-        error={errors.email}
+        ref={phoneRef}
+        label="Phone (optional)"
+        type="tel"
+        placeholder="+1 (405) 123-6789"
+        value={fields.phone}
+        onChange={e => onFieldChange('phone', e.target.value)}
+        error={errors.phone}
         className={glassInput}
       />
       <Input
@@ -695,12 +676,12 @@ interface InputAreaProps {
   isBotTyping: boolean;
   isSuccess: boolean;
   submitting: boolean;
-  fields: { name: string; phone: string; email: string; linkedin: string };
-  errors: { name?: string; phone?: string; email?: string; linkedin?: string };
+  fields: { phone: string; linkedin: string };
+  errors: { phone?: string; linkedin?: string };
   onChipSelect: (value: string) => void;
   onTextSend: (value: string) => void;
   onSkip: () => void;
-  onContactFieldChange: (key: 'name' | 'phone' | 'email' | 'linkedin', value: string) => void;
+  onContactFieldChange: (key: 'phone' | 'linkedin', value: string) => void;
   onContactSubmit: () => void;
 }
 
@@ -861,7 +842,7 @@ export function ChatForm() {
   }, [chat, dismissAttention]);
 
   const handleContactFieldChange = useCallback(
-    (key: 'name' | 'phone' | 'email' | 'linkedin', value: string) => {
+    (key: 'phone' | 'linkedin', value: string) => {
       dismissAttention();
       chat.setField(key, value);
     },
@@ -869,15 +850,11 @@ export function ChatForm() {
   );
 
   const handleContactSubmit = useCallback(async () => {
-    const nameErr = chat.validateField('name');
-    const emailErr = chat.validateField('email');
+    const parts: string[] = [];
+    if (chat.fields.phone) parts.push(chat.fields.phone);
+    if (chat.fields.linkedin) parts.push(chat.fields.linkedin);
 
-    if (nameErr || emailErr) {
-      chat.validate();
-      return;
-    }
-
-    chat.advanceStep(`${chat.fields.name} | ${chat.fields.email}`);
+    chat.advanceStep(parts.length ? parts.join(' | ') : 'Submitted');
     await chat.submitForm();
   }, [chat]);
 
@@ -889,15 +866,11 @@ export function ChatForm() {
     isSuccess: chat.isSuccess,
     submitting: chat.submitting,
     fields: {
-      name: chat.fields.name,
       phone: chat.fields.phone,
-      email: chat.fields.email,
       linkedin: chat.fields.linkedin,
     },
     errors: {
-      name: chat.errors.name,
       phone: chat.errors.phone,
-      email: chat.errors.email,
       linkedin: chat.errors.linkedin,
     },
     onChipSelect: handleChipSelect,

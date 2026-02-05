@@ -95,7 +95,23 @@ export function ExitIntentPopup() {
     [email, dismiss],
   );
 
-  if (!show) return null;
+  if (!show) {
+    if (process.env.NODE_ENV === 'development') {
+      return (
+        <button
+          type="button"
+          onClick={() => {
+            sessionStorage.removeItem('fetchly_form_submitted');
+            window.location.reload();
+          }}
+          className="fixed bottom-4 right-4 z-[9999] px-3 py-1.5 rounded bg-yellow-500 text-black text-xs font-mono"
+        >
+          Reset exit intent
+        </button>
+      );
+    }
+    return null;
+  }
 
   return (
     <div
@@ -138,7 +154,7 @@ export function ExitIntentPopup() {
           <>
             <h2 className="text-white text-xl font-bold mb-2">Before you go...</h2>
             <p className="text-white/70 text-sm mb-6">
-              Drop your email and we&apos;ll send you a free project estimate within 24 hours.
+              Drop your email and we&apos;ll reach out to discuss your project.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-3">
@@ -164,7 +180,7 @@ export function ExitIntentPopup() {
               </button>
             </form>
 
-            <p className="text-white/40 text-xs mt-4 text-center">No spam. Unsubscribe anytime.</p>
+            <p className="text-white/40 text-xs mt-4 text-center">No spam.</p>
           </>
         )}
       </div>

@@ -3,3 +3,4 @@ export { RB2BLoader } from './RB2BLoader';
 export { UTMCapture } from './UTMCapture';
 export { ExitIntentPopup } from './ExitIntentPopup';
 export { FormTracker } from './FormTracker';
+export { LiveSessionsTracker } from './LiveSessionsTracker';

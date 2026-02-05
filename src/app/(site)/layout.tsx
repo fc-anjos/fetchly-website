@@ -4,7 +4,8 @@ import { FooterServer } from '@/components/layout/FooterServer';
 import { SmoothScroll } from '@/components/effects/SmoothScroll';
 import { CursorProvider, CustomCursor } from '@/components/effects/CustomCursor';
 import { Preloader } from '@/components/effects/Preloader';
-import { RB2BLoader, UTMCapture, ExitIntentPopup } from '@/components/tracking';
+import { RB2BLoader, UTMCapture, ExitIntentPopup, LiveSessionsTracker } from '@/components/tracking';
+import { LiveChatProvider } from '@/components/chat/LiveChatProvider';
 
 export default function SiteLayout({
   children,
@@ -20,6 +21,8 @@ export default function SiteLayout({
           <RB2BLoader />
           <UTMCapture />
           <ExitIntentPopup />
+          <LiveSessionsTracker />
+          <LiveChatProvider />
           <a href="#main-content" className="skip-link">
             Skip to main content
           </a>

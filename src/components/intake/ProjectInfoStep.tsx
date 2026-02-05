@@ -15,8 +15,6 @@ const PROJECT_TYPES = [
   'AI Integration',
 ];
 
-const COMPANY_SIZES = ['1-5', '6-10', '11-49', '50-250', '251+'] as const;
-
 interface ProjectInfoStepProps {
   fields: IntakeFields;
   errors: IntakeErrors;
@@ -36,6 +34,25 @@ export function ProjectInfoStep({
 
   return (
     <div className="space-y-8">
+      {/* Email & Name */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <Input
+          label="Email"
+          type="email"
+          placeholder="you@company.com"
+          value={fields.email}
+          onChange={(e) => onFieldChange('email', e.target.value)}
+          error={errors.email}
+        />
+        <Input
+          label="First Name"
+          placeholder="Jane"
+          value={fields.name}
+          onChange={(e) => onFieldChange('name', e.target.value)}
+          error={errors.name}
+        />
+      </div>
+
       {/* Project type */}
       <fieldset>
         <legend className="text-body-lg font-medium text-foreground mb-3">
@@ -60,51 +77,6 @@ export function ProjectInfoStep({
         </div>
         {errors.projectType && (
           <p className="mt-2 text-sm text-red-500">{errors.projectType}</p>
-        )}
-      </fieldset>
-
-      {/* Company name & website */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <Input
-          label="Company name"
-          placeholder="ACME"
-          value={fields.companyName}
-          onChange={(e) => onFieldChange('companyName', e.target.value)}
-          error={errors.companyName}
-        />
-        <Input
-          label="Company website (optional)"
-          placeholder="https://acme.com"
-          value={fields.companyWebsite}
-          onChange={(e) => onFieldChange('companyWebsite', e.target.value)}
-          error={errors.companyWebsite}
-        />
-      </div>
-
-      {/* Company size */}
-      <fieldset>
-        <legend className="text-body-lg font-medium text-foreground mb-3">
-          Company size
-        </legend>
-        <div className="flex flex-wrap gap-2">
-          {COMPANY_SIZES.map((size) => (
-            <button
-              key={size}
-              type="button"
-              onClick={() => onFieldChange('companySize', size)}
-              className={cn(
-                'px-4 py-2 rounded-lg text-sm font-medium border transition-colors duration-200',
-                fields.companySize === size
-                  ? 'bg-primary text-black border-primary'
-                  : 'border-border text-foreground-subtle hover:text-foreground hover:border-primary',
-              )}
-            >
-              {size}
-            </button>
-          ))}
-        </div>
-        {errors.companySize && (
-          <p className="mt-2 text-sm text-red-500">{errors.companySize}</p>
         )}
       </fieldset>
 

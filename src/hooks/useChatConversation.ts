@@ -39,6 +39,18 @@ export const STEPS: StepDef[] = [
     skippable: true,
   },
   {
+    botMessage: "What's your email so we can follow up?",
+    inputMode: 'text',
+    field: 'email',
+    placeholder: 'you@company.com',
+  },
+  {
+    botMessage: "And what's your name?",
+    inputMode: 'text',
+    field: 'name',
+    placeholder: 'Jane',
+  },
+  {
     botMessage: 'How many people are on your team?',
     inputMode: 'chips',
     field: 'companySize',
@@ -67,14 +79,7 @@ export const STEPS: StepDef[] = [
     skippable: true,
   },
   {
-    botMessage: 'Got a LinkedIn profile? (helps us learn about you)',
-    inputMode: 'text',
-    field: 'linkedin',
-    placeholder: 'https://linkedin.com/in/janesmith',
-    skippable: true,
-  },
-  {
-    botMessage: 'Last step, where can we reach you?',
+    botMessage: 'Almost done! Any other way to reach you?',
     inputMode: 'contact',
     field: null,
   },
